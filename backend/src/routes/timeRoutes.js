@@ -12,10 +12,10 @@ router.get("/", authMiddleware, validateIdMiddleware, verifyRoleMiddleware("pasi
 router.post("/", authMiddleware, verifyRoleMiddleware("behandler", "admin"), opprettTime);
 
 // henter alle timer for pasient
-router.get("/mine", hentMineTimer);
+router.get("/mine", authMiddleware, validateIdMiddleware, verifyRoleMiddleware("pasient"), hentMineTimer);
 
 // hent alle timer for innlogget behandler
-router.get("/behandlerTimer", hentBehandlerTimer);
+router.get("/behandlerTimer", authMiddleware, validateIdMiddleware, verifyRoleMiddleware("behandler"), hentBehandlerTimer);
 
 // endre oppsatt time behandler/pasient
 router.patch("/:id", endreTime);
