@@ -1,11 +1,12 @@
 import express from "express";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import { verifyRoleMiddleware } from "../middleware/verifyRoleMiddleware.js";
+import { validateIdMiddleware } from "../middleware/validateIdMiddleware.js";
 
 const router = express.Router();
 
-// denne vil returnere alle ledige timer uansett rolle
-router.get("/", hentTimer);
+// denne vil returnere alle ledige timer for pasient
+router.get("/", authMiddleware, validateIdMiddleware, verifyRoleMiddleware("pasient", "behandler"), hentLedigeTimer);
 
 // dennne vil opprette en tilgjengelig timeavtale kun av rollen behandler som kan bookes
 router.post("/", authMiddleware, verifyRoleMiddleware("behandler", "admin"), opprettTime);

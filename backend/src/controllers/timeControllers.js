@@ -2,10 +2,13 @@ import { Time } from "../models/Time.js";
 import { User } from "../models/User.js";
 import mongoose from "mongoose";
 
-export const hentTimer = async (req, res) => {
+export const hentLedigeTimer = async (req, res) => {
     try {
 
-        const { id, username, role, email} = req.user 
+        const { id, username, email} = req.user 
+        const foundUser = await User.findById(id);
+        
+        if (!foundUser) return res.status(400).json({ message: "Fant ikke bruker i databasen." })
 
 
 
@@ -47,8 +50,6 @@ export const opprettTime = async (req, res) => {
         if (eksisterendeTime) {
             return res.status(400).json({ message: "Det finnes allerede en overlappende time, endre dato eller tidspunkt og prøv igjen." })
         }
-
-
 
         const nyTime = await Time.create({ behandler, dato, startTid, sluttTid })
         res.status(201).json({message: `Ny time opprettet ${dato}`, time: nyTime })
