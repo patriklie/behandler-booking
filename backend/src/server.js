@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import timeRoutes from "./routes/timeRoutes.js";
 import { connectDB } from "./lib/db.js";
+import cors from "cors";
 
 dotenv.config();
 console.log(process.env.MONGO_URI)
@@ -19,6 +20,9 @@ const __dirname = path.dirname(__filename);
 const port = process.env.PORT || 3000
 const app = express();
 app.use(express.json());
+app.use(cors({
+    origin: "http://localhost:5173"
+}));
 
 app.get("/api/hello", (req, res) => {
     res.json({ message: "Hello mister api hello"});
