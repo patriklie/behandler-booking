@@ -8,8 +8,8 @@ const secret = process.env.JWT_SECRET;
 
 export const registerUser = async (req, res) => {
     try {
-        const { password, username, email } = req.body;
-        if (!password || !username || !email) return res.status(400).json({ message: "Missing password, username or email." })
+        const { password, username, email, role } = req.body;
+        if (!password || !username || !email || !role) return res.status(400).json({ message: "Missing password, username or email." })
         
         const existingUser = await User.findOne({ $or: [{ username }, { email }] });
         if (existingUser) {
@@ -18,7 +18,7 @@ export const registerUser = async (req, res) => {
             else if (existingUser.email === email) message = "Email already exists."
             return res.status(400).json({ message });
         }
-        const newUser = await User.create({ password, username, email });
+        const newUser = await User.create({ password, username, email, role });
         res.status(201).json({ message: "New user created.", id: newUser.id, username: newUser.username, email: newUser.email });
         
     } catch (error) {

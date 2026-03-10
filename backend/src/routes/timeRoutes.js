@@ -2,6 +2,15 @@ import express from "express";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import { verifyRoleMiddleware } from "../middleware/verifyRoleMiddleware.js";
 import { validateIdMiddleware } from "../middleware/validateIdMiddleware.js";
+import {
+    hentLedigeTimer,
+    opprettTime,
+    hentMineTimer,
+    hentBehandlerTimer,
+    bookTime,
+    avlysTime,
+    slettTime
+} from "../controllers/timeControllers.js"
 
 const router = express.Router();
 
@@ -9,7 +18,7 @@ const router = express.Router();
 router.get("/", authMiddleware, validateIdMiddleware, verifyRoleMiddleware("pasient", "behandler"), hentLedigeTimer);
 
 // dennne vil opprette en tilgjengelig timeavtale kun av rollen behandler som kan bookes
-router.post("/", authMiddleware, verifyRoleMiddleware("behandler", "admin"), opprettTime);
+router.post("/", authMiddleware, validateIdMiddleware, verifyRoleMiddleware("behandler", "admin"), opprettTime);
 
 // henter alle timer for pasient
 router.get("/mine", authMiddleware, validateIdMiddleware, verifyRoleMiddleware("pasient"), hentMineTimer);

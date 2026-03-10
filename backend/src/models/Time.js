@@ -32,4 +32,4 @@ const timeSchema = new mongoose.Schema({
     }
 }, { timestamps: true, versionKey: false });
 
-export const Time = mongoose.model("Time", timeSchema);
+export const Time = mongoose.model("Time", timeSchema, "timer");

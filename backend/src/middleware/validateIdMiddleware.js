@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 export const validateIdMiddleware = (req, res, next) => {
 
     const { id } = req.user;

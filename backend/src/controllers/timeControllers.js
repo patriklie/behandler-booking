@@ -21,10 +21,6 @@ export const opprettTime = async (req, res) => {
         const { id } = req.user;
         const { dato, startTid, sluttTid } = req.body;
 
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({ message: "Not a valid user ID." })
-        }
-
         const behandler = await User.findById(id);
         if (!behandler) {
             return res.status(404).json({ message: "User not found in database." })
@@ -48,7 +44,7 @@ export const opprettTime = async (req, res) => {
             return res.status(400).json({ message: "Det finnes allerede en overlappende time, endre dato eller tidspunkt og prøv igjen." })
         }
 
-        const nyTime = await Time.create({ behandler, dato, startTid, sluttTid })
+        const nyTime = await Time.create({ behandler: id, dato, startTid, sluttTid })
         res.status(201).json({message: `Ny time opprettet ${dato}`, time: nyTime })
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -97,7 +93,7 @@ export const bookTime = async (req, res) => {
         if (!timeID) return res.status(400).json({ message: "Time ID mangler." });
         if (!mongoose.Types.ObjectId.isValid(timeID)) return res.status(400).json({ message: "Time ID er ikke riktig." });
         
-        const bookaTime = await Time.findOneAndUpdate({ _id: timeID, status: "ledig" }, { pasient: pasientID, status: "booket" }, { new: true }).populate("behandler", "username");
+        const bookaTime = await Time.findOneAndUpdate({ _id: timeID, status: "ledig" }, { pasient: pasientID, status: "booket" }, { returnDocument: "after" }).populate("behandler", "username");
         if (!bookaTime) return res.status(400).json({ message: "Time finnes ikke eller er ikke ledig." });
 
         res.status(200).json({ message: "Time booket!", bookaTime});
@@ -120,13 +116,25 @@ export const avlysTime = async (req, res) => {
         let endretTime;
 
         if (role === "pasient") {
-            endretTime = await Time.findOneAndUpdate({ _id: timeID, pasient: brukerID }, { status: "ledig", pasient: null,  }, { new: true })
+            endretTime = await Time.findOneAndUpdate({ _id: timeID, pasient: brukerID }, { status: "ledig", pasient: null,  }, { returnDocument: "after" })
             if (!endretTime) return res.status(404).json({ message: "Fant ingen time med oppgitt ID" });
-            res.status(200).json({ endretTime, message: `Avlyst timen ${endretTime.dato}, kl: ${endretTime.startTid}.` })
+            res.status(200).json({
+                endretTime, message: `Avlyst timen ${endretTime.dato.toLocaleDateString("no-NO", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+            })}, kl: ${endretTime.startTid}.` })
         } else {
-            endretTime = await Time.findOneAndUpdate({ _id: timeID, behandler: brukerID }, { status: "ledig", pasient: null, }, { new: true })
+            endretTime = await Time.findOneAndUpdate({ _id: timeID, behandler: brukerID }, { status: "ledig", pasient: null, }, { returnDocument: "after" })
             if (!endretTime) return res.status(404).json({ message: "Fant ingen time med oppgitt ID" });
-            res.status(200).json({ endretTime, message: `Avlyst timen ${endretTime.dato}, kl: ${endretTime.startTid}.` })
+            res.status(200).json({
+                endretTime, message: `Avlyst timen ${endretTime.dato.toLocaleDateString("no-NO", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+            })}, kl: ${endretTime.startTid}.` })
         }
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -145,7 +153,13 @@ export const slettTime = async (req, res) => {
         const slettetTime = await Time.findOneAndDelete({ _id: timeID, behandler: brukerID })
         if (!slettetTime) return res.status(400).json({ message: "Fant ingen time å slette." })
         
-        res.status(200).json({ message: `Slettet timen: ${slettetTime.dato}.` })
+        res.status(200).json({
+            message: `Slettet timen ${slettetTime.dato.toLocaleDateString("no-NO", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+        })}, klokken ${slettetTime.startTid}.` })
         
     } catch (error) {
         res.status(500).json({ message: error.message });

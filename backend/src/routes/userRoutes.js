@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 router.get("/", authMiddleware, getAllUsers);
-router.get("/:id", authMiddleware, getUserById);
+router.get("/:id", authMiddleware, getUserById); // legg til protection her så ikke alle kan hente brukere
 router.patch("/:id", authMiddleware, updateUser);
 router.delete("/:id", authMiddleware, deleteUser);
 
