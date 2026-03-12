@@ -32,7 +32,7 @@ export const loginUser = async (req, res) => {
 
         // 1. Jeg trenger brukernavn/epost og passord fra req.body
         const { username, email, password } = req.body;
-
+        console.log("req.body inni loginUser: ", req.body)
         // 2. Jeg bør først validere om feltene finnes i req.body. 
         if (!password) return res.status(400).json({ message: "Password is missing" });
         else if (!username && !email) return res.status(400).json({ message: "Username or Email is missing." });
