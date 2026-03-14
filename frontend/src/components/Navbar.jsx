@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 import { Squash as Hamburger } from 'hamburger-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState } from "react";
-import { Info, ClipboardClock } from "lucide-react";
+import { Info, ClipboardClock, Calendar1, CircleUserRound, LogOut } from "lucide-react";
 
 const Navbar = () => {
 
@@ -33,13 +33,28 @@ const Navbar = () => {
           
 
           <div className="navbar-links">
-            <ClipboardClock color="black" size={30} strokeWidth={1.5}/>
-            <NavLink to="/avtaler">Mine Avtaler</NavLink>
+            <Calendar1 color="black" size={30} strokeWidth={1}/>
+            <NavLink to="/avtaler">Kalender</NavLink>
           </div>
 
           <div className="navbar-links">
-            <Info color="black" size={30} strokeWidth={1.5}/>
+            <ClipboardClock color="black" size={30} strokeWidth={1}/>
+            <NavLink to="/avtaler">Mine avtaler</NavLink>
+          </div>
+
+          <div className="navbar-links">
+            <CircleUserRound color="black" size={30} strokeWidth={1}/>
+            <NavLink to="/avtaler">Min profil</NavLink>
+          </div>
+
+          <div className="navbar-links">
+            <Info color="black" size={30} strokeWidth={1}/>
             <NavLink to="/avtaler">Om oss</NavLink>
+          </div>
+
+          <div className="navbar-links">
+            <LogOut color="black" size={30} strokeWidth={1}/>
+            <NavLink to="/avtaler">Logg ut</NavLink>
           </div>
     
 
