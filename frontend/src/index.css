@@ -33,39 +33,57 @@ input:-webkit-autofill:active {
 
 /* NAVBAR */
 .navbar {
-  color: #fff;
-  width: 100%;
+  color: #000000;
+  width: calc(100% - 32px);
   position: fixed;
   top: 0;
   left: 0;
-  height: 90px;
-  background: var(--primary-color);
   z-index: 2000;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 10px;
+  margin: 16px;
 }
 
-.navbar-header {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  padding: 20px 40px;
-  grid-template-columns: repeat(3, 1fr);
+.navbar-animasjon {
+  display: block;
+  overflow: hidden;
+  border-radius: 30px;
+  background-color: white;
+  height: 60px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px ;
+}
+
+.navbar-top {
+  display: flex;
+  height: 60px;
   align-items: center;
+  padding: 0 16px;
+  position: relative;
+}
+
+.navbar-links {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+  gap: 10px;
+  font-weight: 300;
+  font-size: 1rem;
+  border-bottom: 2px dotted rgba(0, 0, 0, 0.1);
+  line-height: 1;
+}
+
+.navbar-divider {
+  height: 1px;
+  background-color: rgb(0, 0, 0);
+  transform-origin: left;
+  margin: 0 20px;
 }
 
 .navbar-logo {
-  justify-self: center;
-  font-size: 1.2rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .navbar-logo span {
   font-weight: 600;
-}
-
-.navbar-sidebar {
-  background-color: aqua;
-  height: 100vh;
-  width: clamp(330px, 50%, 400px);
-  position: fixed;
-  top: 90px;
 }
