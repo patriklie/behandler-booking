@@ -4,8 +4,10 @@ import Navbar from "./Navbar.jsx";
 const Layout = () => {
   return (
     <>
-        <Navbar />
-    {/*     <Outlet />   */}
+      <Navbar />
+      <div style={{ paddingTop: "92px" }}>
+      <Outlet />   
+      </div>
     </>
   )
 }
