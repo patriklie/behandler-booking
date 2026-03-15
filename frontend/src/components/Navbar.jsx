@@ -8,6 +8,7 @@ import { Info, ClipboardClock, Calendar1, CircleUserRound, LogOut, LogIn } from 
 const Navbar = () => {
 
   const [isOpen, SetIsOpen] = useState(false);
+  const isAuth = useAppStore((state) => state.isAuth);
   const logout = useAppStore((state) => state.logout);
   const navigate = useNavigate();
 
@@ -39,7 +40,8 @@ const Navbar = () => {
             animate={{ scaleX: isOpen ? 1 : 0 }}
             transition={{ type: "spring", duration: 0.3 }}
           />
-          
+          {isAuth && 
+          <>
           <NavLink to="/timer" className="navbar-links" onClick={() => SetIsOpen(false)}>
             <Calendar1 style={{ pointerEvents: "none" }} color="black" size={30} strokeWidth={1}/>
             <span>Kalender</span>
@@ -54,25 +56,29 @@ const Navbar = () => {
             <CircleUserRound style={{ pointerEvents: "none" }} color="black" size={30} strokeWidth={1}/>
             <span>Min profil</span>
           </NavLink>
+          </>
+          }
 
           <NavLink to="/about" className="navbar-links" onClick={() => SetIsOpen(false)}>
             <Info style={{ pointerEvents: "none" }} color="black" size={30} strokeWidth={1}/>
             <span>Om oss</span>
           </NavLink>
 
+          {!isAuth && 
           <NavLink to="/login" className="navbar-links" onClick={() => SetIsOpen(false)}>
             <LogIn style={{ pointerEvents: "none" }} color="black" size={30} strokeWidth={1}/>
             <span>Logg inn</span>
           </NavLink>
+          }
 
-          <div to="/avtaler" className="navbar-links" onClick={loggUtBruker}>
+          {isAuth &&
+          <div className="navbar-links" onClick={loggUtBruker}>
             <LogOut style={{ pointerEvents: "none" }} color="black" size={30} strokeWidth={1}/>
             <span>Logg ut</span>
           </div>
-    
+          }
 
         </motion.div>
-
 
       </nav>
     </>

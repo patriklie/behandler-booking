@@ -45,10 +45,10 @@ input:-webkit-autofill:active {
 
 body {
     background-image: url("https://picsum.photos/1920/1080");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .navbar-animasjon {

@@ -5,25 +5,21 @@ export const useAppStore = create(
     persist(
         (set) => ({
             token: null,
+            isAuth: false,
             username: "",
             email: "",
             role: "",
-            mineBookedeTimer: [],
+            setIsAuth: (bool) => set({ isAuth: bool }),
             setUsername: (newUsername) => set({ username: newUsername }),
             setEmail: (newEmail) => set({ email: newEmail }),
             setRole: (newRole) => set({ role: newRole }),
             setToken: (newToken) => set({ token: newToken }),
-            fjernBookedTime: (timeID) => set((state) => ({
-                mineBookedeTimer: state.mineBookedeTimer.filter((time) => time._id !== timeID)
-            })),
-            leggTilBookedtime: (time) => set((state) => ({
-                mineBookedeTimer: [...state.mineBookedeTimer, time]
-            })),
             logout: () => set({
                 token: null,
                 username: "",
                 email: "",
                 role: "",
+                isAuth: false,
                 mineBookedeTimer: [],
             }),
             
@@ -45,4 +41,15 @@ export const useBear = create((set) => ({
     doubleTheBears: () => set((state) => ({ bears: state.bears * 2 })),
 }))
 
+*/
+
+
+/* 
+
+            fjernBookedTime: (timeID) => set((state) => ({
+                mineBookedeTimer: state.mineBookedeTimer.filter((time) => time._id !== timeID)
+            })),
+            leggTilBookedtime: (time) => set((state) => ({
+                mineBookedeTimer: [...state.mineBookedeTimer, time]
+            })),
 */

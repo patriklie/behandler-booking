@@ -2,14 +2,19 @@ import { LogIn } from "lucide-react";
 import axios from "axios";
 import { useState } from "react";
 import { useAppStore } from "../store/authStore.js";
+import { useNavigate } from "react-router";
 
 
 const LoginPage = () => {
 
   const [epost, setEpost] = useState("");
   const [passord, setPassord] = useState("");
-  const setToken = useAppStore((state) => state.setToken)
-  const setUsername = useAppStore((state) => state.setUsername)
+  const setToken = useAppStore((state) => state.setToken);
+  const setUsername = useAppStore((state) => state.setUsername);
+  const setEmail = useAppStore((state) => state.setEmail);
+  const setRole = useAppStore((state) => state.setRole);
+  const setAuth = useAppStore((state) => state.setIsAuth);
+  const navigate = useNavigate();
 
   const brukernavnHandler = (e) => {
     setEpost(e.target.value);
@@ -30,7 +35,11 @@ const LoginPage = () => {
       console.log(response.data);
 
       setToken(response.data.token);
-      setUsername(response.data.username)
+      setUsername(response.data.username);
+      setEmail(response.data.email);
+      setRole(response.data.role);
+      setAuth(true);
+      navigate("/timer");
 
     } catch (error) {
       console.error(error.response.data);
