@@ -12,6 +12,7 @@ const ProtectedRoutes = () => {
   const setEmail = useAppStore((state) => state.setEmail);
   const setRole = useAppStore((state) => state.setRole);
   const setIsAuth = useAppStore((state) => state.setIsAuth);
+  const isAuth = useAppStore((state) => state.isAuth);
   const [tokenCheck, setTokenCheck] = useState(false);
   const navigate = useNavigate();
 
@@ -21,6 +22,13 @@ const ProtectedRoutes = () => {
       if (!token) {
         navigate("/login");
         console.log("Token mangler, sendes til login.")
+        return;
+      }
+
+      // denne må jeg se mer på senere vil faile for utløpte tokens, mulig lage axios interceptor på status 401.
+      if (isAuth) {
+        setTokenCheck(true);
+        console.log("Bruker er authorized")
         return;
       }
 

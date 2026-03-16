@@ -1,4 +1,4 @@
-import { LogIn } from "lucide-react";
+import { LogIn, AtSign, LockKeyhole, ArrowBigRight, Mail } from "lucide-react";
 import axios from "axios";
 import { useState } from "react";
 import { useAppStore } from "../store/authStore.js";
@@ -15,14 +15,6 @@ const LoginPage = () => {
   const setRole = useAppStore((state) => state.setRole);
   const setAuth = useAppStore((state) => state.setIsAuth);
   const navigate = useNavigate();
-
-  const brukernavnHandler = (e) => {
-    setEpost(e.target.value);
-  }
-
-  const passordHandler = (e) => {
-    setPassord(e.target.value);
-  }
 
   const loginRequest = async (e) => {
     e.preventDefault();
@@ -48,21 +40,24 @@ const LoginPage = () => {
 
   }
 
-  const inputClass = "max-w-[400px] bg-gray-50 px-4 py-2 my-2 w-full h-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:border-transparent"
-
   return (
     <>
-      <div className="text-center pt-4">LoginPage</div>
+      <div>
       
-      <form onSubmit={loginRequest}  className="flex flex-col items-center p-2">
-        <input onChange={brukernavnHandler} className={inputClass} placeholder="Brukernavn eller epost"></input>
-        <input onChange={passordHandler} className={inputClass} placeholder="Passord"></input>
-        <button type="submit" className="font-bold hover:scale-[1.02] transition tracking-wide flex items-center gap-1 bg-amber-300 px-10 py-1 rounded-3xl cursor-pointer">
-          <span>Submit</span>
-          <LogIn size={40} strokeWidth={1} />
-        </button>
+        <form onSubmit={loginRequest} className="form-container" >
+          <div className="input-container">
+            <Mail className="input-icon" size={18} color="grey" strokeWidth={1.5} />
+            <input type="text" onChange={(e) => setEpost(e.target.value)} value={epost} id="epost" placeholder="patrik@gmail.com" required></input>
+          </div>
+          <div className="input-container">
+            <LockKeyhole className="input-icon" size={18} color="grey" strokeWidth={1.5} />
+            <input type="password" onChange={(e) => setPassord(e.target.value)} value={passord} id="passord" placeholder="passord" required></input>
+          </div>
+          <div className="form-no-bruker">Har du ikke bruker? Registrer her</div>
+          <button type="submit" className="logginn-btn">Logg inn <ArrowBigRight fill="white" stroke="none" size={20} /></button>
 
       </form>
+      </div>
     </>
   )
 }
