@@ -3,7 +3,7 @@ import { Squash as Hamburger } from 'hamburger-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState } from "react";
 import { useAppStore } from "../store/authStore.js";
-import { Info, ClipboardClock, Calendar1, CircleUserRound, LogOut, LogIn } from "lucide-react";
+import { Info, ClipboardClock, Calendar1, CircleUserRound, LogOut, LogIn, UserPlus } from "lucide-react";
 
 const Navbar = () => {
 
@@ -67,10 +67,18 @@ const Navbar = () => {
           </NavLink>
 
           {!isAuth && 
+          <>
           <NavLink to="/login" className="navbar-links" onClick={() => SetIsOpen(false)}>
             <LogIn style={{ pointerEvents: "none" }} color="black" size={30} strokeWidth={1}/>
             <span>Logg inn</span>
           </NavLink>
+          
+          <NavLink to="/register" className="navbar-links" onClick={() => SetIsOpen(false)}>
+            <UserPlus style={{ pointerEvents: "none" }} color="black" size={30} strokeWidth={1}/>
+            <span>Registrer</span>
+          </NavLink>
+
+          </>
           }
 
           {isAuth &&

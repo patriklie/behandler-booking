@@ -179,6 +179,33 @@ body {
 
 .form-no-bruker {
   font-size: 12px;
-  color: grey;
+  color: rgb(0, 0, 0);
   text-align: center;
+}
+
+.form-no-bruker a {
+  color: rgb(0, 119, 255);
+  text-decoration: underline;
+}
+
+.form-container .radio-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  gap: 30px;
+  height: 40px;
+}
+
+.form-container .radio-container div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-family: "Poppins", sans-serif;
+}
+
+input[type="radio"] {
+  width: 16px;
+  height: 16px;
 }

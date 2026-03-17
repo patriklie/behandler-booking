@@ -2,7 +2,7 @@ import { LogIn, AtSign, LockKeyhole, ArrowBigRight, Mail } from "lucide-react";
 import axios from "axios";
 import { useState } from "react";
 import { useAppStore } from "../store/authStore.js";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 
 
 const LoginPage = () => {
@@ -53,7 +53,7 @@ const LoginPage = () => {
             <LockKeyhole className="input-icon" size={18} color="grey" strokeWidth={1.5} />
             <input type="password" onChange={(e) => setPassord(e.target.value)} value={passord} id="passord" placeholder="passord" required></input>
           </div>
-          <div className="form-no-bruker">Har du ikke bruker? Registrer her</div>
+          <div className="form-no-bruker">Har du ikke bruker? Registrer <Link to="/register">her</Link></div>
           <button type="submit" className="logginn-btn">Logg inn <ArrowBigRight fill="white" stroke="none" size={20} /></button>
 
       </form>
