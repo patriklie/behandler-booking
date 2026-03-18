@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router";
 import { Squash as Hamburger } from 'hamburger-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useAppStore } from "../store/authStore.js";
 import { Info, ClipboardClock, Calendar1, CircleUserRound, LogOut, LogIn, UserPlus } from "lucide-react";
 
@@ -11,6 +11,8 @@ const Navbar = () => {
   const isAuth = useAppStore((state) => state.isAuth);
   const logout = useAppStore((state) => state.logout);
   const navigate = useNavigate();
+  
+  const touchStartY = useRef(null);
 
   const loggUtBruker = () => {
     logout();
@@ -23,6 +25,24 @@ const Navbar = () => {
       <nav className="navbar">
 
         <motion.div className="navbar-animasjon"
+          
+          onClick={() => SetIsOpen(!isOpen)}
+          
+          onTouchStart={(e) => {
+          touchStartY.current = e.touches[0].clientY;
+          }}
+          
+          onTouchEnd={(e) => {
+            const touchEndY = e.changedTouches[0].clientY;
+            const diff = touchEndY - touchStartY.current;
+            
+            if (Math.abs(diff) > 50) {
+              e.preventDefault();
+              if (diff > 50) SetIsOpen(true);
+              if (diff < -50) SetIsOpen(false);
+            }
+          }}
+          
           animate={{
             height: isOpen ? "calc(100vh - 32px)" : "60px"
           }}
@@ -31,7 +51,7 @@ const Navbar = () => {
 
           <div className="navbar-top">
             <img src="/g15.svg" className="navbar-top-logo-svg" />
-            <div className="navbar-ham"><Hamburger size={20} rounded color="#000" toggled={isOpen} toggle={SetIsOpen} distance='sm' hideOutline={false} /></div>
+            <div className="navbar-ham" onClick={(e) => e.stopPropagation()}><Hamburger size={20} rounded color="#000" toggled={isOpen} toggle={SetIsOpen} distance='sm' hideOutline={false} /></div>
             <div className="navbar-logo"><span>Behandler</span>Booking</div>
             
           </div>

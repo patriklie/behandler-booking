@@ -70,6 +70,7 @@ body {
   height: 60px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px ;
   border: 2px solid rgba(255, 255, 255, 0.2);
+  touch-action: none;
 }
 
 .navbar-top {
