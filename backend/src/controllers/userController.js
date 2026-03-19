@@ -65,7 +65,7 @@ export const updateUser = async (req, res) => {
         const updatedUserObject = updatedUser.toObject();
         delete updatedUserObject.password;
 
-        res.status(200).json({ message: `Updated the userprofil for ${updatedUser.username}.`, ...updatedUserObject })
+        res.status(200).json({ message: `Oppdatert profile din ${updatedUser.username}.`, ...updatedUserObject })
     
     } catch (error) {
         res.status(500).json({ message: error.message, text: "Inni getUserById Catchen." })

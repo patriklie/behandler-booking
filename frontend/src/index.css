@@ -168,6 +168,37 @@ body {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
+.input-container select {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  padding: 12px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: 1px solid grey;
+}
+
+.input-container select {
+  color: rgb(155, 155, 155); /* placeholder-farge som default */
+}
+
+.input-container select.has-value {
+  color: #000000; /* svart når noe er valgt */
+}
+
+.input-container select option {
+  color: #000000;
+}
+
+.select-icon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
 .logginn-btn {
   background-color: rgb(0, 110, 255);
   width: clamp(200px, 50%, 250px);
@@ -180,7 +211,7 @@ body {
   justify-content: center;
   gap: 8px;
   align-items: center;
-  transition: transform 0.1s ease;
+/*   transition: transform 0.1s ease; */
 }
 
 .logginn-btn:focus {
@@ -228,7 +259,6 @@ input[type="radio"] {
 
 .card-container {
   background-color: rgba(255, 255, 255, 0.068);
-  margin: 0 16px;
   max-width: 100%;
   padding: 20px;
   border-radius: 25px;

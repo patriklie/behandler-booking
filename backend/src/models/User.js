@@ -22,6 +22,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ["admin", "behandler", "pasient"],
         default: "pasient"
+    },
+    typeBehandler: {
+        type: String,
+        enum: [
+            "kiropraktor",
+            "fysioterapeut", 
+            "lege",
+            "tannlege",
+            "psykolog",
+            "naprapat",
+            "osteopat",
+            "akupunktør",
+            "personligtrener",
+            "ernæringsfysiolog"
+        ],
+        default: null,
     }
 }, { timestamps: true, versionKey: false });
 

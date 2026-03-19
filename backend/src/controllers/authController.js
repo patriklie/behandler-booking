@@ -8,8 +8,12 @@ const secret = process.env.JWT_SECRET;
 
 export const registerUser = async (req, res) => {
     try {
-        const { password, username, email, role } = req.body;
+        const { password, username, email, role, typeBehandler } = req.body;
         if (!password || !username || !email || !role) return res.status(400).json({ message: "Missing password, username or email." })
+        
+        if (role === "behandler" && !typeBehandler) {
+            return res.status(400).json({ message: "Behandler mangler fagfelt." })
+        }
         
         const existingUser = await User.findOne({ $or: [{ username }, { email }] });
         if (existingUser) {
@@ -18,7 +22,7 @@ export const registerUser = async (req, res) => {
             else if (existingUser.email === email) message = "Email already exists."
             return res.status(400).json({ message });
         }
-        const newUser = await User.create({ password, username, email, role });
+        const newUser = await User.create({ password, username, email, role, typeBehandler });
         res.status(201).json({ message: "New user created.", id: newUser.id, username: newUser.username, email: newUser.email });
         
     } catch (error) {
@@ -51,7 +55,8 @@ export const loginUser = async (req, res) => {
                     id: foundUser._id,
                     username: foundUser.username,
                     email: foundUser.email,
-                    role: foundUser.role
+                    role: foundUser.role,
+                    typeBehandler: foundUser.typeBehandler
                 });
             } else {
         // 6. Her returnerer jeg feilmelding om hva som ikke stemmer, jeg velger å gjøre dette konkret siden det er en test.
