@@ -113,6 +113,7 @@ body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    user-select: none;
 }
 
 .navbar-logo span {
@@ -211,6 +212,7 @@ body {
   justify-content: center;
   gap: 8px;
   align-items: center;
+  cursor: pointer;
 /*   transition: transform 0.1s ease; */
 }
 
@@ -269,7 +271,7 @@ input[type="radio"] {
 
 .card-image {
   position: absolute;
-  right: -60px;
+  right: -80px;
   top: -20px;
   max-height: 290px;
   width: auto; 
@@ -309,7 +311,7 @@ input[type="radio"] {
 
 .card-undertitle-large {
   font-size: 20px;
-  width: 65%;
+  width: 70%;
   letter-spacing: 2px;
   font-weight: 400;
   color: white;

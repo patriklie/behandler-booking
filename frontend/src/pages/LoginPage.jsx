@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useAppStore } from "../store/authStore.js";
 import { useNavigate, Link } from "react-router";
+import { motion } from "motion/react";
 
 
 const LoginPage = () => {
@@ -54,7 +55,14 @@ const LoginPage = () => {
             <input type="password" onChange={(e) => setPassord(e.target.value)} value={passord} id="passord" placeholder="passord" required></input>
           </div>
           <div className="form-no-bruker">Har du ikke bruker? Registrer <Link to="/register">her</Link></div>
-          <button type="submit" className="logginn-btn">Logg inn <ArrowBigRight fill="white" stroke="none" size={20} /></button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 200, damping: 17 }}
+            type="submit"
+            className="logginn-btn">
+            Logg inn <ArrowBigRight fill="white" stroke="none" size={20} />
+          </motion.button>
 
       </form>
       </div>

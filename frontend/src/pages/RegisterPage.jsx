@@ -121,16 +121,16 @@ const RegisterPage = () => {
               <div className="select-icon">{aktivtIkon}</div>
               <select className={nyBruker.typeBehandler ? "has-value" : ""} value={nyBruker.typeBehandler} name="typeBehandler" onChange={handleBruker} > 
                 <option value="">Velg fagfelt</option>
-                <option value="kiropraktor">Kiropraktor</option>
+                <option value="akupunktør">Akupunktør</option>
+                <option value="ernæringsfysiolog">Ernæringsfysiolog</option>
                 <option value="fysioterapeut">Fysioterapeut</option>
+                <option value="kiropraktor">Kiropraktor</option>
                 <option value="lege">Lege</option>
-                <option value="tannlege">Tannlege</option>
-                <option value="psykolog">Psykolog</option>
                 <option value="naprapat">Naprapat</option>
                 <option value="osteopat">Osteopat</option>
-                <option value="akupunktør">Akupunktør</option>
                 <option value="personligtrener">Personlig trener</option>
-                <option value="ernæringsfysiolog">Ernæringsfysiolog</option>
+                <option value="psykolog">Psykolog</option>
+                <option value="tannlege">Tannlege</option>
               </select>
           </motion.div>
           )}

@@ -1,11 +1,11 @@
 import { Link } from "react-router";
 import { motion } from "motion/react";
 
-const Card = ({ children, icon, style, image, title, button, buttonIcon, buttonLink }) => {
+const Card = ({ children, /* icon, */ style, image, title, button, buttonIcon, buttonLink }) => {
   return (
     <>
       <div className="card-container" style={style}>
-        {icon && <div className="icon-container">{icon}</div>}
+        {/* {icon && <div className="icon-container">{icon}</div>} */}
         <div className="card-title-small">{title}</div>
         {children}
 

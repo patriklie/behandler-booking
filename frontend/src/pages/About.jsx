@@ -8,7 +8,7 @@ const About = () => {
   return (
     <>
       <Card
-        icon={<Info strokeWidth={2} size={40} color="#FFFFFF" />}
+        /*icon={<Info strokeWidth={2} size={40} color="#FFFFFF" />} */
         image={figur}
         title={"om oss"}
         button={"Book time nå"}
