@@ -1,5 +1,6 @@
 import { User } from "../models/User.js";
 import mongoose from "mongoose";
+import cloudinary from "../lib/cloudinary.js";
 
 
 export const getAllUsers = async (req, res) => {
@@ -73,8 +74,6 @@ export const updateUser = async (req, res) => {
 };
 
 export const deleteUser = async (req, res) => {
-
-
     // hente ut ID på bruker vi skal slette fra params
     // sjekke om ID er korrekt mongoose
     // finne bruker i DB
@@ -96,4 +95,47 @@ export const deleteUser = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message, text: "Inni getUserById Catchen." })
     }
+}
+
+export const uploadProfilePicture = async (req, res) => {
+    try {
+    const { id } = req.params;
+    
+    if (!req.file) {
+    return res.status(404).json({ message: "Mangler fil i req.fil." })
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Ikke en valid bruker ID." })
+    }
+
+    // options og filhåndtering, legger det i ram.
+    const options = { overwrite: true, folder: `behandler-booking/${id}/profile` };
+    const base64 = `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`;
+        
+    // finner aktuell bruker og sletter det gamle profilbilde fra cloudinary
+    const foundUser = await User.findById(id);
+    if (foundUser.profilbildePublicId) {
+        await cloudinary.uploader.destroy(foundUser.profilbildePublicId);
+    }
+        
+    const response = await cloudinary.uploader.upload(base64, options);
+        
+     // Legger til url og public-id for profilbilde på brukeren i mongodb
+    const findUser = await User.findByIdAndUpdate(id, {
+        profilbildeUrl: response.secure_url,
+        profilbildePublicId: response.public_id,
+    }, { new: true }); // oppdater DENNE TIL NYESTE MONGOOSE SYNTAXEN.
+
+    console.log(response);
+        res.status(200).json({
+            message: "Profilbilde lastet opp.",
+            profilbildeUrl: response.secure_url,
+        });
+        
+
+    } catch (error) {
+      res.status(500).json({ message: error.message, text: "Inni uploadProfilePicture." })
+    }
+
 }

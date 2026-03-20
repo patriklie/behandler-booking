@@ -38,6 +38,14 @@ const userSchema = new mongoose.Schema({
             "ernæringsfysiolog"
         ],
         default: null,
+    },
+    profilbildeUrl: {
+        type: String,
+        default: null,
+    },
+    profilbildePublicId: {
+        type: String,
+        default: null,
     }
 }, { timestamps: true, versionKey: false });
 
