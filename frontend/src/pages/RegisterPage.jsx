@@ -5,7 +5,6 @@ import { useAppStore } from "../store/authStore.js";
 import { useNavigate } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 
-
 const RegisterPage = () => {
 
   
@@ -62,6 +61,7 @@ const RegisterPage = () => {
         email: nyBruker.email,
         password: nyBruker.password,
       });
+      console.log("Dette får jeg tilbake ved registrering: ", loginRespons)
       setToken(loginRespons.data.token);
       navigate("/timer")
 

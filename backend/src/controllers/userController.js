@@ -17,13 +17,13 @@ export const getUserById = async (req, res) => {
         const { id } = req.params;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({ message: "Not a valid user ID." })
+            return res.status(400).json({ message: "Ikke en valid bruker ID." })
         }
 
         const foundUser = await User.findById(id).select("-password");
 
         if (!foundUser) {
-            return res.status(404).json({ message: "User not found in database." })
+            return res.status(404).json({ message: "Bruker ikke funnet i databasen." })
         }
 
         res.status(200).json(foundUser);
@@ -40,13 +40,13 @@ export const updateUser = async (req, res) => {
         const { id } = req.params;
         // Sjekker om ID faktisk er en godkjent mongoose id type.
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({ message: "Not a valid user ID." })
+            return res.status(400).json({ message: "Ikke en valid bruker ID." })
         }
 
         // Henter eksisterende bruker (om det finnes fra DB)
         const foundUser = await User.findById(id);
         if (!foundUser) {
-            return res.status(404).json({ message: "User not found in the database." })
+            return res.status(404).json({ message: "Bruker ikke funnet i databasen." })
         }
 
         // Felt vi IKKE vil tillate at klienten oppdaterer direkte
@@ -84,13 +84,13 @@ export const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({ message: "Not a valid user ID." })
+            return res.status(400).json({ message: "Ikke en valid bruker ID." })
         }
 
         const foundUser = await User.findByIdAndDelete(id);
-        if (!foundUser) return res.status(404).json({ message: "User not found." });
+        if (!foundUser) return res.status(404).json({ message: "Bruker ikke funnet." });
 
-        res.status(200).json({ message: `Deleted ${foundUser.username}` })
+        res.status(200).json({ message: `Slettet bruker ${foundUser.username}` })
 
 
     } catch (error) {

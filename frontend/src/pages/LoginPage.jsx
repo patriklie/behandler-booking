@@ -1,10 +1,10 @@
-import { LogIn, AtSign, LockKeyhole, ArrowBigRight, Mail } from "lucide-react";
+import { LockKeyhole, ArrowBigRight, Mail } from "lucide-react";
 import axios from "axios";
 import { useState } from "react";
 import { useAppStore } from "../store/authStore.js";
 import { useNavigate, Link } from "react-router";
 import { motion } from "motion/react";
-
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
 
@@ -15,6 +15,7 @@ const LoginPage = () => {
   const setEmail = useAppStore((state) => state.setEmail);
   const setRole = useAppStore((state) => state.setRole);
   const setAuth = useAppStore((state) => state.setIsAuth);
+  const setTypeBehandler = useAppStore((state) => state.setTypeBehandler);
   const navigate = useNavigate();
 
   const loginRequest = async (e) => {
@@ -25,17 +26,20 @@ const LoginPage = () => {
       password: passord
       })
 
-      console.log(response.data);
-
+      console.log("Dette får jeg tilbake ved login: ", response);
+      toast.success(`Hei ${response.data.username} 👋`);
+      
       setToken(response.data.token);
       setUsername(response.data.username);
       setEmail(response.data.email);
       setRole(response.data.role);
       setAuth(true);
+      setTypeBehandler(response.data.typeBehandler || "");
       navigate("/timer");
 
     } catch (error) {
       console.error(error.response.data);
+      toast.error(error.response.data.message);
 }
 
 

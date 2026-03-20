@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useState, useRef } from "react";
 import { useAppStore } from "../store/authStore.js";
 import { Info, ClipboardClock, Calendar1, CircleUserRound, LogOut, LogIn, UserPlus } from "lucide-react";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
 
@@ -11,10 +12,12 @@ const Navbar = () => {
   const isAuth = useAppStore((state) => state.isAuth);
   const logout = useAppStore((state) => state.logout);
   const navigate = useNavigate();
+  const username = useAppStore((state) => state.username);
   
   const touchStartY = useRef(null);
 
   const loggUtBruker = () => {
+    toast.success(`Logget ut ${username}`);
     logout();
     navigate("/login");
     SetIsOpen(false);
@@ -102,7 +105,7 @@ const Navbar = () => {
           }
 
           {isAuth &&
-          <div className="navbar-links" onClick={loggUtBruker}>
+          <div className="navbar-links logout-btn" onClick={loggUtBruker}>
             <LogOut style={{ pointerEvents: "none" }} color="black" size={30} strokeWidth={1}/>
             <span>Logg ut</span>
           </div>

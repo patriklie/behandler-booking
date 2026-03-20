@@ -23,7 +23,7 @@ export const opprettTime = async (req, res) => {
 
         const behandler = await User.findById(id);
         if (!behandler) {
-            return res.status(404).json({ message: "User not found in database." })
+            return res.status(404).json({ message: "Behandler ID finnes ikke i databasen." })
         }
 
         if (!dato || !startTid || !sluttTid) {
