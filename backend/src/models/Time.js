@@ -20,6 +20,11 @@ const timeSchema = new mongoose.Schema({
         required: [true, "Sluttid er påkrevd."],
         match: [/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Sluttid må være i format HH:MM"]
     },
+    pris: {
+        type: Number,
+        default: 0,
+        min: [0, "Pris kan ikke være negativ"]
+    },
     pasient: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",

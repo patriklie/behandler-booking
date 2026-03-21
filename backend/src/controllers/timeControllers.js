@@ -19,7 +19,7 @@ export const opprettTime = async (req, res) => {
     try {
 
         const { id } = req.user;
-        const { dato, startTid, sluttTid } = req.body;
+        const { dato, startTid, sluttTid, pris } = req.body;
 
         const behandler = await User.findById(id);
         if (!behandler) {
@@ -44,7 +44,7 @@ export const opprettTime = async (req, res) => {
             return res.status(400).json({ message: "Det finnes allerede en overlappende time, endre dato eller tidspunkt og prøv igjen." })
         }
 
-        const nyTime = await Time.create({ behandler: id, dato, startTid, sluttTid })
+        const nyTime = await Time.create({ behandler: id, dato, startTid, sluttTid, pris })
         res.status(201).json({message: `Ny time opprettet ${dato}`, time: nyTime })
     } catch (error) {
         res.status(500).json({ message: error.message });

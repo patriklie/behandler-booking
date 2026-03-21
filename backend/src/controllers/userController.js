@@ -51,7 +51,7 @@ export const updateUser = async (req, res) => {
         }
 
         // Felt vi IKKE vil tillate at klienten oppdaterer direkte
-        const protectedKeys = ["_id", "__v", "createdAt", "updatedAt", "role"];
+        const protectedKeys = ["_id", "__v", "createdAt", "updatedAt", "role", "profilbildeUrl", "profilbildePublicId" ];
 
         for (let key in req.body) {
             if (protectedKeys.includes(key)) continue; // hopper over sensitive felter
