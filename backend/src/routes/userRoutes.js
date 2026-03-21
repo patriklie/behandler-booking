@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.get("/", authMiddleware, getAllUsers);
 router.get("/:id", authMiddleware, getUserById); // legg til protection her så ikke alle kan hente brukere
-router.patch("/:id", authMiddleware, updateUser);
+router.patch("/", authMiddleware, updateUser);
 router.delete("/:id", authMiddleware, deleteUser);
 router.post("/:id/profilbilde", authMiddleware, upload.single("profilbilde"), uploadProfilePicture);
 router.delete("/:id/profilbilde", authMiddleware, deleteProfilePicture);

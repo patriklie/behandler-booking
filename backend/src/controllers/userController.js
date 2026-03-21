@@ -37,8 +37,8 @@ export const getUserById = async (req, res) => {
 export const updateUser = async (req, res) => {
     try {
     
-        // jeg henter ut ID på brukeren som skal endres fra req.params
-        const { id } = req.params;
+        // jeg henter ut ID på brukeren som skal endres fra req.user som authMiddleware la der.
+        const { id } = req.user;
         // Sjekker om ID faktisk er en godkjent mongoose id type.
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ message: "Ikke en valid bruker ID." })
@@ -47,7 +47,7 @@ export const updateUser = async (req, res) => {
         // Henter eksisterende bruker (om det finnes fra DB)
         const foundUser = await User.findById(id);
         if (!foundUser) {
-            return res.status(404).json({ message: "Bruker ikke funnet i databasen." })
+            return res.status(404).json({ message: "Bruker finnes ikke." })
         }
 
         // Felt vi IKKE vil tillate at klienten oppdaterer direkte

@@ -16,6 +16,7 @@ const LoginPage = () => {
   const setRole = useAppStore((state) => state.setRole);
   const setAuth = useAppStore((state) => state.setIsAuth);
   const setTypeBehandler = useAppStore((state) => state.setTypeBehandler);
+  const setProfilbilde = useAppStore((state) => state.setProfilbilde);
   const navigate = useNavigate();
 
   const loginRequest = async (e) => {
@@ -33,6 +34,7 @@ const LoginPage = () => {
       setUsername(response.data.username);
       setEmail(response.data.email);
       setRole(response.data.role);
+      setProfilbilde(response.data.profilbilde);
       setAuth(true);
       setTypeBehandler(response.data.typeBehandler || "");
       navigate("/timer");
@@ -52,11 +54,11 @@ const LoginPage = () => {
         <form onSubmit={loginRequest} className="form-container" >
           <div className="input-container">
             <Mail className="input-icon" size={18} color="grey" strokeWidth={1.5} />
-            <input type="text" onChange={(e) => setEpost(e.target.value)} value={epost} id="epost" placeholder="patrik@gmail.com" required></input>
+            <input type="text" onChange={(e) => setEpost(e.target.value)} value={epost} id="epost" placeholder="patrik@gmail.com" required />
           </div>
           <div className="input-container">
             <LockKeyhole className="input-icon" size={18} color="grey" strokeWidth={1.5} />
-            <input type="password" onChange={(e) => setPassord(e.target.value)} value={passord} id="passord" placeholder="passord" required></input>
+            <input type="password" onChange={(e) => setPassord(e.target.value)} value={passord} id="passord" placeholder="passord" required />
           </div>
           <div className="form-no-bruker">Har du ikke bruker? Registrer <Link to="/register">her</Link></div>
           <motion.button

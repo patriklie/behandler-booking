@@ -84,17 +84,17 @@ const RegisterPage = () => {
 
           <div className="input-container">
             <UserPlus className="input-icon" size={18} color="grey" strokeWidth={1.5} />
-            <input type="text" value={nyBruker.username} name="username" onChange={handleBruker} placeholder="brukernavn" required></input>
+            <input type="text" value={nyBruker.username} name="username" onChange={handleBruker} placeholder="brukernavn" required />
           </div>
 
           <div className="input-container">
             <Mail className="input-icon" size={18} color="grey" strokeWidth={1.5} />
-            <input type="text" value={nyBruker.email} name="email" onChange={handleBruker} placeholder="patrik@gmail.com" required></input>
+            <input type="text" value={nyBruker.email} name="email" onChange={handleBruker} placeholder="patrik@gmail.com" required />
           </div>
 
           <div className="input-container">
             <LockKeyhole className="input-icon" size={18} color="grey" strokeWidth={1.5} />
-            <input type="password" value={nyBruker.password} name="password" onChange={handleBruker} placeholder="passord" required></input>
+            <input type="password" value={nyBruker.password} name="password" onChange={handleBruker} placeholder="passord" required />
           </div>
 
           <div className="radio-container">
