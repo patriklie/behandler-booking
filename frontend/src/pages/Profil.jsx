@@ -2,7 +2,7 @@ import { useProfile, useAppStore } from "../store/authStore.js";
 import { useState } from "react";
 import axios from "axios";
 import { motion } from "motion/react";
-import { UserPen, Mail, Stethoscope } from "lucide-react";
+import { UserPen, Mail, Stethoscope, CircleChevronDown } from "lucide-react";
 import ProfileCard from "../components/ProfileCard.jsx";
 import toast from "react-hot-toast";
 
@@ -89,6 +89,7 @@ const Profil = () => {
   
   return (
     <>
+    <div className="profil-forhåndsvisning"><span>Forhåndsvisning av profilen din </span></div>
     <ProfileCard profilbildeKlikk={profilbildeKlikk} username={username} email={email} role={role} typeBehandler={typeBehandler} />
     
     <form onSubmit={oppdaterProfil} className="form-container"> 
@@ -105,7 +106,6 @@ const Profil = () => {
       <div className="input-container">
         <Stethoscope className="input-icon" size={18} color="grey" strokeWidth={1.5} />
         <select value={nyProfil.typeBehandler} name="typeBehandler" onChange={handleOppdaterBruker}> 
-          <option value="">Velg fagfelt</option>
           <option value="akupunktør">Akupunktør</option>
           <option value="ernæringsfysiolog">Ernæringsfysiolog</option>
           <option value="fysioterapeut">Fysioterapeut</option>

@@ -119,7 +119,7 @@ const RegisterPage = () => {
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
                 className="input-container">
               <div className="select-icon">{aktivtIkon}</div>
-              <select className={nyBruker.typeBehandler ? "has-value" : ""} value={nyBruker.typeBehandler} name="typeBehandler" onChange={handleBruker} > 
+              <select style={{ paddingLeft: 20 }} className={nyBruker.typeBehandler ? "has-value" : ""} value={nyBruker.typeBehandler} name="typeBehandler" onChange={handleBruker} > 
                 <option value="">Velg fagfelt</option>
                 <option value="akupunktør">Akupunktør</option>
                 <option value="ernæringsfysiolog">Ernæringsfysiolog</option>
