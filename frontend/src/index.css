@@ -394,9 +394,10 @@ input[type="radio"] {
 
 .profile-container {
 background-color: rgb(255, 255, 255);
-width: 100%;
-height: auto;
-border-radius: 10px;
+width: clamp(200px, 100%, 500px);
+margin: 0 auto;
+height: 200px;
+border-radius: 5px;
 box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 3px;
 display: grid;
 grid-template-columns: 40% 60%;

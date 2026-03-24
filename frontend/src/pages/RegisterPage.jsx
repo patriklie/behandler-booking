@@ -4,13 +4,12 @@ import axios from "axios";
 import { useAppStore } from "../store/authStore.js";
 import { useNavigate } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
+import toast from "react-hot-toast";
 
 const RegisterPage = () => {
 
-  
   const setToken = useAppStore((state) => state.setToken);
   const navigate = useNavigate();
-  const [feil, setFeil] = useState("")
 
   const [nyBruker, setNyBruker] = useState({
     username: "",
@@ -42,12 +41,12 @@ const RegisterPage = () => {
     try {
 
       if (!nyBruker.username || !nyBruker.email || !nyBruker.role || !nyBruker.password) {
-        setFeil("Alle felt må fylles ut.");
+        toast.error("Alle felt må fylles ut.");
         return;
       } 
       
       if (nyBruker.role === "behandler" && !nyBruker.typeBehandler) {
-        setFeil("Velg type behandler.")
+        toast.error("Velg type behandler.")
         return;
       }
       
@@ -66,7 +65,7 @@ const RegisterPage = () => {
       navigate("/profil")
 
     } catch (error) {
-      setFeil(error.response.data.message);
+      toast.error(error.response.data.message);
       console.log(error.response.data.message)
     }
 
@@ -89,7 +88,7 @@ const RegisterPage = () => {
 
           <div className="input-container">
             <Mail className="input-icon" size={18} color="grey" strokeWidth={1.5} />
-            <input type="text" value={nyBruker.email} name="email" onChange={handleBruker} placeholder="patrik@gmail.com" required />
+            <input type="text" value={nyBruker.email} name="email" onChange={handleBruker} placeholder="patrik@hotmail.com" required />
           </div>
 
           <div className="input-container">

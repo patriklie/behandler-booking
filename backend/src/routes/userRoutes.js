@@ -6,12 +6,14 @@ import {
     updateUser,
     deleteUser,
     uploadProfilePicture,
-    deleteProfilePicture
+    deleteProfilePicture,
+    getAlleBehandlere
 } from "../controllers/userController.js";
 import { upload } from "../middleware/uploadMiddleware.js";
 
 const router = express.Router();
 
+router.get("/behandlere", authMiddleware, getAlleBehandlere);
 router.get("/", authMiddleware, getAllUsers);
 router.get("/:id", authMiddleware, getUserById); // legg til protection her så ikke alle kan hente brukere
 router.patch("/", authMiddleware, updateUser);

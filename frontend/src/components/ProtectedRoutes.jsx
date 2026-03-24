@@ -7,7 +7,7 @@ const ProtectedRoutes = () => {
 
   const token = useAppStore((state) => state.token);
   const logout = useAppStore((state) => state.logout);
-  const username = useAppStore((state) => state.username);
+  const setTypeBehandler = useAppStore((state) => state.setTypeBehandler)
   const setUsername = useAppStore((state) => state.setUsername);
   const setEmail = useAppStore((state) => state.setEmail);
   const setRole = useAppStore((state) => state.setRole);
@@ -37,15 +37,14 @@ const ProtectedRoutes = () => {
           headers: { Authorization: `Bearer ${token}` }
         });
 
-        if (!username) {
-          setUsername(response.data.username);
-          setEmail(response.data.email);
-          setRole(response.data.role);
-        }
-
-        console.log("Respons fra verifiser token Auth/me: ", response.data);
+        setUsername(response.data.username);
+        setEmail(response.data.email);
+        setRole(response.data.role);
+        setTypeBehandler(response.data.typeBehandler || "");
         setIsAuth(true);
         setTokenCheck(true);
+        
+        console.log("Respons fra verifiser token Auth/me: ", response.data);
 
       } catch (error) {
         logout();

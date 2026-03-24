@@ -18,6 +18,7 @@ const Profil = () => {
     role: role,
     typeBehandler: typeBehandler,
   });
+  const profilbilde = useAppStore((state) => state.profilbilde);
   
   const profilbildeKlikk = async (e) => {
     console.log("Du klikket på profilbilde!");
@@ -88,9 +89,9 @@ const Profil = () => {
 }
   
   return (
-    <>
+    <div className="margin-klassen">
     <div className="profil-forhåndsvisning"><span>Forhåndsvisning av profilen din </span></div>
-    <ProfileCard profilbildeKlikk={profilbildeKlikk} username={username} email={email} role={role} typeBehandler={typeBehandler} />
+    <ProfileCard profilbildeKlikk={profilbildeKlikk} username={username} email={email} role={role} typeBehandler={typeBehandler} profilbilde={profilbilde} />
     
     <form onSubmit={oppdaterProfil} className="form-container"> 
       <div className="input-container">
@@ -131,7 +132,7 @@ const Profil = () => {
       </motion.button>  
 
     </form>
-    </>
+    </div>
   )
 }
 

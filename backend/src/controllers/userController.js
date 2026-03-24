@@ -12,6 +12,21 @@ export const getAllUsers = async (req, res) => {
     }
 }
 
+export const getAlleBehandlere = async (req, res) => {
+    try {
+        const alleBehandlere = await User.find({ role: "behandler" }).select("-password");
+
+        if (alleBehandlere.length <= 0) {
+            return res.status(404).json({ message: "Ingen behandlere funnet." });
+        }
+
+        res.status(200).json({ alleBehandlere });
+
+    } catch (error) {
+        res.status(500).json({ message: error.message, text: "Inni getAlleBehandlere catche." })
+    }
+}
+
 export const getUserById = async (req, res) => {
     try {
 

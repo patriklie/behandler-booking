@@ -1,11 +1,9 @@
-import { useAppStore } from "../store/authStore.js";
 import defaultAvatar from "../assets/Profile_avatar_placeholder_large.png";
 import { useRef } from "react";
 import { ShieldCheck } from "lucide-react";
 
-const ProfileCard = ({ profilbildeKlikk, username, email, role, typeBehandler }) => {
+const ProfileCard = ({ profilbildeKlikk, username, email, role, typeBehandler, profilbilde, velgbehandler, valgt }) => {
     
-    const profilbilde = useAppStore((state) => state.profilbilde);
     const inputField = useRef();
     
     const handleOnChangeProfile = async (e) => {
@@ -15,14 +13,18 @@ const ProfileCard = ({ profilbildeKlikk, username, email, role, typeBehandler })
     
     return (
     <>
-    <div className="profile-container">
+    <div className="profile-container" onClick={velgbehandler || undefined} style={{ boxShadow: valgt ? "rgba(55, 148, 55, 1) 0px 2px 5px" : "" }}>
         <div className="profilbilde-wrapper">
             <div className="profilbilde-bakgrunn"
-                onClick={() => inputField.current.click()}
+                onClick={ profilbildeKlikk ? () => inputField.current.click() : undefined }
                 style={{ backgroundImage: `url(${profilbilde || defaultAvatar})` }}
             />
-        </div>
+            </div>
+                
+    {profilbildeKlikk && 
     <input type="file" ref={inputField} style={{ display: "none" }} onChange={handleOnChangeProfile} />
+    }
+
     <div className="profil-innhold">
         <div className="profil-brukernavn">{username}</div>
         <div className="profil-typebehandler">{typeBehandler}<ShieldCheck color="#379437" strokeWidth={2} size={14} /></div>
