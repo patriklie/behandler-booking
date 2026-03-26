@@ -20,8 +20,13 @@ input[type="checkbox"] {
 }
 
 :root {
-  --primary-color: #0abd6c;
-  --secondary-color: #20d885;
+  --primary-color: #006EFF;
+  --secondary-color: #d2e1f5;
+  --mint-green: #279A74;
+  --mint-green-shadow: #279a745e;
+  --grey-text: #71847E;
+  --bg-almost-white:#F7F7F7;
+  --bg-darker-almost-white: #F1F3F2;
 }
 
 * {
@@ -61,6 +66,18 @@ input:-webkit-autofill:active {
   margin: 16px 32px;
 }
 
+body {
+/*     background-image: url("./assets/alex-padurariu-iNmouRApXYM-unsplash_large.jpg"); */
+/*     background-image: url("./assets/BG_app.png"); */
+    /*background-image: url("/jean-philippe-delberghe-75xPHEQBmvA-unsplash.jpg");*/
+    /* Link til bilde på unsplash for credits https://unsplash.com/photos/clear-glass-jar-on-gray-wooden-table-iNmouRApXYM */
+/*     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; */
+    background-color: var(--bg-almost-white);
+}
+
 /* NAVBAR */
 .navbar {
   color: #000000;
@@ -72,27 +89,13 @@ input:-webkit-autofill:active {
   margin: 16px;
 }
 
-
-body {
-/*     background-image: url("./assets/alex-padurariu-iNmouRApXYM-unsplash_large.jpg"); */
-    background-image: url("./assets/BG_app.png");
-    /*background-image: url("/jean-philippe-delberghe-75xPHEQBmvA-unsplash.jpg");*/
-    /* Link til bilde på unsplash for credits https://unsplash.com/photos/clear-glass-jar-on-gray-wooden-table-iNmouRApXYM */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
 .navbar-animasjon {
   display: block;
   overflow: hidden;
   border-radius: 30px;
-  background-color: rgb(255, 255, 255);
-  /* gjennomsiktig */
-  /*backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); */
-  /* Safari */
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   height: 60px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px ;
   border: 2px solid rgba(255, 255, 255, 0.2);
@@ -169,6 +172,17 @@ body {
   margin: 0 auto;
 }
 
+.input-wrapper {
+  position: relative;
+}
+
+.input-container label {
+  font-size: 0.8rem;
+  display: block;
+  padding-bottom: 5px;
+  color: #444444;
+}
+
 .input-icon {
   position: absolute;
   top: 50%;
@@ -177,14 +191,15 @@ body {
 }
 
 .input-container input {
-  outline: 1px solid grey;
+  outline: 1px solid rgb(224, 224, 224);
   padding: 12px 42px;
   width: 100%;
   border-radius: 10px;
   font-size: 14px;
-  font-family: Verdana;
-  color: #000000;
+  /* font-family: Verdana; */
+  color: #444444;
   background-color: white;
+  line-height: 1.2;
 }
 
 .input-container input::placeholder {
@@ -197,7 +212,31 @@ body {
  letter-spacing: 1px;
 }
 
-.input-container input:focus {
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field,
+input[type="time"]::-webkit-datetime-edit-text,
+input[type="time"]::-webkit-datetime-edit-hours-field,
+input[type="time"]::-webkit-datetime-edit-minutes-field {
+   color: rgb(155, 155, 155);
+}
+
+input[type="date"]:not([value=""])::-webkit-datetime-edit-month-field,
+input[type="date"]:not([value=""])::-webkit-datetime-edit-day-field,
+input[type="date"]:not([value=""])::-webkit-datetime-edit-year-field,
+input[type="time"]:not([value=""])::-webkit-datetime-edit-hours-field,
+input[type="time"]:not([value=""])::-webkit-datetime-edit-minutes-field {
+  color: #444444;
+}
+
+.input-container input:focus,
+.input-container select:focus {
   outline: 1px solid rgb(56, 56, 56);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
@@ -210,16 +249,16 @@ body {
   font-size: 14px;
   appearance: none;
   -webkit-appearance: none;
-  outline: 1px solid grey;
-  color: rgb(0, 0, 0);
+  outline: 1px solid rgb(224, 224, 224);
+  color: rgb(155, 155, 155);
 }
 
 .input-container select.has-value {
-  color: #000000; /* svart når noe er valgt */
+  color: #444444;; /* svart når noe er valgt */
 }
 
 .input-container select option {
-  color: #000000;
+  color: #444444;;
 }
 
 .select-icon {
@@ -258,7 +297,7 @@ body {
 
 .form-no-bruker {
   font-size: 12px;
-  color: rgb(255, 255, 255);
+  color: var(--grey-text);
   text-align: center;
 }
 
@@ -280,7 +319,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: white;
+  color: var(--grey-text);
   font-family: "Poppins", sans-serif;
 }
 
@@ -293,7 +332,7 @@ input[type="radio"] {
 /* Card component */
 
 .card-container {
-  background-color: rgba(255, 255, 255, 0.068);
+  background-color: rgb(255, 255, 255);
   max-width: 100%;
   margin: 16px auto;
   padding: 20px;
@@ -325,13 +364,13 @@ input[type="radio"] {
 .graphic-container .box {
   position: absolute;
   width: 900px;
-  height: 100px;
-  background-color: #ffffff27;
-  backdrop-filter: blur(10px);
+  height: 200px;
+  background-color: #0687ff2f;
+/*   backdrop-filter: blur(10px); */
   bottom: -100px;
-  right: -50px;
+  right: -400px;
   border-radius: 25px;
-  transform: rotate(-15deg);
+  transform: rotate(-20deg);
 }
 
 .card-title-small {
@@ -340,7 +379,7 @@ input[type="radio"] {
   font-weight: 00;
   letter-spacing: 3px;
   font-size: 12px;
-  color: rgb(255, 255, 255);
+  color: var(--primary-color);
 }
 
 .card-undertitle-large {
@@ -348,7 +387,7 @@ input[type="radio"] {
   width: 70%;
   letter-spacing: 2px;
   font-weight: 400;
-  color: white;
+  color: rgb(0, 0, 0);
   line-height: 1.2;
 }
 
@@ -360,8 +399,8 @@ input[type="radio"] {
 
 .card-text {
   font-size: 12px;
-  color: white;
-  width: 65%;
+  color: rgb(24, 24, 24);
+  width: 70%;
   font-weight: 300;
   margin: 16px 0;
   letter-spacing: 0.05em;
@@ -396,18 +435,20 @@ input[type="radio"] {
 .profile-container {
 background-color: rgb(255, 255, 255);
 width: clamp(200px, 100%, 500px);
-margin: 0 auto;
+margin: 1rem auto;
 height: 180px;
-border-radius: 5px;
-box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 3px;
+border-radius: 10px 10px 10px 10px;
+box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px;
 display: grid;
-grid-template-columns: 40% 60%;
-overflow: hidden;
+grid-template-columns: 35% 65%;
+/* overflow: hidden; */
 transition: box-shadow 0.3s ease;
 }
 
 .profilbilde-wrapper {
   height: 100%;
+    border-radius: 10px 0px 0px 10px;
+ 
 }
 
 .profilbilde-bakgrunn {
@@ -416,11 +457,12 @@ transition: box-shadow 0.3s ease;
   background-size: cover;
   background-position: center;
   cursor: pointer;
+  border-radius: 10px 0px 0px 10px;
 }
 
 .profil-innhold {
-  background-color: rgb(255, 255, 255);
-  padding: 10px;
+  padding: 1rem;
+  position: relative;
 }
 
 .profil-brukernavn {
@@ -429,7 +471,7 @@ transition: box-shadow 0.3s ease;
 }
 
 .profil-typebehandler {
-  color: #379437;
+  color: var(--mint-green);
   text-transform: capitalize;
   font-size: 14px;
   display: flex;
@@ -438,12 +480,11 @@ transition: box-shadow 0.3s ease;
 }
 
 .profil-om {
-  padding-top: 10px;
   font-size: 10px;
 }
 
 .profil-forhåndsvisning {
-  color :rgba(255, 255, 255);
+  color :var(--grey-text);
   margin: 16px auto;
   gap: 10px;
   font-size: 20px;
@@ -455,18 +496,15 @@ transition: box-shadow 0.3s ease;
   font-size: 26px;
 }
 
-.profil-valgt-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 16px;
-}
-
 .profil-valgt {
-  background-color: #379437;
+  background-color: var(--mint-green);
   color: white;
   padding: 4px 20px;
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 20px;
   text-align: center;
-  width: 100%;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -478,6 +516,19 @@ transition: box-shadow 0.3s ease;
   opacity: 0;
   pointer-events: none;
   transform: scale(0.9);
+}
+
+.rounded-info-box {
+  background-color: var(--secondary-color);
+  margin: 1rem auto 0 auto;
+  border-radius: 50px;
+  padding: 4px 20px;
+  font-size: 0.7rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  letter-spacing: .5px;
+  width: fit-content;
+  text-align: center;
 }
 
 .mySwiper.locked .swiper-pagination {
@@ -495,3 +546,12 @@ transition: box-shadow 0.3s ease;
 .swiper-pagination-bullet-active {
   transform: scale(1.3);
 }
+
+/* .mySwiper .swiper-slide {
+  transform: scale(0.8) !important;
+  transition: transform 0.25s ease !important;
+}
+
+.mySwiper .swiper-slide-active {
+  transform: scale(1) !important;
+} */

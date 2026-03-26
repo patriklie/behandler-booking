@@ -113,7 +113,7 @@ const Profil = () => {
         
       <div className="input-container">
         <Stethoscope className="input-icon" size={18} color="grey" strokeWidth={1.5} />
-        <select value={nyProfil.typeBehandler} name="typeBehandler" onChange={handleOppdaterBruker}> 
+        <select value={nyProfil.typeBehandler} className={nyProfil.typeBehandler ? "has-value" : ""} name="typeBehandler" onChange={handleOppdaterBruker}> 
           <option value="akupunktør">Akupunktør</option>
           <option value="ernæringsfysiolog">Ernæringsfysiolog</option>
           <option value="fysioterapeut">Fysioterapeut</option>

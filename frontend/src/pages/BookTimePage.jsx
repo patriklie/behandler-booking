@@ -51,10 +51,10 @@ const BookTimePage = () => {
   return (
       
     <>
-      <div className="profil-forhåndsvisning"><span>{ valgtBehandler ? "Valgt behandler" : "Velg behandler" }</span></div>
+      <div className="rounded-info-box"><span>{ valgtBehandler ? "Valgt behandler" : "Velg behandler" }</span></div>
       <Swiper
         onSwiper={(swiper) => (swiperRef.current = swiper)}
-        style={{ padding: "0 16px 40px 16px" }}
+        style={{ padding: "0 16px 20px 16px" }}
         spaceBetween={50}
         slidesPerView={1}
         className={`mySwiper ${valgtBehandler ? "locked" : ""}`}

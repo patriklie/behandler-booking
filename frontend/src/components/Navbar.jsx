@@ -49,7 +49,12 @@ const Navbar = () => {
           animate={{
             height: isOpen ? "calc(100vh - 32px)" : "60px"
           }}
-          transition={{ type: "spring", duration: .5, delay: isOpen ? 0 : 0.2 }}
+          transition={{
+            type: "spring",
+            duration: .5,
+            
+            delay: isOpen ? 0 : 0.2
+          }}
         >
 
           <div className="navbar-top">

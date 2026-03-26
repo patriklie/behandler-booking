@@ -30,6 +30,10 @@ export const opprettTime = async (req, res) => {
             return res.status(400).json({ message: "Manglende input data for å opprette time i request" });
         }
 
+        if (startTid === sluttTid) {
+            return res.status(400).json({ message: "Start- og slutt er samme tidspunkt." })
+        }
+
         // Eksempel: Vi oppretter time med start 10:00 og slutt 12:00
         // da sjekker vi databasen om det finnes timer med starttid før kl 12:00 OG
         // har en slutttid etter kl 10:00
