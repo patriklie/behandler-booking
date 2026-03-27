@@ -555,3 +555,66 @@ transition: box-shadow 0.3s ease;
 .mySwiper .swiper-slide-active {
   transform: scale(1) !important;
 } */
+
+/* Kalender */
+
+.kalender-container {
+  margin: 1rem auto;
+  width: 320px;
+}
+
+.kalender-month-year {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+.kalender-icon-wrapper {
+  display: flex;
+  padding: 20px;
+  transition: background-color .3s ease;
+  cursor: pointer;
+
+}
+
+.kalender-icon-wrapper:hover {
+  background-color: var(--bg-darker-almost-white);
+}
+
+.kalender-grid {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(7, 1fr);
+  user-select: none;
+}
+
+.kalender-grid div {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+  border-radius: 5px; 
+}
+
+.kalender-celler-null {
+    background-color: rgb(241, 241, 241);
+}
+
+.kalender-celler-datoer {
+    background-color: rgb(202, 202, 202);
+    cursor: pointer;
+}
+
+.kalender-dager {
+  font-weight: 600;
+}
+
+.kalender-grid div.valgt {
+  background-color: black;
+  color: white;
+}
+
+.kalender-formatert-dato {
+  text-align: center;
+  font-weight: 600;
+}
