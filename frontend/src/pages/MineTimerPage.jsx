@@ -5,13 +5,15 @@ import axios from "axios";
 import { useAppStore } from "../store/authStore.js";
 import toast from "react-hot-toast";
 import { Clock, Info, Wallet } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 
 const MineTimerPage = () => {
 
 const token = useAppStore((state) => state.token);
 const [behandlerTimer, setBehandlerTimer] = useState([]);
 const [valgtDato, setValgtDato] = useState(new Date().toISOString().split("T")[0]);  
-const timerValgtDato = behandlerTimer.filter(time => time.dato.startsWith(valgtDato))
+const timerValgtDato = behandlerTimer.filter(time => time.dato.startsWith(valgtDato));
+const [showSkjema, setShowSkjema] = useState(false);
   
 const formatDato = (datoString) => {
   const date = new Date(datoString);
@@ -43,13 +45,41 @@ const hentBehandlerTimer = async () => {
   
   return (
     <>
-      <OpprettTimeSkjema hentBehandlerTimer={hentBehandlerTimer} />
-      <Kalender timer={behandlerTimer} onDatoValg={setValgtDato} />
-      <div className="kalender-formatert-dato">
-        {valgtDato ? formatDato(valgtDato) : "Ingen dato valgt"}
+
+      
+      <div className="ny-time-knapp-container">
+        <div></div>
+        <button onClick={() => setShowSkjema(!showSkjema)}>{ showSkjema ? "Lukk" : "Åpne ny time skjema" }</button> 
+        <div></div>
       </div>
       
-      <div className="timer-container">
+      <AnimatePresence mode="popLayout">  
+      {showSkjema && 
+
+          <motion.div
+          key="skjema"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.3 }}
+          >
+          
+         <OpprettTimeSkjema hentBehandlerTimer={hentBehandlerTimer} />
+        </motion.div>
+      }
+
+      </AnimatePresence>  
+      
+      <motion.div layout>
+      <Kalender timer={behandlerTimer} onDatoValg={setValgtDato} />
+      </motion.div>
+      
+      
+      <motion.div layout className="kalender-formatert-dato">
+        {valgtDato ? formatDato(valgtDato) : "Ingen dato valgt"}
+      </motion.div>
+      
+      <AnimatePresence>
+      <motion.div layout="position" className="timer-container">
         
       {
         timerValgtDato.map((time) => {
@@ -67,8 +97,10 @@ const hentBehandlerTimer = async () => {
           )
         })
       }
-      </div>
-           
+      </motion.div>
+
+</AnimatePresence>
+      
     </>
   )
 }
