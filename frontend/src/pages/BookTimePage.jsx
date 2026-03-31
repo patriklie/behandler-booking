@@ -28,8 +28,20 @@ const BookTimePage = () => {
     dialogRef.current.showModal();
   }
   
-  const bookTime = () => {
-    console.log("Booker time!");
+  const bookTime = async () => {
+    try {
+      const response = await axios.patch(`${import.meta.env.VITE_API_URL}/api/time/${valgtTime._id}/book`, {}, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      hentValgtBehandlerTimer();
+      setValgtTime(null);
+      dialogRef.current.close();
+      toast.success(response.data.message)
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Feil ved booking av time.")
+    }
   }
   
   const avbrytBooking = () => {
@@ -46,25 +58,25 @@ const BookTimePage = () => {
     }).format(date);
   };
   
+  const hentValgtBehandlerTimer = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/time/behandler/${valgtBehandler._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      setValgtBehandlerTimer(response.data.valgtBehandlerTimer)
+
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Feil ved henting av valgt behandler timer.")
+    }
+
+  }
+  
   useEffect(() => {
     if (!valgtBehandler) {
       setValgtBehandlerTimer([]);
       return;
-    }
-    
-    const hentValgtBehandlerTimer = async () => {
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/time/behandler/${valgtBehandler._id}`, {
-          headers: {
-          Authorization: `Bearer ${token}`
-          }
-        })
-        setValgtBehandlerTimer(response.data.valgtBehandlerTimer)
-        
-      } catch (error) {
-        toast.error(error.response?.data?.message || "Feil ved henting av valgt behandler timer.")
-      }
-    
     }
     hentValgtBehandlerTimer();
   }, [valgtBehandler])

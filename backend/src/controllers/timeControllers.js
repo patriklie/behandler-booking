@@ -93,7 +93,6 @@ export const bookTime = async (req, res) => {
     try {
         const { id: timeID } = req.params;
         const { id: pasientID } = req.user;
-
         if (!timeID) return res.status(400).json({ message: "Time ID mangler." });
         if (!mongoose.Types.ObjectId.isValid(timeID)) return res.status(400).json({ message: "Time ID er ikke riktig." });
         
