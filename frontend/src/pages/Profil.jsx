@@ -1,15 +1,19 @@
 import { useProfile, useAppStore } from "../store/authStore.js";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import { motion } from "motion/react";
 import { UserPen, Mail, Stethoscope, CircleChevronDown } from "lucide-react";
 import ProfileCard from "../components/ProfileCard.jsx";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
+import SlettCharacter from "../assets/3d-female-character-with-question-marks.png";
 
 const Profil = () => {
   
+  const navigate = useNavigate();
   const { username, email, role, typeBehandler } = useProfile();
   const token = useAppStore((state) => state.token);
+  const logout = useAppStore((state) => state.logout);
   const setProfil = useAppStore((state) => state.setProfil);
   const setProfilbilde = useAppStore((state) => state.setProfilbilde);
   const [nyProfil, setNyProfil] = useState({
@@ -19,7 +23,9 @@ const Profil = () => {
     typeBehandler: typeBehandler,
   });
   const profilbilde = useAppStore((state) => state.profilbilde);
-  
+  const slettModalRef = useRef();
+
+
   const profilbildeKlikk = async (e) => {
     console.log("Du klikket på profilbilde!");
     console.log(e)
@@ -96,7 +102,21 @@ const Profil = () => {
 }
 
 const slettProfil = async () => {
-  console.log("Slette profil");
+  try {
+
+    const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/users/`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    slettModalRef.current.close()
+    toast.success(response.data.message, { duration: 4000 });
+    logout();
+    navigate("/login");
+
+  } catch(error) {
+    toast.error(error.response?.data?.message)
+  }
 }
   
   return (
@@ -151,13 +171,28 @@ const slettProfil = async () => {
       Oppdater profil
       <UserPen color="#FFFFFF" size={20} />
     </motion.button>  
-    <motion.button className="profil-slett-btn">
-      Slett profilen
-    </motion.button>
+
 
     </form>
 
+    <motion.button className="profil-slett-btn" onClick={() => slettModalRef.current.showModal()}>
+      Slett profilen
+    </motion.button>
 
+    <dialog className="slett-profil-modal" ref={slettModalRef}>
+      <img className="slett-profil-char" src={SlettCharacter} />
+      <motion.button
+      whileHover={{ scale: 1.5 }}
+      whileTap={{ scale: 1 }} 
+      transition={{ type: "spring" }}
+      className="slett-btn" 
+      onClick={slettProfil}>Slett profilen</motion.button>
+      <motion.button 
+      whileHover={{ scale: 1.5 }}
+      whileTap={{ scale: 1 }} 
+      transition={{ type: "spring" }} 
+      className="avbryt-btn" onClick={() => slettModalRef.current.close()}>Avbryt</motion.button>
+    </dialog>
 
     </div>
   )

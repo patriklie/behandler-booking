@@ -17,7 +17,7 @@ const MineTimerPage = () => {
   const [valgtDato, setValgtDato] = useState(new Date().toISOString().split("T")[0]);  
   const timerValgtDato = behandlerTimer.filter(time => time.dato.startsWith(valgtDato));
   const [showSkjema, setShowSkjema] = useState(false);
-
+  
   const formatDato = (datoString) => {
     const date = new Date(datoString);
     return new Intl.DateTimeFormat("no-NO", {
@@ -87,7 +87,6 @@ const MineTimerPage = () => {
       <motion.div layout>
       <Kalender timer={behandlerTimer} onDatoValg={setValgtDato} />
       </motion.div>
-      
       
       <motion.div layout className="kalender-formatert-dato">
         {valgtDato ? formatDato(valgtDato) : "Ingen dato valgt"}
