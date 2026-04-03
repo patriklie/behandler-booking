@@ -868,14 +868,14 @@ dialog::backdrop {
   background-position: center;
 }
 
-.time-booking-modal .bilde-flex .logo::after,
+/* .time-booking-modal .bilde-flex .logo::after,
 .time-booking-modal .bilde-flex .behandler-bilde::after {
   content: "";
   position: absolute;
   inset: -10px;
   border-radius: 10px;
   border: 2px dotted rgba(0, 0, 0, 0.05);
-}
+} */
 
 .dotsdots {
   width: 100%;

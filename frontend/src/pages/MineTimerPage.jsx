@@ -80,10 +80,7 @@ const MineTimerPage = () => {
       }
 
       </AnimatePresence>  
-      </>
-      }
-      
-      
+        
       <motion.div layout>
       <Kalender timer={behandlerTimer} onDatoValg={setValgtDato} />
       </motion.div>
@@ -98,8 +95,12 @@ const MineTimerPage = () => {
       <TimeListe timerValgtDato={timerValgtDato} slettTime={slettTime} />
       </motion.div>
 
-</AnimatePresence>
-      
+      </AnimatePresence>
+      </>
+      }
+
+    <div>Pasienttimelist med swipe slettings</div>
+
     </>
   )
 }
