@@ -123,9 +123,9 @@ const MineTimerPage = () => {
 
      
       {pasientTimer &&
-
         <>
-        <PasientTimeListe timer={pasientTimer} />
+          <Skillelinje tekst="Mine Timer" />
+          <PasientTimeListe timer={pasientTimer} />
         </>
       }
 

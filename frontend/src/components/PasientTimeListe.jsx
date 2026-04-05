@@ -5,6 +5,16 @@ import PasientTimeCelle from "../components/PasientTimeCelle.jsx";
 import { time } from "motion/react";
 
 const PasientTimeListe = ({ timer }) => {
+    
+    const dagerTilTime = (timeString) => {
+        const idag = new Date();
+        const timeDato = new Date(timeString);
+        const diffMs = timeDato - idag;
+        const diffDager = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+        
+        if (diffDager <= 0) return "0";
+        return `${diffDager}`;   
+    } 
 
     const formatDato = (datoString) => {
         const date = new Date(datoString)
@@ -21,7 +31,7 @@ const PasientTimeListe = ({ timer }) => {
             <div className="pasientTimer-container">
                 {
                     timer.map((time) => {
-                        return <PasientTimeCelle key={time._id} formatDato={formatDato} time={time} />
+                        return <PasientTimeCelle key={time._id} formatertDato={formatDato(time.dato)} time={time} dagerTilTime={dagerTilTime(time.dato)} />
                     })
                 }
                 

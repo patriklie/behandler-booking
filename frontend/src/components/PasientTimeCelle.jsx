@@ -1,22 +1,22 @@
-import { motion, useMotionValue, useTransform, animate, useMotionValueEvent, useAnimationControls } from "motion/react";
+import { motion, useMotionValue, useTransform, animate, useMotionValueEvent, useAnimationControls, AnimatePresence } from "motion/react";
 import { useState } from "react";
-import { Trash2 } from "lucide-react";
+import { CalendarX, Trash2 } from "lucide-react";
 
-const PasientTimeCelle = ({ time, formatDato }) => {
+const PasientTimeCelle = ({ time, formatertDato, dagerTilTime }) => {
     const x = useMotionValue(0);
     const bakgrunnsfarge = useTransform(x, [0, -(window.innerWidth * 0.5)], ["#ffffff", "#ff4444"]);
     const ikonSize = useTransform(x, [0, -(window.innerWidth * 0.5)], [1, 2]);
-    const ikonOpacity = useTransform(x, [0, -(window.innerWidth * 0.5)], [0, 1]);
+    const ikonOpacity = useTransform(x, [0, -(window.innerWidth * 0.25)], [0, 1]);
+    const tekstPosition = useTransform(x, [0, -(window.innerWidth)], ["150px", "75px"]);
     const [visIkon, setVisIkon] = useState(true);
-    
-    const ikonControls = useAnimationControls()
+    const ikonControls = useAnimationControls();
 
     useMotionValueEvent(x, "change", (latest) => {
         const terskel = -(window.innerWidth * 0.5)
         if (latest <= terskel) {
             ikonControls.start({
                 rotate: [0, -10, 10, -10, 10, 0],
-                transition: { duration: 1, repeat: Infinity, ease: "easeInOut" }
+                transition: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
             })
         } else {
             ikonControls.start({
@@ -29,20 +29,30 @@ const PasientTimeCelle = ({ time, formatDato }) => {
     return (
         <div className="pasientTime-wrapper">
             {visIkon &&
+            <>
                 <motion.div
                     className="bak-timecelle-ikon"
                     style={{ scale: ikonSize, opacity: ikonOpacity }}
                     animate={ikonControls}
                 >
-                <Trash2 />
-            </motion.div>
+                    <CalendarX strokeWidth={1} />
+                </motion.div>
+                <motion.div
+                    className="bak-timecelle-tekst"
+                    style={{ right: tekstPosition }}
+                
+                >
+                    AVLYS TIMEN
+                </motion.div>
+            </>
             }
-
+            
             <motion.div
                 className="pasientTime-celle"
                 drag="x"
                 dragConstraints={{ right: 0 }}
                 dragElastic={0.1}
+                transition={{ type: "spring" }}
                 style={{ x, backgroundColor: bakgrunnsfarge}}
                 onDragEnd={(event, info) => {
                     const terskel = window.innerWidth * 0.5
@@ -59,7 +69,17 @@ const PasientTimeCelle = ({ time, formatDato }) => {
                     }
                 }}
             >
-                {formatDato(time.dato)}
+                <div className="pasientTime-grid-celle">
+                    <div>{time.behandler.username}</div>
+                    <div>{time.startTid} - {time.sluttTid}</div>
+                </div>
+                
+                <div className="pasientTime-grid-celle">
+                    <div>{dagerTilTime} dager til</div>
+                    <div>{time.behandler.typeBehandler}</div>
+                </div>
+
+ 
             </motion.div>
 
         </div>

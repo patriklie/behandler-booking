@@ -968,20 +968,28 @@ dialog.slett-profil-modal::after {
 /* PasientTimeListe JSX */
 
 .pasientTimer-container {
-  display: grid;
-  gap: 1rem;
-  margin-top: 1rem;
+ margin: 0 1rem;
 }
 
 .pasientTime-wrapper {
   position: relative;
+  display: grid;
+  gap: 1rem;
+  margin: 1rem auto;
+  width: clamp(300px, 100%, 600px)
 }
 
 .pasientTime-celle {
-  display: flex;
-  padding: 20px 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+  padding: 16px;
   box-shadow: 1px 0 10px 1px rgba(0, 0, 0, 0.048);
   cursor: pointer;
+  border-radius: 12px;
+  border: 1px solid #E5E7EB;
+  overflow: hidden;
+  font-size: 12px;
 }
 
 .bak-timecelle-ikon {
@@ -991,4 +999,21 @@ dialog.slett-profil-modal::after {
   display: flex;
   align-items: center;
   z-index: -1;
+  color: rgb(29, 29, 29);
+}
+
+.bak-timecelle-tekst {
+  position: absolute;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+  font-weight: 500;
+  color: rgb(29, 29, 29);
+  z-index: -1;
+}
+
+.pasientTime-grid-celle {
+  display: flex;
+  justify-content: space-between;
 }
