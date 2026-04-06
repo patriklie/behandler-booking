@@ -7,6 +7,8 @@ import ProfileCard from "../components/ProfileCard.jsx";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import SlettCharacter from "../assets/3d-female-character-with-question-marks.png";
+import ProfileCharacter from "../assets/3d-female-character-waving.png";
+import Skillelinje from "../components/Skillelinje.jsx";
 
 const Profil = () => {
   
@@ -143,7 +145,15 @@ const slettProfil = async () => {
     <div className="profil-forhåndsvisning"><span>Forhåndsvisning av profilen din </span></div>
     <ProfileCard profilbildeKlikk={profilbildeKlikk} username={username} email={email} role={role} typeBehandler={typeBehandler} profilbilde={profilbilde} />
     </>
-    }
+      }
+      
+      {role === "pasient" &&
+        <>
+        <Skillelinje tekst="Min Profil" />
+        <img src={ProfileCharacter} className="profile-character" />
+
+        </>
+      }
     
     
     <form onSubmit={oppdaterProfil} className="form-container"> 

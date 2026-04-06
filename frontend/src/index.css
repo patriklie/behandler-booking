@@ -542,6 +542,12 @@ transition: box-shadow 0.3s ease;
   cursor: pointer;
 }
 
+.profile-character {
+  width: 200px;
+  display: block;
+  margin: 0 auto;
+}
+
 .mySwiper.locked .swiper-pagination {
   opacity: 0;
   pointer-events: none;
@@ -954,7 +960,7 @@ dialog.slett-profil-modal::after {
 /* PasientTimeListe JSX */
 
 .pasientTimer-container {
- margin: 2rem;
+ margin: 1rem 2rem;
 }
 
 .pasientTime-wrapper {
@@ -1086,3 +1092,26 @@ dialog.slett-profil-modal::after {
   mask-image: linear-gradient(to top, black 0%, transparent 100%);
     -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%);
 } */
+
+/* MineTimerPage */ 
+
+.filter-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+
+.filter-btn {
+  padding: 5px 16px;
+  background-color: var(--grey-text);
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+
+.filter-btn.active {
+  background-color: var(--mint-green);
+}

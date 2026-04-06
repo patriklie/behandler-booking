@@ -14,10 +14,29 @@ const MineTimerPage = () => {
   const token = useAppStore((state) => state.token);
   const role = useAppStore((state) => state.role);
   const [behandlerTimer, setBehandlerTimer] = useState([]);
-  const [pasientTimer, setPasientTimer] = useState([]);
+
   const [valgtDato, setValgtDato] = useState(new Date().toISOString().split("T")[0]);  
   const timerValgtDato = behandlerTimer.filter(time => time.dato.startsWith(valgtDato));
   const [showSkjema, setShowSkjema] = useState(false);
+  
+  const [filter, setFilter] = useState("");
+  const [pasientTimer, setPasientTimer] = useState([]);
+  const idag = new Date();
+  idag.setHours(0, 0, 0, 0);
+
+  const kommende = pasientTimer.filter(time => {
+    const dato = new Date(time.dato);
+    dato.setHours(0, 0, 0, 0);
+    return dato >= idag;
+  });
+
+  const tidligere = pasientTimer.filter(time => {
+    const dato = new Date(time.dato);
+    dato.setHours(0, 0, 0, 0);
+    return dato < idag;
+  });
+  
+  const filtrerteTimer = filter === "kommende" ? kommende : filter === "tidligere" ? tidligere : pasientTimer;
   
   const formatDato = (datoString) => {
     const date = new Date(datoString);
@@ -27,6 +46,20 @@ const MineTimerPage = () => {
       year: "numeric",
   }).format(date);
   };
+  
+  const avlysTime = async (timeID) => {
+    try {
+      
+      const response = await axios.patch(`${import.meta.env.VITE_API_URL}/api/time/${timeID}/avlys`, {}, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      hentPasientTimer()
+      toast.success(response.data.message)
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Noe gikk galt ved avlysing av timen")
+    }
+  
+  }
   
   const hentPasientTimer = async () => {
     try {
@@ -122,10 +155,59 @@ const MineTimerPage = () => {
       }
 
      
-      {pasientTimer &&
+      {pasientTimer && role === "pasient" &&
         <>
-          <Skillelinje tekst="Mine Timer" />
-          <PasientTimeListe timer={pasientTimer} />
+
+        <Skillelinje tekst="Mine Timer" />
+        <div className="filter-container">
+          
+          <motion.div
+            whileHover={{
+              scale: 1.1,
+              boxShadow: "0px 5px 10px rgba(0,0,0,0.1)"
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 10
+            }}
+            className={`filter-btn alle ${filter === "" ? "active" : ""}`}
+            onClick={() => setFilter("")}
+          >Alle</motion.div>
+          
+            <motion.div
+              whileHover={{
+                scale: 1.1,
+                boxShadow: "0px 5px 10px rgba(0,0,0,0.1)"
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 10
+              }}
+            className={`filter-btn tidligere ${filter === "tidligere" ? "active" : ""}`}
+              onClick={() => setFilter("tidligere")}
+            >
+            Tidligere</motion.div>
+          
+            <motion.div
+              whileHover={{
+                scale: 1.1,
+                boxShadow: "0px 5px 10px rgba(0,0,0,0.1)"
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 10
+              }}
+            className={`filter-btn kommende ${filter === "kommende" ? "active" : ""}`}
+              onClick={() => setFilter("kommende")}
+            >
+            Kommende</motion.div>
+          
+          </div>
+        
+        <PasientTimeListe timer={filtrerteTimer} avlysTime={avlysTime} />
         </>
       }
 

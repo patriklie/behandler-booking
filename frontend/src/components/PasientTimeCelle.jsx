@@ -1,30 +1,57 @@
 import { motion, useMotionValue, useTransform, animate, useMotionValueEvent, useAnimationControls, AnimatePresence } from "motion/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BadgeCheck, Calendar, CalendarClock, CalendarX, Clock, Trash2 } from "lucide-react";
 
-const PasientTimeCelle = ({ time, formatertDato, dagerTilTime }) => {
+const PasientTimeCelle = ({ time, formatertDato, dagerTilTime, avlysTime }) => {
     const x = useMotionValue(0);
-    const bakgrunnsfarge = useTransform(x, [0, -(window.innerWidth * 0.5)], ["#ffffff", "#ff4444"]);
-    const ikonSize = useTransform(x, [0, -(window.innerWidth * 0.5)], [1, 2]);
-    const ikonOpacity = useTransform(x, [0, -(window.innerWidth * 0.25)], [0, 1]);
-    const tekstPosition = useTransform(x, [0, -(window.innerWidth)], ["150px", "75px"]);
+    const swipeDistance = 120;
+    const bakgrunnsfarge = useTransform(x, [0, -swipeDistance], ["#ffffff", "#ff4444"]);
+    const ikonSize = useTransform(x, [0, -swipeDistance], [1, 2]);
+    const ikonOpacity = useTransform(x, [0, -swipeDistance], [0, 1]);
+    const tekstPosition = useTransform(x, [0, -swipeDistance * 2], ["150px", "75px"]);
     const [visIkon, setVisIkon] = useState(true);
     const ikonControls = useAnimationControls();
+    const [harNudget, setHarNudget] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
+    const [erOverSwipe, setErOverSwipe] = useState(false);
+    
+    
+    const handleTap = () => {
+        if (harNudget) return;
+        if (isDragging) return;
+        setHarNudget(true);
 
-    useMotionValueEvent(x, "change", (latest) => {
-        const terskel = -(window.innerWidth * 0.5)
-        if (latest <= terskel) {
+        animate(x, [0, -280, 0], {
+            duration: 1.8,
+            ease: "easeInOut"
+        });
+    };
+    
+    useEffect(() => {
+        if (erOverSwipe) {
             ikonControls.start({
                 rotate: [0, -10, 10, -10, 10, 0],
-                transition: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
-            })
+                transition: {
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                }
+            });
         } else {
             ikonControls.start({
                 rotate: 0,
-                transition: { duration: 0.1, ease: "easeInOut" }
-            })
+                transition: { duration: 0.1 }
+            });
         }
-    })
+    }, [erOverSwipe]);
+
+    useMotionValueEvent(x, "change", (latest) => {
+        const erOver = latest <= -swipeDistance;
+
+        if (erOver !== erOverSwipe) {
+            setErOverSwipe(erOver);
+        }
+    });
     
     return (
         <div className="pasientTime-wrapper">
@@ -51,27 +78,42 @@ const PasientTimeCelle = ({ time, formatertDato, dagerTilTime }) => {
                 className="pasientTime-celle"
                 drag="x"
                 dragConstraints={{ right: 0 }}
+                onTap={handleTap} 
                 dragElastic={0.1}
                 transition={{ type: "spring" }}
-                style={{ x, backgroundColor: bakgrunnsfarge}}
+                style={{ x, backgroundColor: bakgrunnsfarge }}
+                onDragStart={() => setIsDragging(true)}
                 onDragEnd={(event, info) => {
-                    const terskel = window.innerWidth * 0.5
-                    if (info.offset.x <= -terskel) {
+                    setIsDragging(false);
+
+                    const SWIPE_THRESHOLD = 120;
+
+                    const harSwipet =
+                        info.offset.x <= -SWIPE_THRESHOLD || info.velocity.x <= -500;
+
+                    if (harSwipet) {
+                        // 👉 ACTION
                         animate(x, -window.innerWidth, {
-                            duration: 0.1,
-                            onComplete: () => {
+                            duration: 0.5,
+                            onComplete: async () => {
                                 setVisIkon(false);
-                            console.log("Avlys timen funksjon.")
+                                await avlysTime(time._id);
+                                console.log("Avlys timen funksjon.");
                             }
-                        })
+                        });
                     } else {
-                        animate(x, 0, { type: "spring", stiffness: 300, damping: 20 })
+                        // 👉 RESET
+                        animate(x, 0, {
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 20
+                        });
                     }
                 }}
             >
                 
                 {dagerTilTime > 0 ?
-                    <div div className="dager-banner">
+                    <div className="dager-banner">
                 <CalendarClock size={30} strokeWidth={1.2} />
                 <div>{dagerTilTime} dager</div>
         </div> : ""
@@ -93,6 +135,7 @@ const PasientTimeCelle = ({ time, formatertDato, dagerTilTime }) => {
                 <div className="pasientTime-grid-celle innhold">
                     <div className="stor-forbokstav pasienttime-type-behandler">{time.behandler.typeBehandler}</div>
                     <div className="pasienttime-behandler-navn">{time.behandler.username}</div>
+                    
                     <div className="pasientTime-ikon-flex">
                         <div className="icon-pair">
                             <Clock strokeWidth={2} size={18} />
@@ -103,7 +146,11 @@ const PasientTimeCelle = ({ time, formatertDato, dagerTilTime }) => {
                             <div>{formatertDato}</div>
                         </div>
                     </div>
-                    <div>{time.pris},-</div>
+                    
+                    
+                    
+                    
+                    <div>Ikke betalt {time.pris},-</div>
                 </div>
                 
  
