@@ -452,7 +452,7 @@ input[type="radio"] {
 background-color: rgb(255, 255, 255);
 width: clamp(200px, 100%, 500px);
 margin: 1rem auto;
-height: 180px;
+height: 200px;
 border-radius: 10px 10px 10px 10px;
 box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px;
 display: grid;
@@ -497,7 +497,18 @@ transition: box-shadow 0.3s ease;
 }
 
 .profil-om {
-  font-size: 10px;
+  font-size: 12px;
+}
+
+.profil-neste-time,
+.profil-ingen-neste-time {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.profil-ingen-neste-time {
+  color: red;
 }
 
 .profil-forhåndsvisning {
