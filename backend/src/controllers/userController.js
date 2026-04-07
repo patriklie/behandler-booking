@@ -1,4 +1,5 @@
 import { User } from "../models/User.js";
+import { Time } from "../models/Time.js";
 import mongoose from "mongoose";
 import cloudinary from "../lib/cloudinary.js";
 
@@ -13,19 +14,33 @@ export const getAllUsers = async (req, res) => {
 }
 
 export const getAlleBehandlere = async (req, res) => {
+   
     try {
         const alleBehandlere = await User.find({ role: "behandler" }).select("-password");
-
-        if (alleBehandlere.length <= 0) {
+        if (alleBehandlere.length === 0) {
             return res.status(404).json({ message: "Ingen behandlere funnet." });
         }
+        
+        const now = new Date();
+        const behandlerIds = alleBehandlere.map(b => b._id);
+       
+        const alleTimer = await Time.find({
+            behandler: { $in: behandlerIds },
+            status: "ledig",
+            dato: { $gte: now }
+        }).sort({ dato: 1, startTid: 1 });
+       
+        const lagtTilTimeObjekt = alleBehandlere.map((b) => {
+            const nesteTime = alleTimer.find(t => t.behandler.toString() === b._id.toString());
+            return { ...b.toObject(), nesteTilgjengeligeTime: nesteTime || null };
+        });
 
-        res.status(200).json({ alleBehandlere });
+        res.status(200).json({ alleBehandlere: lagtTilTimeObjekt });
 
     } catch (error) {
-        res.status(500).json({ message: error.message, text: "Inni getAlleBehandlere catche." })
+        res.status(500).json({ message: error.message });
     }
-}
+};
 
 export const getUserById = async (req, res) => {
     try {
