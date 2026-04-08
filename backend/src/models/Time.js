@@ -20,6 +20,14 @@ const timeSchema = new mongoose.Schema({
         required: [true, "Sluttid er påkrevd."],
         match: [/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Sluttid må være i format HH:MM"]
     },
+    startDatoTidspunkt: {
+        type: Date,
+        required: [true, "Start dato tidspunkt er påkrevd."]
+    },
+    sluttDatoTidspunkt: {
+        type: Date,
+        required: [true, "Slutt dato tidspunkt er påkrev."]
+    },
     pris: {
         type: Number,
         default: 0,

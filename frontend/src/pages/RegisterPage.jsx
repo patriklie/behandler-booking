@@ -86,7 +86,7 @@ const RegisterPage = () => {
 
           <div className="input-container">
             <UserPlus className="input-icon" size={18} color="grey" strokeWidth={1.5} />
-            <input type="text" value={nyBruker.username} name="username" onChange={handleBruker} placeholder="brukernavn" required />
+            <input type="text" value={nyBruker.username} name="username" onChange={handleBruker} placeholder="Patrik Lie" required />
           </div>
 
           <div className="input-container">
@@ -96,7 +96,7 @@ const RegisterPage = () => {
 
           <div className="input-container">
             <LockKeyhole className="input-icon" size={18} color="grey" strokeWidth={1.5} />
-            <input type={visPassord ? "text": "password"} value={nyBruker.password} name="password" onChange={handleBruker} placeholder="passord" required />
+            <input type={visPassord ? "text": "password"} value={nyBruker.password} name="password" onChange={handleBruker} placeholder="Passord" required />
             <PassordIkon className="input-icon-right" size={18} strokeWidth={1.5} onClick={() => setVisPassord(!visPassord)} />
           </div>
 

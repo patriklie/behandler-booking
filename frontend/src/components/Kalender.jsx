@@ -10,13 +10,11 @@ const Kalender = ({ timer, onDatoValg }) => {
     const ukedager = ["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"];
     
     let daysInThisMonth = new Date(year, month + 1, 0).getDate();
-    
     let firstDayOfThisMonth = new Date(year, month, 1).getDay(); 
     firstDayOfThisMonth = firstDayOfThisMonth === 0 ? 6 : firstDayOfThisMonth - 1; // justere for norsk kalender
     
     const tommeCeller = Array(firstDayOfThisMonth).fill(null);
     const dagerCeller = Array.from({ length: daysInThisMonth }, (_, i) => i + 1);
-    
     const monthCeller = [...tommeCeller, ...dagerCeller];
     
     const previousMonth = () => {

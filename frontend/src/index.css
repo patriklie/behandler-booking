@@ -632,6 +632,11 @@ transition: box-shadow 0.3s ease;
 .kalender-celler-datoer {
     background-color: rgb(202, 202, 202);
     cursor: pointer;
+    transition: background-color .2s ease;
+}
+
+.kalender-celler-datoer:hover {
+  background-color: grey;
 }
 
 .kalender-dager {
@@ -639,8 +644,9 @@ transition: box-shadow 0.3s ease;
 }
 
 .kalender-grid div.valgt {
-  background-color: black;
+  background-color: var(--mint-green);
   color: white;
+  font-weight: 800;
 }
 
 .kalender-formatert-dato {

@@ -47,8 +47,15 @@ export const opprettTime = async (req, res) => {
         if (eksisterendeTime) {
             return res.status(400).json({ message: "Det finnes allerede en overlappende time, endre dato eller tidspunkt og prøv igjen." })
         }
+        const now = new Date();
+        const startDatoTidspunkt = new Date(`${dato}T${startTid}`);
+        const sluttDatoTidspunkt = new Date(`${dato}T${sluttTid}`);
 
-        const nyTime = await Time.create({ behandler: id, dato, startTid, sluttTid, pris })
+        if (now >= startDatoTidspunkt) {
+            return res.status(400).json({ message: "Kan ikke opprette timer tilbake i tid." });
+        }
+
+        const nyTime = await Time.create({ behandler: id, dato, startTid, sluttTid, pris, startDatoTidspunkt, sluttDatoTidspunkt })
         res.status(201).json({message: `Ny time opprettet ${dato}`, time: nyTime })
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -59,7 +66,7 @@ export const opprettTime = async (req, res) => {
 export const hentMineTimer = async (req, res) => {
     try {
         const { id } = req.user;
-        const mineTimer = await Time.find({ pasient: id }).populate("behandler", "username typeBehandler profilbilde").sort({ dato: 1 });
+        const mineTimer = await Time.find({ pasient: id }).populate("behandler", "username typeBehandler profilbilde").sort({ startDatoTidspunkt: 1 });
         if (mineTimer.length === 0) return res.status(404).json({ message: "Ingen timeavtaler funnet." })
         res.status(200).json({ mineTimer, message: "Mine timeavtaler på innlogget pasient." })
         
@@ -105,7 +112,6 @@ export const bookTime = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
-
 
 // Avlys time setter den til ledig om du er behandler/pasient rolle og gjør timen tilgjengelig for andre.
 export const avlysTime = async (req, res) => {
@@ -176,7 +182,7 @@ export const hentValgtBehandlerTimer = async (req, res) => {
         const { behandlerId: id } = req.params;
         if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ message: "Ikke godkjent behandler ID." });
 
-        const valgtBehandlerTimer = await Time.find({ behandler: id, status: "ledig" })
+        const valgtBehandlerTimer = await Time.find({ behandler: id, status: "ledig" }).sort({ startDatoTidspunkt: 1 })
         res.status(200).json({ message: "Hentet alle ledige timer på valgt behandler.", valgtBehandlerTimer })
 
     } catch (error) {

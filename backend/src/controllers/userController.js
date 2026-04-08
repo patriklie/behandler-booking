@@ -27,11 +27,11 @@ export const getAlleBehandlere = async (req, res) => {
         const alleTimer = await Time.find({
             behandler: { $in: behandlerIds },
             status: "ledig",
-            dato: { $gte: now }
-        }).sort({ dato: 1, startTid: 1 });
+            startDatoTidspunkt: { $gte: now }
+        }).sort({ startDatoTidspunkt: 1 });
        
         const lagtTilTimeObjekt = alleBehandlere.map((b) => {
-            const nesteTime = alleTimer.find(t => t.behandler.toString() === b._id.toString());
+            const nesteTime = alleTimer.find(t => t.behandler.toString() === b._id.toString()); // Jeg konverterer ObjectId til string fordi ellers sammenligner jeg objektreferanser i minnet, ikke selve verdien
             return { ...b.toObject(), nesteTilgjengeligeTime: nesteTime || null };
         });
 
@@ -104,11 +104,6 @@ export const updateUser = async (req, res) => {
 };
 
 export const deleteUser = async (req, res) => {
-    // hente ut ID på bruker vi skal slette fra params
-    // sjekke om ID er korrekt mongoose
-    // finne bruker i DB
-    // slette bruker fra databasen og returnere info om brukeren som er slettet
-    // logge ut bruker?
 
     try {
         const { id } = req.params;

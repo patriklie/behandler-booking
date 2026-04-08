@@ -128,7 +128,7 @@ const BookTimePage = () => {
       <Skillelinje tekst={valgtBehandler ? "Valgt behandler" : "Velg behandler"} />
     <Swiper
         onSwiper={(swiper) => (swiperRef.current = swiper)}
-        style={{ padding: "0 16px 20px 16px" }}
+        style={{ padding: "0 16px 24px 16px" }}
         spaceBetween={50}
         slidesPerView={1}
         className={`mySwiper ${valgtBehandler ? "locked" : ""}`}
