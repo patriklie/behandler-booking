@@ -958,6 +958,7 @@ dialog::backdrop {
   background-color: grey;
   color: white;
   cursor: pointer;
+  font-size: 12px;
 }
 
 .type-behandler-btn::first-letter {

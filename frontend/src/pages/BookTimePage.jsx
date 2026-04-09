@@ -134,7 +134,15 @@ const BookTimePage = () => {
       <Skillelinje tekst={valgtBehandler ? "Valgt behandler" : "Velg behandler"} />
       <div className="behandler-filter-container">
       {unikeBehandlerTyper.map((b) => {
-        return <button key={b} onClick={() => setValgtBehandlerType(b)} className={`type-behandler-btn ${valgtBehandlerType === b ? "aktiv-behandler-btn" : ""}`}>{b}</button>
+        return <motion.button whileHover={{
+          scale: 1.1,
+          boxShadow: "0px 5px 10px rgba(0,0,0,0.1)"
+        }}
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 10
+          }} key={b} onClick={() => setValgtBehandlerType(b)} className={`type-behandler-btn ${valgtBehandlerType === b ? "aktiv-behandler-btn" : ""}`}>{b}</motion.button>
       })
         }
       </div>
