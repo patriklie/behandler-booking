@@ -190,7 +190,7 @@ export const deleteProfilePicture = async (req, res) => {
 
 export const hentAllePasienter = async (req, res) => {
     try {
-        const pasienter = await User.find({ role: "pasient" }).select("-password");
+        const pasienter = await User.find({ role: "pasient" }).sort({ username: 1 }).select("-password");
         res.status(200).json({ pasienter });
     } catch(error) {
         res.status(500).json({ message: error.message });

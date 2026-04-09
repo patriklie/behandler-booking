@@ -1,12 +1,12 @@
 import { motion, useTransform, useMotionValue, animate } from "motion/react"
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { Calendar1, Clock, ClockCheck, Wallet, CalendarClock, User } from "lucide-react";
+import { Calendar1, Clock, ClockCheck, Wallet, CalendarClock, User, Mail, Trash } from "lucide-react";
 import { useAppStore } from "../store/authStore";
 import toast from "react-hot-toast";
 
 
-const DrawerEndretime = ({ time, closeBehandlerTime, hentBehandlerTimer }) => {
+const DrawerEndretime = ({ time, closeBehandlerTime, hentBehandlerTimer, slettTime }) => {
     
     const y = useMotionValue(0);
     const swipeAvstand = 150;
@@ -24,6 +24,8 @@ const DrawerEndretime = ({ time, closeBehandlerTime, hentBehandlerTimer }) => {
         pris: time.pris || "",
         pasientID: time.pasient?._id || ""
     })
+    
+    const valgtPasient = allePasienter.find(p => p._id === endretTime.pasientID);
     
     const handleTime = (e) => {
         setEndretTime({ ...endretTime, [e.target.name]: e.target.value })
@@ -58,7 +60,9 @@ const DrawerEndretime = ({ time, closeBehandlerTime, hentBehandlerTimer }) => {
             }
         }
         hentAllePasienter();
-    }, [])
+    }, []);
+    
+    console.log(allePasienter)
     
     const endreTime = async (e) => {
         e.preventDefault();
@@ -80,7 +84,7 @@ const DrawerEndretime = ({ time, closeBehandlerTime, hentBehandlerTimer }) => {
             toast.error(error.response?.data?.message || "Noe gikk galt ved endring av time.")
         }
     }
-        
+        console.log(valgtPasient)
     return (
     <>
         <motion.div
@@ -109,8 +113,8 @@ const DrawerEndretime = ({ time, closeBehandlerTime, hentBehandlerTimer }) => {
                 <div className="time-drawer-drag"></div>
             </div>
 
-            <form className="form-container" style={{ backgroundColor: "#ffffff" }} onSubmit={endreTime}>
-
+            <form className="form-container drawer-form" onSubmit={endreTime}>
+                <div className="drawer-form-overskrift">Endre time</div>
                 <div className="input-container">
                     <label htmlFor="dato">Dato</label>
                     <div className="input-wrapper">
@@ -147,6 +151,8 @@ const DrawerEndretime = ({ time, closeBehandlerTime, hentBehandlerTimer }) => {
                         <label htmlFor="pasientID">Pasient</label>
                         <div className="input-wrapper">
                             <User className="input-icon" size={18} color="grey" strokeWidth={1.5} />
+                            {   valgtPasient &&
+                                <Mail className="drawer-form-contact" strokeWidth={1.5} onClick={() => window.location.href = `mailto:${valgtPasient.email}`} />}
                             <select id="pasientID" name="pasientID" value={endretTime.pasientID} onChange={handleTime}>
                                 <option value="">Ingen pasient</option>
                                 {allePasienter.map(pasient => (
@@ -163,10 +169,13 @@ const DrawerEndretime = ({ time, closeBehandlerTime, hentBehandlerTimer }) => {
                     whileTap={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 17 }}
                     type="submit"
-                    className="logginn-btn">
+                    className="logginn-btn drawer-btn">
                     Oppdater timen <CalendarClock size={20} />
                 </motion.button>
-
+                    <div className="drawer-slett" onClick={async () => {
+                        await slettTime(time);
+                        handleClose();
+                    }}>Slett time</div>
                 </form>
         </motion.div>
     </>
