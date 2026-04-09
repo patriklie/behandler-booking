@@ -16,14 +16,18 @@ import Skillelinje from "../components/Skillelinje.jsx";
 const BookTimePage = () => {
   const token = useAppStore((state) => state.token);
   const [valgtBehandler, setValgtBehandler] = useState(null);
-  const [alleBehandlere, setAlleBehandlere] = useState(null);
+  const [alleBehandlere, setAlleBehandlere] = useState([]);
   const [valgtBehandlerTimer, setValgtBehandlerTimer] = useState([]);
   const swiperRef = useRef(null);
   const [valgtDato, setValgtDato] = useState(new Date().toISOString().split("T")[0]);
   const timerValgtDato = valgtBehandlerTimer.filter(time => time.dato.startsWith(valgtDato));
   const [valgtTime, setValgtTime] = useState(null);
   const dialogRef = useRef();
-  
+  const [valgtBehandlerType, setValgtBehandlerType] = useState("Alle");
+  const typer = [...new Set(alleBehandlere.map((behandler) => behandler.typeBehandler))].sort((a, b) => a.localeCompare(b, "no")); // rein sortering og fjernet "alle" legger til under
+  const unikeBehandlerTyper = ["Alle", ...typer];
+  const behandlereFiltrert = valgtBehandlerType === "Alle" ? alleBehandlere : alleBehandlere.filter((b) => b.typeBehandler === valgtBehandlerType)
+
   const handleTimeValg = (time) => {
     setValgtTime(time);
     dialogRef.current.showModal();
@@ -128,6 +132,12 @@ const BookTimePage = () => {
   <>
     
       <Skillelinje tekst={valgtBehandler ? "Valgt behandler" : "Velg behandler"} />
+      <div className="behandler-filter-container">
+      {unikeBehandlerTyper.map((b) => {
+        return <button key={b} onClick={() => setValgtBehandlerType(b)} className={`type-behandler-btn ${valgtBehandlerType === b ? "aktiv-behandler-btn" : ""}`}>{b}</button>
+      })
+        }
+      </div>
     <Swiper
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         style={{ padding: "0 16px 24px 16px" }}
@@ -138,7 +148,7 @@ const BookTimePage = () => {
         modules={[ Pagination ]}
       >
         {
-          alleBehandlere && alleBehandlere.map((behandler) => {
+          behandlereFiltrert.map((behandler) => {
             return <SwiperSlide key={behandler._id}><ProfileCard cursorEnabled={true} velgbehandler={() => setValgtBehandler((prev) => { return prev?._id === behandler._id ? null : behandler })} valgt={behandler._id === valgtBehandler?._id} username={behandler.username} email={behandler.email} role={behandler.role} typeBehandler={behandler.typeBehandler} profilbilde={behandler.profilbilde} nesteTime={behandler.nesteTilgjengeligeTime} formaterDato={formatDatoUtenYear} visTilgjengelighet={true} omBehandler={behandler.omBehandler} /></SwiperSlide>
           })
         }
