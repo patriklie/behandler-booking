@@ -232,12 +232,9 @@ const slettProfil = async () => {
       whileTap={{ scale: 1 }} 
       transition={{ type: "spring" }}
       className="slett-btn" 
-      onClick={slettProfil}>Slett profilen: <span>{username}</span></motion.button>
-      <motion.button 
-      whileHover={{ scale: 1.2 }}
-      whileTap={{ scale: 1 }} 
-      transition={{ type: "spring" }} 
-      className="avbryt-btn" onClick={() => slettModalRef.current.close()}>Avbryt</motion.button>
+      onClick={slettProfil}>Slett: <span>{username}</span></motion.button>
+      <button  
+      className="avbryt-btn" onClick={() => slettModalRef.current.close()}>Avbryt</button>
       <X 
       onClick={() => slettModalRef.current.close()} 
       className="lukk-modal" 

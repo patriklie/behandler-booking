@@ -15,6 +15,7 @@ import Skillelinje from "../components/Skillelinje.jsx";
 
 const BookTimePage = () => {
   const token = useAppStore((state) => state.token);
+  const role = useAppStore((state) => state.role);
   const [valgtBehandler, setValgtBehandler] = useState(null);
   const [alleBehandlere, setAlleBehandlere] = useState([]);
   const [valgtBehandlerTimer, setValgtBehandlerTimer] = useState([]);
@@ -209,17 +210,27 @@ const BookTimePage = () => {
         
         <div className="time-booking-overskrift">Godkjenn timevalget</div>
         <div className="time-booking-tekst">{valgtTime?.dato && formatDato(valgtTime.dato)} hos {valgtBehandler?.typeBehandler} {valgtBehandler?.username}. Timen er fra {valgtTime?.startTid} til {valgtTime?.sluttTid} og koster {valgtTime?.pris}kr.</div>
-        <motion.button
-          whileHover={{
-            scale: 1.1,
-            boxShadow: "0px 15px 25px rgba(0,0,0,0.2)"
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 10
-          }}
-          className="modal-book-btn" onClick={bookTime}>Book time</motion.button>
+        
+        {role === "pasient" ? 
+          <motion.button
+            whileHover={{
+              scale: 1.1,
+              boxShadow: "0px 15px 25px rgba(0,0,0,0.2)"
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 10
+            }}
+            className="modal-book-btn" onClick={bookTime}>Book time</motion.button>
+          :
+          <button className="modal-book-btn-behandler">Book time</button>
+
+
+
+
+}
+
         <button className="modal-cancel-btn" onClick={avbrytBooking}>Avbryt</button>
       </dialog>
       
