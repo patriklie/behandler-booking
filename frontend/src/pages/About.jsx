@@ -44,7 +44,7 @@ const About = () => {
         <div className="wrapper">
           <div>
             <h2 className="section-title">En enkel måte å booke behandling på</h2>
-            <p>BehandlerBooking er en moderne bookingplattform som kobler pasienter
+            <p>HelseBooking er en moderne bookingplattform som kobler pasienter
               og behandlere. Pasienter finner og booker timer enkelt, mens
               behandlere får full oversikt over sin timeplan, alt på ett sted.</p>
             <motion.button

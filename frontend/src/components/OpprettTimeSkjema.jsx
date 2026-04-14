@@ -48,8 +48,7 @@ const OpprettTimeSkjema = ({ hentBehandlerTimer }) => {
       
     <>
 
-        <form className="form-container" style={{ backgroundColor: "#ffffff" }} onSubmit={opprettTime}>
-
+        <form className="form-container" onSubmit={opprettTime}>
         <div className="input-container">
           <label htmlFor="dato">Dato</label>
           <div className="input-wrapper">
@@ -87,7 +86,7 @@ const OpprettTimeSkjema = ({ hentBehandlerTimer }) => {
           whileTap={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 200, damping: 17 }}
           type="submit"
-          className="logginn-btn">
+          className="logginn-btn opprett-time-btn">
           Opprett time <ClockPlus size={20} />
         </motion.button>
           

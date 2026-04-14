@@ -141,12 +141,12 @@ const slettProfil = async () => {
 }
   
   return (
-    <div className="margin-klassen">
+    <>
     
     
     { role === "behandler" &&
     <>
-    <div className="profil-forhåndsvisning"><span>Forhåndsvisning av profilen din </span></div>
+        <Skillelinje tekst="Min Profil" />
     <ProfileCard profilbildeKlikk={profilbildeKlikk} username={username} email={email} role={role} typeBehandler={typeBehandler} profilbilde={profilbilde} omBehandler={omBehandler} />
     </>
       }
@@ -242,7 +242,7 @@ const slettProfil = async () => {
       />
     </dialog>
 
-    </div>
+    </>
   )
 }
 

@@ -5,6 +5,9 @@ import { useState, useRef } from "react";
 import { useAppStore } from "../store/authStore.js";
 import { Info, ClipboardClock, Calendar1, CircleUserRound, LogOut, LogIn, UserPlus } from "lucide-react";
 import toast from "react-hot-toast";
+import HelseBooking from "../assets/HelseBooking_Logo.png";
+import HelseBookingSmall from "../assets/HelseBooking_Logo_sm.png";
+import HelseBookingBlue from "../assets/HelseBooking_Logo_blue.png";
 
 
 const Navbar = () => {
@@ -59,9 +62,9 @@ const Navbar = () => {
         >
 
           <div className="navbar-top">
-            <img src="/g15.svg" className="navbar-top-logo-svg" />
+            <img src={HelseBookingBlue} className="navbar-top-logo-svg" />
             <div className="navbar-ham" onClick={(e) => e.stopPropagation()}><Hamburger size={20} rounded color="#000" toggled={isOpen} toggle={SetIsOpen} distance='sm' hideOutline={false} /></div>
-            <div className="navbar-logo"><span>Behandler</span>Booking</div>
+            {/* <div className="navbar-logo"><span>Behandler</span>Booking</div> */}
             
           </div>
 
@@ -74,36 +77,36 @@ const Navbar = () => {
           {isAuth && 
           <>
           <NavLink to="/booktime" className="navbar-links" onClick={() => SetIsOpen(false)}>
-            <Calendar1 style={{ pointerEvents: "none" }} color="black" size={30} strokeWidth={1}/>
-            <span>Book time</span>
+            <Calendar1 style={{ pointerEvents: "none" }} size={24} strokeWidth={1.2}/>
+            <span>Book Time</span>
           </NavLink>
 
           <NavLink to="/minetimer" className="navbar-links" onClick={() => SetIsOpen(false)}>
-            <ClipboardClock style={{ pointerEvents: "none" }} color="black" size={30} strokeWidth={1}/>
-            <span>Mine timer</span>
+            <ClipboardClock style={{ pointerEvents: "none" }} size={24} strokeWidth={1.2}/>
+            <span>Mine Timer</span>
           </NavLink>
 
           <NavLink to="/profil" className="navbar-links" onClick={() => SetIsOpen(false)}>
-            <CircleUserRound style={{ pointerEvents: "none" }} color="black" size={30} strokeWidth={1}/>
-            <span>Min profil</span>
+            <CircleUserRound style={{ pointerEvents: "none" }} size={24} strokeWidth={1.2}/>
+            <span>Profil</span>
           </NavLink>
           </>
           }
 
           <NavLink to="/about" className="navbar-links" onClick={() => SetIsOpen(false)}>
-            <Info style={{ pointerEvents: "none" }} color="black" size={30} strokeWidth={1}/>
-            <span>Om oss</span>
+            <Info style={{ pointerEvents: "none" }} size={24} strokeWidth={1.2}/>
+            <span>Om</span>
           </NavLink>
 
           {!isAuth && 
           <>
           <NavLink to="/login" className="navbar-links" onClick={() => SetIsOpen(false)}>
-            <LogIn style={{ pointerEvents: "none" }} color="black" size={30} strokeWidth={1}/>
+            <LogIn style={{ pointerEvents: "none" }} size={24} strokeWidth={1.2}/>
             <span>Logg inn</span>
           </NavLink>
           
           <NavLink to="/register" className="navbar-links" onClick={() => SetIsOpen(false)}>
-            <UserPlus style={{ pointerEvents: "none" }} color="black" size={30} strokeWidth={1}/>
+            <UserPlus style={{ pointerEvents: "none" }} size={24} strokeWidth={1.2}/>
             <span>Registrer</span>
           </NavLink>
 
@@ -112,7 +115,7 @@ const Navbar = () => {
 
           {isAuth &&
           <div className="navbar-links logout-btn" onClick={loggUtBruker}>
-            <LogOut style={{ pointerEvents: "none" }} color="black" size={30} strokeWidth={1}/>
+            <LogOut style={{ pointerEvents: "none" }} size={24} strokeWidth={1.2}/>
             <span>Logg ut</span>
           </div>
           }

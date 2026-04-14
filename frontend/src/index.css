@@ -21,11 +21,12 @@ input[type="checkbox"] {
 
 :root {
   --primary-color: #006EFF;
+  --primary-color-shadow: #006eff2f;
   --secondary-color: #d2e1f5;
   --secondary-blue: #7bb4ff;
   --mint-green: #279A74;
   --mint-green-shadow: #279a745e;
-  --grey-text: #71847E;
+  --grey-text: rgb(134, 134, 134);
   --bg-almost-white:#F6F6F8;
   --bg-darker-almost-white: #F1F3F2;
 }
@@ -82,18 +83,17 @@ body {
 /* NAVBAR */
 .navbar {
   color: #000000;
-  width: calc(100% - 32px);
+  width: 100vw;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 99;
-  margin: 16px;
+  user-select: none;
 }
 
 .navbar-animasjon {
   display: block;
   overflow: hidden;
-  border-radius: 30px;
   background-color: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -108,7 +108,7 @@ body {
   align-items: center;
   padding: 0 16px;
   position: relative;
-  
+  cursor: pointer;
 }
 
 .navbar-top-logo-svg {
@@ -118,16 +118,27 @@ body {
 .navbar-links {
   height: 60px;
   display: flex;
+  color: rgb(61, 61, 61);
   align-items: center;
-  margin: 0 20px;
+  margin: 0 2rem;
+  padding-left: 1rem;
   gap: 10px;
   font-weight: 300;
   font-size: 1rem;
+
+  border-top: 2px solid transparent;
   border-bottom: 2px dotted rgba(0, 0, 0, 0.1);
+  transition: all .25s ease;
 }
 
 .navbar-links.active {
   font-weight: 600;
+  color: black;
+}
+
+.navbar-links:hover {
+  color: black;
+  background-color: rgba(0, 0, 0, 0.01);
 }
 
 .navbar-links.logout-btn {
@@ -517,7 +528,7 @@ transition: box-shadow 0.3s ease;
 }
 
 .profil-typebehandler {
-  color: var(--mint-green);
+  color: var(--primary-color);
   text-transform: capitalize;
   font-size: 14px;
   display: flex;
@@ -537,7 +548,7 @@ transition: box-shadow 0.3s ease;
 }
 
 .profil-neste-time span {
-  color: var(--mint-green);
+  color: var(--primary-color);
 }
 
 .profil-ingen-neste-time {
@@ -558,7 +569,7 @@ transition: box-shadow 0.3s ease;
 }
 
 .profil-valgt {
-  background-color: var(--mint-green);
+  background-color: var(--primary-color);
   color: white;
   padding: 4px 20px;
   position: absolute;
@@ -624,8 +635,12 @@ transition: box-shadow 0.3s ease;
 /* Kalender */
 
 .kalender-container {
-  margin: 1rem auto;
-  width: 320px;
+  margin: 0 auto;
+  max-width: 400px;
+  background-color: white;
+  box-shadow: 0px 0px 10px #e6e6e6;
+  border-radius: 1rem;
+  padding: 1rem;
 }
 
 .kalender-month-year {
@@ -638,9 +653,9 @@ transition: box-shadow 0.3s ease;
 .kalender-icon-wrapper {
   display: flex;
   padding: 20px;
-  transition: background-color .3s ease;
+  transition: background-color .25s ease;
   cursor: pointer;
-
+  border-radius: 10px;
 }
 
 .kalender-icon-wrapper:hover {
@@ -662,14 +677,15 @@ transition: box-shadow 0.3s ease;
 }
 
 .kalender-celler-null {
-    background-color: rgb(241, 241, 241);
+    background-color: transparent;
+    color: #D1D7DB;
     pointer-events: none;
 }
 
 .kalender-celler-datoer {
-    background-color: rgb(202, 202, 202);
+    background-color: rgb(223, 223, 223);
     cursor: pointer;
-    transition: background-color .2s ease;
+    transition: background-color .25s ease;
 }
 
 .kalender-celler-datoer:hover {
@@ -681,13 +697,14 @@ transition: box-shadow 0.3s ease;
 }
 
 .kalender-grid div.valgt {
-  background-color: var(--mint-green);
+  background-color: var(--primary-color);
   color: white;
   font-weight: 800;
 }
 
 .kalender-formatert-dato {
   text-align: center;
+  margin: 1.5rem;
   font-weight: 600;
 }
 
@@ -739,7 +756,7 @@ transition: box-shadow 0.3s ease;
   user-select: none;
   cursor: pointer;
   color: white;
-  background: var(--mint-green);
+  background: var(--primary-color);
   border-radius: 3px;
   padding: 3px 20px;
 }
@@ -752,7 +769,7 @@ transition: box-shadow 0.3s ease;
   gap: 15px;
   margin-bottom: 1rem;
   user-select: none;
-  margin: 32px 32px 16px 32px;
+  margin: 2rem;
 }
 
 .skillelinje-knapp-container div {
@@ -960,7 +977,7 @@ dialog::backdrop {
 .behandler-filter-container {
   display: grid;
   gap: 10px;
-  margin: 0 auto;
+  margin: 1rem auto;
   padding: 0 1rem;
   max-width: clamp(200px, 100%, 500px);
   grid-template-columns: repeat(5, 1fr);
@@ -980,7 +997,7 @@ dialog::backdrop {
 }
 
 .type-behandler-btn.aktiv-behandler-btn {
-  background-color: var(--mint-green);
+  background-color: var(--primary-color);
 }
 
 /* Slett profil Modal */
@@ -1065,10 +1082,10 @@ dialog.slett-profil-modal::after {
   color: black;
 }
 
-/* PasientTimeListe JSX */
+/* PasientTimeListe */
 
 .pasientTimer-container {
- margin: 1rem 2rem;
+ margin: 2rem;
 }
 
 .pasientTime-wrapper {
@@ -1099,7 +1116,7 @@ dialog.slett-profil-modal::after {
   height:90px;
   color: white;
   font-size: 12px;
-  background-color: var(--mint-green);
+  background-color: var(--primary-color);
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
@@ -1175,7 +1192,7 @@ dialog.slett-profil-modal::after {
 
 .pasienttime-type-behandler {
   padding: 5px 16px;
-  background-color: var(--mint-green);
+  background-color: var(--primary-color);
   color: white;
   border-radius: 20px;
   width: fit-content;
@@ -1214,7 +1231,7 @@ dialog.slett-profil-modal::after {
 }
 
 .filter-btn.active {
-  background-color: var(--mint-green);
+  background-color: var(--primary-color);
 }
 
 /* MineTimerPage Behandler Drawer */
@@ -1236,7 +1253,8 @@ dialog.slett-profil-modal::after {
   border-radius: 10px 10px 0 0;
   padding: 1rem 2rem;
   bottom: -10%;
-  height: 90%;
+/*   height: 90%; */
+  height: 600px;
   width: 100vw;
   background: white;
   z-index: 101;
@@ -1254,6 +1272,12 @@ dialog.slett-profil-modal::after {
   height: 6px;
   border-radius: 9999px;
   margin: 0 auto 2rem auto;
+  transition: background-color .25s ease;
+  cursor: pointer;
+}
+
+.time-drawer-drag:hover {
+  background-color: rgb(143, 143, 143);
 }
 
 .form-container.drawer-form {
@@ -1297,7 +1321,7 @@ dialog.slett-profil-modal::after {
 }
 
 .drawer-form-contact:hover {
-  color: var(--mint-green);
+  color: var(--primary-color);
   transform: translateY(-50%) scale(1.2);
 }
 
@@ -1317,10 +1341,22 @@ dialog.slett-profil-modal::after {
 }
 
 
+/* Opprett Time skjema */
+.opprett-time-skjema {
+  margin: 1rem;
+}
+
+.logginn-btn.opprett-time-btn {
+  margin-top: 1rem;
+}
+
 @media (max-width: 550px) {
   .dager-banner {
     display: none;
   }
+    .timer-container {
+      grid-template-columns: 1fr;
+    }
 
   .behandler-filter-container {
     grid-template-columns: repeat(3, 1fr);

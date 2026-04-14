@@ -137,7 +137,8 @@ const MineTimerPage = () => {
       <AnimatePresence mode="popLayout">  
       {showSkjema && 
 
-          <motion.div
+          <motion.div layout
+          className="opprett-time-skjema"
           key="skjema"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}

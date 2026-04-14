@@ -92,7 +92,6 @@ const PasientTimeCelle = ({ time, formatertDato, dagerTilTime, avlysTime }) => {
                         info.offset.x <= -SWIPE_THRESHOLD || info.velocity.x <= -500;
 
                     if (harSwipet) {
-                        // 👉 ACTION
                         animate(x, -window.innerWidth, {
                             duration: 0.5,
                             onComplete: async () => {
@@ -102,7 +101,6 @@ const PasientTimeCelle = ({ time, formatertDato, dagerTilTime, avlysTime }) => {
                             }
                         });
                     } else {
-                        // 👉 RESET
                         animate(x, 0, {
                             type: "spring",
                             stiffness: 300,
@@ -112,11 +110,18 @@ const PasientTimeCelle = ({ time, formatertDato, dagerTilTime, avlysTime }) => {
                 }}
             >
                 
-                {dagerTilTime > 0 ?
+                {dagerTilTime > 1 ?
                     <div className="dager-banner">
                 <CalendarClock size={30} strokeWidth={1.2} />
                 <div>{dagerTilTime} dager</div>
-        </div> : ""
+                </div> : ""
+                }
+                
+                {dagerTilTime === 1 ?
+                    <div className="dager-banner">
+                <CalendarClock size={30} strokeWidth={1.2} />
+                <div>{dagerTilTime} dag</div>
+                </div> : ""
                 }
                 
                 {dagerTilTime === "0" ?

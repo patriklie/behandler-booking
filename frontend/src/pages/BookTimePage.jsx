@@ -165,7 +165,7 @@ const BookTimePage = () => {
       <AnimatePresence mode="popLayout" >  
       {valgtBehandler && (
         <motion.div key="kalender-wrapper" layout>
-          <motion.div layout style={{ marginTop: "-30px" }}>
+          <motion.div layout>
             <Kalender timer={valgtBehandlerTimer} onDatoValg={setValgtDato} />
           </motion.div>
             
