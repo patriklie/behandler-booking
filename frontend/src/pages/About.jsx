@@ -4,6 +4,7 @@ import figur from "../assets/freepik__background__36259.png";
 import { motion } from "motion/react"
 import { Link, useNavigate } from "react-router";
 import Isometric from "../assets/IsoMetric_klinikk.png";
+import FeatureListe from "../components/FeatureListe.jsx";
 
 const About = () => {
   
@@ -80,6 +81,7 @@ const About = () => {
         
       </section>
      
+      <FeatureListe />
       
     </>
   );

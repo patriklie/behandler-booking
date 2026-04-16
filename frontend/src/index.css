@@ -868,9 +868,9 @@ transition: box-shadow 0.3s ease;
 
 .about-section {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin: 2rem ;
+  margin: 8rem 2rem;
+  gap: 2rem;
 }
 
 .isometric-klinikk {
@@ -915,6 +915,59 @@ transition: box-shadow 0.3s ease;
     radial-gradient(at 10% 24%, hsla(197, 100%, 65%, 1) 0px, transparent 50%),
     radial-gradient(at 97% 38%, hsla(232, 100%, 66%, 1) 0px, transparent 50%);
 } */
+
+/* About featureliste */ 
+
+.feature-grid-container {
+  margin: 2rem;
+}
+
+.feature-grid {
+  padding: 2rem 3rem;
+  background-color: rgb(221, 122, 122);
+  overflow: hidden;
+}
+
+.feature-rad {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: start;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgb(0, 0, 0);
+
+}
+
+.feature-navn {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.feature-detaljer {
+  grid-column: 1 / -1;
+/*   padding-top: .5rem; */
+  font-size: .9rem;
+  color: pink;
+  overflow: hidden;
+}
+
+.feature-status {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.feature-chevron {
+  transition: transform .25s ease;
+}
+
+.feature-chevron-open {
+  transform: rotate(180deg);
+}
+
+.feature-inner-detaljer {
+  padding-top: .5rem;
+}
 
 /* MODAL, Dialog */
 
@@ -1426,5 +1479,9 @@ dialog.slett-profil-modal::after {
   .figur-placeholder {
     width: 200px;
     height: 200px;
+  }
+  .about-section {
+    flex-direction: column;
+    margin: 2rem;
   }
 }
