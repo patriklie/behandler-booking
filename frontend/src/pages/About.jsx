@@ -1,47 +1,16 @@
-import { Info, ArrowBigRight, ChevronDown } from "lucide-react";
-import Card from "../components/Card.jsx";
-import figur from "../assets/freepik__background__36259.png";
+import { ChevronDown } from "lucide-react";
 import { motion } from "motion/react"
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import Isometric from "../assets/IsoMetric_klinikk.png";
 import FeatureListe from "../components/FeatureListe.jsx";
+import HelseBookingLogo500 from "../assets/HelseBooking_500.png";
 
 const About = () => {
   
   const navigate = useNavigate();
   
   return (
-    <>
-      
-      
-{/*       <div className="margin-klassen">
-        <Card
-          image={figur}
-          title={"om oss"}
-          button={"Book time nå"}
-          buttonLink={"/login"}
-          buttonIcon={<ArrowBigRight fill="white" stroke="none" size={20} />}
-        >
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ type: "spring", delay: 0.3, duration: 1, ease: "easeOut" }}
-            className="card-undertitle-large">
-            Den beste måten å booke behandler
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", delay: 0.4, duration: 1, ease: "easeOut" }}
-            
-            className="card-text">
-            BehandlerBooking er en moderne bookingplattform som kobler pasienter
-            og behandlere. Pasienter finner og booker ledige timer enkelt, mens
-            behandlere får full oversikt over sin timeplan, alt på ett sted.
-          </motion.div>
-          </Card>
-      </div> */}
-      
+    <>      
       <section className="diagonal">
         <div className="wrapper">
           <div>
@@ -80,10 +49,42 @@ const About = () => {
 
         
       </section>
+      
+
+  
       <div className="feature-liste-topp-overskrift">Alle HelseBooking sine</div>
       <div className="feature-liste-overskrift">Funksjoner</div>
-      <ChevronDown />
+      <div className="feature-chevron-wrapper">
+        <ChevronDown />
+      </div>
       <FeatureListe />
+      
+      {/* Infosection */}
+      <div className="info-section-container">
+        <div className="info-section-flex">
+          <div className="info-section-big">50+</div>
+          <div className="info-section-small">Behandlere</div>
+        </div>
+        <div className="info-section-flex">
+          <div className="info-section-big">1500+</div>
+          <div className="info-section-small">Pasienter</div>
+        </div>
+        <div className="info-section-flex">
+          <div className="info-section-big">3300+</div>
+          <div className="info-section-small">Timer bestilt</div>
+        </div>
+        <div className="info-section-flex">
+          <div className="info-section-big">30+</div>
+          <div className="info-section-small">Klinikker</div>
+        </div>
+
+        <div className="disclaimer">*Fiktive tall</div>
+      </div>
+      
+      
+      {/* FOOTER */}
+      <img className="feature-helse-logo" src={HelseBookingLogo500} />
+      <div className="feature-footer">En plattform laget av Patrik Bystrøm Lie</div>
       
     </>
   );
