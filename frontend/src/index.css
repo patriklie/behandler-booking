@@ -1055,7 +1055,7 @@ transition: box-shadow 0.3s ease;
   width: 100%;
   height: 300px;
   position: relative;
-  border-radius: 10px;
+  border-radius: 5px;
   overflow: hidden;
 }
 
@@ -1063,12 +1063,16 @@ transition: box-shadow 0.3s ease;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
 .about-behandlere-navn {
   color: var(--text-off-black);
   font-weight: 600;
   margin-top: 1rem;
+}
+.about-behandlere-profilbilde-wrapper:hover .about-behandlere-profilbilde {
+  transform: scale(1.08);
 }
 
 .about-behandlere-type {
