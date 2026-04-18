@@ -3,7 +3,7 @@ import { Squash as Hamburger } from 'hamburger-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useRef } from "react";
 import { useAppStore } from "../store/authStore.js";
-import { Info, ClipboardClock, Calendar1, CircleUserRound, LogOut, LogIn, UserPlus } from "lucide-react";
+import { Info, ClipboardClock, Calendar1, CircleUserRound, LogOut, LogIn, UserPlus, Hospital, CalendarPlus } from "lucide-react";
 import toast from "react-hot-toast";
 import HelseBooking from "../assets/HelseBooking_Logo.png";
 import HelseBookingSmall from "../assets/HelseBooking_Logo_sm.png";
@@ -15,6 +15,7 @@ const Navbar = () => {
   const [isOpen, SetIsOpen] = useState(false);
   const isAuth = useAppStore((state) => state.isAuth);
   const logout = useAppStore((state) => state.logout);
+  const role = useAppStore((state) => state.role);
   const navigate = useNavigate();
   const username = useAppStore((state) => state.username);
   
@@ -77,7 +78,7 @@ const Navbar = () => {
           {isAuth && 
           <>
           <NavLink to="/booktime" className="navbar-links" onClick={() => SetIsOpen(false)}>
-            <Calendar1 style={{ pointerEvents: "none" }} size={24} strokeWidth={1.2}/>
+            <CalendarPlus style={{ pointerEvents: "none" }} size={24} strokeWidth={1.2}/>
             <span>Book Time</span>
           </NavLink>
 
@@ -91,6 +92,13 @@ const Navbar = () => {
             <span>{username || "Profil"}</span>
           </NavLink>
           </>
+          }
+          
+          {isAuth && role === "behandler" && 
+          <NavLink to="/klinikk" className="navbar-links" onClick={() => SetIsOpen(false)}>
+            <Hospital style={{ pointerEvents: "none" }} size={24} strokeWidth={1.2} />
+            <span>Klinikker</span>
+          </NavLink>
           }
 
           <NavLink to="/about" className="navbar-links" onClick={() => SetIsOpen(false)}>

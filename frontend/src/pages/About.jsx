@@ -7,6 +7,9 @@ import FeatureListe_data_driven from "../components/FeatureListe_data_driven.jsx
 import HelseBookingLogo500 from "../assets/HelseBooking_500.png";
 import AboutBehandlere from "../components/AboutBehandlere.jsx";
 import HelseBookingBadge200 from "../assets/Badge_200.png";
+import FlyingMaskott from "../assets/FlyingMaskott.png";
+import FlyingMaskott2 from "../assets/FlyingMaskott_noshadow.png";
+import FlyingMaskott3 from "../assets/FlyingMaskott_cropped.png";
 
 const About = () => {
   
@@ -14,7 +17,9 @@ const About = () => {
   
   return (
     <>      
+  
       <section className="diagonal">
+        
         <div className="wrapper-hero">
           <div className="diagonal-hero-container">
             <h2 className="section-title">En enkel måte å booke behandling</h2>
@@ -35,12 +40,12 @@ const About = () => {
               onClick={() => navigate("/booktime")}
             >Kom i gang!</motion.button>
           </div>
-          
-          <div className="figur-placeholder"></div> {/* ikke i flyten */}
-          <div className="figur2"></div>
+          <img src={FlyingMaskott3} className="figur2"></img>
+
                  
         </div>
-      </section>
+        </section>
+   
       
       <div className="about-section-wrapper">
         <section className="about-section">
@@ -55,7 +60,7 @@ const About = () => {
       <AboutBehandlere />
   
       <img src={HelseBookingBadge200} className="feature-badge-200"/>
-      <div className="feature-liste-topp-overskrift">Alle HelseBooking sine</div>
+      <div className="feature-liste-topp-overskrift">HelseBooking sine</div>
       <div className="feature-liste-overskrift">Funksjoner</div>
       <div className="feature-chevron-wrapper">
         <ChevronDown />

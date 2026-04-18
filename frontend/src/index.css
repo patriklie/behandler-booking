@@ -1,7 +1,7 @@
 /* @import "tailwindcss"; */
 
 #root {
-  overflow: hidden;
+/*   overflow: hidden; */
   padding-bottom: 50px;
 }
 
@@ -80,7 +80,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 99;
+  z-index: 99999;
   user-select: none;
 }
 
@@ -780,13 +780,11 @@ transition: box-shadow 0.3s ease;
   border-radius: 5px;
 }
 
-/* TEST på about sida */
+/* About siden DIAGONAL hero */
 
 .diagonal {
   margin: 6rem 0 2rem 0;
-  padding-top: 5rem;
-  padding-bottom: 2rem;
-  padding-inline: 30px;
+  padding: 4rem 2rem 3rem 2rem;
   background: transparent;
   position: relative;
   color: white;
@@ -809,20 +807,23 @@ transition: box-shadow 0.3s ease;
   position: absolute;
   inset: 0;
   z-index: -1;
- /*  filter: blur(40px); */
   box-shadow:
     inset 0 20px 20px -20px rgba(0, 0, 0, 0.4),
     inset 0 -20px 20px -20px rgba(0, 0, 0, 0.4);
 }
 
 .diagonal .wrapper-hero {
-  display: grid;
-  grid-template-columns: 1fr 250px;
-  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 850px;
 }
 
 .diagonal-hero-container {
-  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
 }
 
 .section-title {
@@ -832,27 +833,19 @@ transition: box-shadow 0.3s ease;
 
 .section-tekst {
   font-weight: 200;
-  max-width: 800px;
-}
-
-.figur-placeholder {
-  width: 300px;
-  height: 300px;
-  grid-column: 2;
-  pointer-events: none;
 }
 
 .figur2 {
-  background: url("./assets/FlyingMaskott.png");
-  background-size: cover;
-  background-position: center;
-  width: 600px;
-  height: 600px;
-  position: absolute;
-  right: -165px;
-  top: -100px;
-  pointer-events: none;
+  object-fit: cover;
+  width: 200px;
+  height: auto;
+  margin-top: -130px;
+  margin-right: 10px;
+  overflow: visible;
 }
+
+
+
 
 .about-button {
     /* background-color: var(--primary-color); */
@@ -1663,6 +1656,111 @@ dialog.slett-profil-modal[open] {
   margin-top: 1rem;
 }
 
+/* Klinikk JSX */
+
+.klinikk-form-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.klinikk-input-container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.klinikk-input-container input {
+  outline: 1px solid #e0e0e0;
+  padding: 12px 42px;
+  width: 100%;
+  border-radius: 10px;
+  font-size: 14px;
+  /* font-family: Verdana; */
+  color: #444444;
+  background-color: white;
+  line-height: 1.2;
+  border: none;
+}
+
+.klinikk-input-container input::placeholder {
+  letter-spacing: 1px;
+  padding-left: 2px;
+  color: rgb(155, 155, 155);
+}
+
+.klinikk-input-wrapper {
+  position: relative;
+  overflow: visible;
+}
+
+.klinikk-input-container label {
+  font-size: 0.8rem;
+  display: block;
+  padding-bottom: 5px;
+  color: #444444;
+}
+
+.klinikk-input-icon {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  z-index: 9999;
+}
+
+.klinikk-opprett-btn {
+  background-color: rgb(0, 110, 255);
+  width: clamp(200px, 50%, 250px);
+  margin: 0 auto;
+  padding: 10px;
+  color: white;
+  border-radius: 25px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.klikk-opprett-btn-btn:focus {
+  outline: none;
+}
+
+.klinikk-input-container input:focus {
+  outline: 1px solid rgb(56, 56, 56);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+/* Klinikk GEOAPIFY */
+
+.geocoder-container {
+  width: 100%;
+}
+
+.klinikk-form-container .geoapify-autocomplete-items {
+  background-color: white;
+  border-radius: 1rem;
+  border: none;
+}
+
+.klinikk-form-container .geoapify-autocomplete-input {
+  height: unset;
+}
+
+/* .klinikk-form-container .geoapify-autocomplete-input::placeholder {
+  letter-spacing: 1px;
+  padding-left: 2px;
+  color: rgb(155, 155, 155);
+} */
+
+
+
+
 @media (max-width: 850px) {
   .about-behandlere-grid {
     grid-template-columns: 1fr 1fr;
@@ -1680,24 +1778,15 @@ dialog.slett-profil-modal[open] {
   .behandler-filter-container {
     grid-template-columns: repeat(3, 1fr);
   }
-  .figur2 {
-    right: -225px;
-    top: 0;
-  }
-  .diagonal .wrapper {
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-  }
-  .figur-placeholder {
-    width: 200px;
-    height: 200px;
-  }
+
   .about-section {
     flex-direction: column;
     margin: 2rem;
   }
+
   .about-behandlere-grid {
     grid-template-columns: 1fr;
   }
-}
 
+
+}

@@ -42,6 +42,11 @@ const timeSchema = new mongoose.Schema({
         type: String,
         enum: ["ledig", "booket", "avlyst"],
         default: "ledig"
+    },
+    klinikk: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Klinikk",
+        required: [true, "Klinikk er påkrevd."]
     }
 }, { timestamps: true, versionKey: false });
 

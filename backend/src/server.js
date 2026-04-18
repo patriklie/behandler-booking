@@ -5,6 +5,7 @@ import path from "path";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import timeRoutes from "./routes/timeRoutes.js";
+import klinikkRoutes from "./routes/klinikkRoutes.js";
 import { connectDB } from "./lib/db.js";
 import cors from "cors";
 
@@ -31,6 +32,7 @@ app.get("/api/hello", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/time", timeRoutes);
+app.use("/api/klinikk", klinikkRoutes);
 
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../client/build")));

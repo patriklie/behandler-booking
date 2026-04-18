@@ -36,24 +36,24 @@ const features = [
     },
     {
         id: 6,
+        title: "Klinikker",
+        status: "ongoing",
+        detaljer:
+            "Det utvikles nå støtte for at behandlere skal kunne opprette klinikker/behandlingssteder og knytte andre behandlere til stedet."
+    },
+    {
+        id: 7,
         title: "Kart og veibeskrivelse",
         status: "ongoing",
         detaljer:
             "Det utvikles en ny funksjon som gjør det mulig for behandler å legge til lokasjon med kart og veibeskrivelse som følger timen som opprettes."
     },
     {
-        id: 7,
-        title: "Epost time bekreftelse",
-        status: "ongoing",
-        detaljer:
-            "Brukere vil få bekreftelse på mail når man booker eller avlyser en time samt en påminnelses mail 24 timer før timen."
-    },
-    {
         id: 8,
-        title: "Klinikker",
+        title: "Epost time bekreftelse",
         status: "planned",
         detaljer:
-            "Det planlegges støtte for at behandlere skal kunne opprette klinikker og knytte andre behandlere til klinikken."
+            "Brukere vil få bekreftelse på mail når man booker eller avlyser en time samt en påminnelses mail 24 timer før timen."
     },
     {
         id: 9,
