@@ -146,10 +146,12 @@ const slettProfil = async () => {
     
     { role === "behandler" &&
     <>
-        <Skillelinje tekst="Min Profil" />
-    <ProfileCard profilbildeKlikk={profilbildeKlikk} username={username} email={email} role={role} typeBehandler={typeBehandler} profilbilde={profilbilde} omBehandler={omBehandler} />
+      <Skillelinje tekst="Min Profil" />
+      <div className="profile-container-wrapper">
+        <ProfileCard profilbildeKlikk={profilbildeKlikk} username={username} email={email} role={role} typeBehandler={typeBehandler} profilbilde={profilbilde} omBehandler={omBehandler} />
+      </div>
     </>
-      }
+    }
       
       {role === "pasient" &&
         <>

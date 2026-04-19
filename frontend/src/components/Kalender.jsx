@@ -59,27 +59,28 @@ const getCellClass = (dato) => {
     
   return (
       <>
-          <div className="kalender-container">
-              
-              <div className="kalender-month-year">
-                  <div className="kalender-icon-wrapper" onClick={previousMonth}><ChevronLeft /></div>
-                  <div>{months[month]} {year}</div>
-                  <div className="kalender-icon-wrapper" onClick={nextMonth}><ChevronRight /></div>
-              </div>
-              
-              <div className="kalender-grid">
-                  {ukedager.map((dag) => {
-                      return <div key={dag} className="kalender-dager">{dag[0]}</div>
-                  })}
-                  
-                  {monthCeller.map((dato, index) => {
-                      return <div key={index} className={getCellClass(dato)} onClick={() => handleDatoValg(dato)}>{dato}</div>
-                  })}  
-                  
-              </div>
-          
+          <div className="kalender-container-wrapper">
+            <div className="kalender-container">
+                
+                <div className="kalender-month-year">
+                    <div className="kalender-icon-wrapper" onClick={previousMonth}><ChevronLeft /></div>
+                    <div>{months[month]} {year}</div>
+                    <div className="kalender-icon-wrapper" onClick={nextMonth}><ChevronRight /></div>
+                </div>
+                
+                <div className="kalender-grid">
+                    {ukedager.map((dag) => {
+                        return <div key={dag} className="kalender-dager">{dag[0]}</div>
+                    })}
+                    
+                    {monthCeller.map((dato, index) => {
+                        return <div key={index} className={getCellClass(dato)} onClick={() => handleDatoValg(dato)}>{dato}</div>
+                    })}  
+                    
+                </div>
+            
+            </div>
           </div>
-      
       </>
   )
 }

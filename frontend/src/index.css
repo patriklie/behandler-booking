@@ -484,6 +484,10 @@ input[type="radio"] {
 
 /* ProfileCard */
 
+.profile-container-wrapper {
+  margin: 0 1rem;
+}
+
 .profile-container {
 background-color: rgb(255, 255, 255);
 width: clamp(200px, 100%, 500px);
@@ -629,6 +633,10 @@ transition: box-shadow 0.3s ease;
 } */
 
 /* Kalender */
+
+.kalender-container-wrapper {
+  margin: 0 1rem;
+}
 
 .kalender-container {
   margin: 0 auto;
@@ -1659,6 +1667,8 @@ dialog.slett-profil-modal[open] {
 /* Klinikk JSX */
 
 .klinikk-form-container {
+  width: 100%;
+  max-width: 500px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -1714,7 +1724,7 @@ dialog.slett-profil-modal[open] {
 .klinikk-opprett-btn {
   background-color: rgb(0, 110, 255);
   width: clamp(200px, 50%, 250px);
-  margin: 0 auto;
+  margin: 2rem auto;
   padding: 10px;
   color: white;
   border-radius: 25px;
@@ -1736,16 +1746,74 @@ dialog.slett-profil-modal[open] {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
-/* Klinikk GEOAPIFY */
+/* Opprett Klinikk GEOAPIFY DRAWER*/
+
+.opprett-klinikk-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, .4);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.opprett-klinikk-drawer-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  border-radius: 10px 10px 0 0;
+  padding: 1rem 2rem;
+  bottom: -10%;
+  height: 90%;
+  width: 100vw;
+  background: white;
+  z-index: 101;
+  background: #ffffff;
+  /*     background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgb(242, 248, 252) 100%); */
+}
+
+.opprett-klinikk-drawer-drag-wrapper {
+  width: 100%;
+}
+
+.opprett-klinikk-drawer-drag {
+  background-color: rgb(212, 212, 212);
+  width: 48px;
+  height: 6px;
+  border-radius: 9999px;
+  margin: 0 auto 2rem auto;
+  transition: background-color .25s ease;
+  cursor: pointer;
+}
+
+.opprett-klinikk-drawer-drag:hover {
+  background-color: rgb(143, 143, 143);
+}
 
 .geocoder-container {
   width: 100%;
 }
 
 .klinikk-form-container .geoapify-autocomplete-items {
-  background-color: white;
-  border-radius: 1rem;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
   border: none;
+  outline: 1px solid #e0e0e0;
+  top: 110%;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+}
+
+.klinikk-form-container .geoapify-autocomplete-item .address .main-part {
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.klinikk-form-container .geoapify-autocomplete-item .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .klinikk-form-container .geoapify-autocomplete-input {
