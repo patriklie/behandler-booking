@@ -7,6 +7,7 @@ import { useAppStore } from "../store/authStore.js";
 import KlinikkKort from "../components/KlinikkKort.jsx";
 import toast from "react-hot-toast";
 import DrawerRedigerKlinikk from "../components/DrawerRedigerKlinikk.jsx";
+import Isometric from "../assets/IsoMetric_klinikk.png";
 
 const Klinikk = () => {
   
@@ -128,8 +129,8 @@ const Klinikk = () => {
     return (
       <>
         <div className="open-klinikk-opprett-btn" onClick={openDrawer}>
+          <img className="opprett-klinikk-image" src={Isometric} />
           <div>Opprett Klinikk</div>
-          <Hospital size={ 50 } strokeWidth={1} />
         </div>
         
         <div className="klinikk-kort-wrapper">

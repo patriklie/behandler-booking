@@ -5,7 +5,7 @@ export const FlyttKart = ({ latitude, longitude }) => {
     const map = useMap();
 
     useEffect(() => {
-        map.flyTo([latitude, longitude], 15);
+        map.flyTo([latitude, longitude], 13);
     }, [latitude, longitude]);
 
     return null;

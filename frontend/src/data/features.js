@@ -37,7 +37,7 @@ const features = [
     {
         id: 6,
         title: "Klinikker",
-        status: "ongoing",
+        status: "done",
         detaljer:
             "Det utvikles nå støtte for at behandlere skal kunne opprette klinikker/behandlingssteder og knytte andre behandlere til stedet."
     },

@@ -1,16 +1,23 @@
-import { Settings, SquarePen, UsersRound, Plus, UserMinus, ChevronDown, UserPlus2, UserPlus } from "lucide-react";
+import { SquarePen, UsersRound, UserMinus, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import { useState, Fragment } from "react";
+import { useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { FlyttKart } from "./FlyttKart";
-
+import L from "leaflet";
 
 
 const KlinikkKort = ({ klinikk, openRedigerKlinikkDrawer, visBehandlere, toggleBehandlere, leggTilBehandlerKlinikk, slettBehandlerFraKlinikk, slettKlinikk, alleBehandlere }) => {
     
   const { navn, adresse, latitude, longitude, behandlere, opprettetAv } = klinikk;
   const [valgtBehandler, setValgtBehandler] = useState("");
+  
+  const customIcon = L.icon({
+    iconUrl: "/HelseBooking_32.png",
+    iconSize: [32, 32],   
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -16]
+  });
     
   return (
     <div className="klinikk-kort" >
@@ -21,15 +28,17 @@ const KlinikkKort = ({ klinikk, openRedigerKlinikkDrawer, visBehandlere, toggleB
       
       <MapContainer
         center={[latitude, longitude]}
-        zoom={15}
+        attributionControl={false} /* Denne legger jeg til true eller fjerner ved prodsetting  */
+        zoom={13}
         className="klinikk-kort-map-container"
         zoomControl={false}
       >
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          /* url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" */ /* Denne var kaldere også fin */ 
+          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
           /* attribution='&copy; <a href="https://carto.com/">CARTO</a>' AKTIVER attribution linken i prodsetting */
         />
-        <Marker position={[latitude, longitude]}>
+        <Marker position={[latitude, longitude]} icon={customIcon}>
           <Popup>
             <div style={{ fontWeight: "600" }}>{navn}</div>
             <div>{adresse}</div>

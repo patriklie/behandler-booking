@@ -140,10 +140,10 @@ const DrawerOpprettKlinikk = ({ closeDrawer, oppdaterKlinikker }) => {
                 transition={{ type: "spring", stiffness: 200, damping: 17 }}
                 type="submit"
                 className="klinikk-opprett-btn">
-                    <div>Opprett Klinikk</div>
-                    <Hospital strokeWidth={1.5} size={20} />
-                    <Plus className="klinikk-opprett-btn-icon-plus" size={16} strokeWidth={3} />
-                </motion.button>
+                    <div>Opprett ny Klinikk</div>
+                        <Hospital strokeWidth={1.5} size={20} />
+                    </motion.button>
+                    <div onClick={handleClose} className="klinikk-opprett-avbryt-btn">Avbryt</div>
 
             </form>
            
