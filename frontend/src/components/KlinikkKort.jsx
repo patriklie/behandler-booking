@@ -1,6 +1,10 @@
-import { Settings, SquarePen, UsersRound, Plus, UserMinus, ChevronDown } from "lucide-react";
+import { Settings, SquarePen, UsersRound, Plus, UserMinus, ChevronDown, UserPlus2, UserPlus } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState, Fragment } from "react";
+import "leaflet/dist/leaflet.css";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { FlyttKart } from "./FlyttKart";
+
 
 
 const KlinikkKort = ({ klinikk, openRedigerKlinikkDrawer, visBehandlere, toggleBehandlere, leggTilBehandlerKlinikk, slettBehandlerFraKlinikk, slettKlinikk, alleBehandlere }) => {
@@ -14,9 +18,32 @@ const KlinikkKort = ({ klinikk, openRedigerKlinikkDrawer, visBehandlere, toggleB
       <div className="klinikk-kort-type">Klinikk</div>
       <div className="klinikk-kort-navn">{navn}</div>
       <div className="klinikk-kort-adresse">{adresse}</div>
+      
+      <MapContainer
+        center={[latitude, longitude]}
+        zoom={15}
+        className="klinikk-kort-map-container"
+        zoomControl={false}
+      >
+        <TileLayer
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          /* attribution='&copy; <a href="https://carto.com/">CARTO</a>' AKTIVER attribution linken i prodsetting */
+        />
+        <Marker position={[latitude, longitude]}>
+          <Popup>
+            <div style={{ fontWeight: "600" }}>{navn}</div>
+            <div>{adresse}</div>
+          </Popup>
+        </Marker>
+        <FlyttKart latitude={latitude} longitude={longitude} />
+      </MapContainer>
+      
       <div className="klinikk-kort-behandlere-container">
-        <UsersRound />
-        <div className="klinikk-kort-antall-behandlere">{behandlere.length}</div>
+        <div className="klinikk-kort-antall-behandlere-wrapper">
+          <UsersRound size={18} color="grey" />
+          <div className="klinikk-kort-antall-behandlere">{behandlere.length}</div>
+        </div>
+
         <ChevronDown className={`klinikk-kort-chevron ${visBehandlere ? "klinikk-kort-chevron-open" : ""}`} onClick={() => toggleBehandlere(klinikk._id)} >Rediger Behandlere</ChevronDown>
       </div>
       
@@ -28,33 +55,46 @@ const KlinikkKort = ({ klinikk, openRedigerKlinikkDrawer, visBehandlere, toggleB
             animate={{ height: "auto" }}
             exit={{ height: 0 }}
             style={{ overflow: "hidden" }}
-            className="klinikk-kort-behandler-grid">
+            className="klinikk-kort-behandler-wrapper">
           
-          <select className="klinikk-kort-behandler-select" value={valgtBehandler} onChange={(e) => setValgtBehandler(e.target.value)}>
-            <option value="">Legg til behandler</option>
-            {alleBehandlere
-              .filter(b => !behandlere.some(kb => kb._id === b._id)) // filtrer ut de som allerede er lagt til kom tilbake til denne
-              .map(b => (
-                <option key={b._id} value={b._id}>{b.username}</option>
-              ))
-            }
-            </select>
-          
-            <Plus
-              className="klinikk-kort-behandler-icon-add"
-              onClick={() => valgtBehandler && leggTilBehandlerKlinikk(klinikk._id, valgtBehandler)}
-              style={{ visibility: valgtBehandler ? "visible" : "hidden" }}
-            />
+            <div>
+              <select
+                className="klinikk-kort-behandler-select"
+                value={valgtBehandler}
+                name="behandler-select"
+                id="behandler-select"
+                onChange={(e) => {
+                  const behandlerId = e.target.value
+                  if (!behandlerId) return;
+                  setValgtBehandler("");
+                  leggTilBehandlerKlinikk(klinikk._id, behandlerId);
+                }}
+              >
+                <option value="">Legg til behandler</option>
+                {alleBehandlere
+                  .filter(b => !behandlere.some(kb => kb._id === b._id)) // filtrer ut de som allerede er lagt til kom tilbake til denne
+                  .map(b => (
+                    <option key={b._id} value={b._id}>{b.username}</option>
+                  ))
+                }
+              </select>
+            </div>
+            
 
-          
-          {behandlere.map((behandler) => {
+            <div className="klinikk-kort-behandler-liste">
+            
+            
+            {behandlere.map((behandler) => {
+            const thumbnailUrl = behandler.profilbilde?.replace("/upload/", "/upload/w_48,h_48,c_fill/");
             return (
-              <Fragment key={behandler._id}>
+              <div className="klinikk-kort-behandler-add-container" key={behandler._id}>
+                <img className="klinikk-kort-behandler-profilbilde" src={thumbnailUrl} />
                 <div className="klinikk-kort-behandler-navn">{behandler.username}</div>
-                <UserMinus className="klinikk-kort-behandler-icon" onClick={() => slettBehandlerFraKlinikk(klinikk._id, behandler._id)} />
-              </Fragment>
+                <UserMinus className="klinikk-kort-behandler-icon-remove" onClick={() => slettBehandlerFraKlinikk(klinikk._id, behandler._id)} />
+              </div>
             )
-          })}
+            })}
+            </div>
           
           
         </motion.div>

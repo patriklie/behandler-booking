@@ -24,6 +24,25 @@ const MineTimerPage = () => {
   idag.setHours(0, 0, 0, 0);
   const [showTimeDrawer, setShowTimeDrawer] = useState(false);
   const [valgtEndreTime, setValgtEndreTime] = useState("");
+  const [klinikker, setKlinikker] = useState([]);
+  
+  const hentMineKlinikker = async () => {
+    try {
+      
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/klinikk/mine`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      setKlinikker(response.data)
+      
+    } catch (error) {
+      console.error(error.response?.data?.message);
+    }
+  }
+  
+  useEffect(() => {
+    if (role !== "behandler") return;
+    hentMineKlinikker();
+  }, [])
 
   const kommende = pasientTimer.filter(time => {
     const dato = new Date(time.dato);
@@ -70,10 +89,6 @@ const MineTimerPage = () => {
       setPasientTimer(response.data.mineTimer);
       
     } catch (error) {
-      if (error.response?.status === 404) {
-        setPasientTimer([])
-        return
-      }
       toast.error(error.response?.data?.message || "Noe gikk galt ved henting av pasienttimer")
     }
   }
@@ -107,7 +122,9 @@ const MineTimerPage = () => {
       const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/time/${time._id}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
-      hentBehandlerTimer();
+      console.log("Slettet, henter timer på nytt...");
+      await hentBehandlerTimer();
+      console.log("behandlerTimer etter sletting:", behandlerTimer);
       toast.success(response.data.message)
     } catch (error) {
     toast.error(error.response?.data?.message || "Noe gikk galt ved sletting av time")
@@ -145,7 +162,7 @@ const MineTimerPage = () => {
           transition={{ duration: 0.3, delay: 0.3 }}
           >
           
-         <OpprettTimeSkjema hentBehandlerTimer={hentBehandlerTimer} />
+          <OpprettTimeSkjema hentBehandlerTimer={hentBehandlerTimer} mineKlinikker={klinikker} />
         </motion.div>
       }
 

@@ -1,23 +1,25 @@
 import axios from "axios";
-import { Calendar1, Clock, ClockCheck, Wallet, ClockPlus } from "lucide-react";
+import { Calendar1, Clock, ClockCheck, Wallet, ClockPlus, Hospital } from "lucide-react";
 import { useRef, useState } from "react";
 import { motion } from "motion/react";
 import { useAppStore } from "../store/authStore";
 import toast from "react-hot-toast";
 
-const OpprettTimeSkjema = ({ hentBehandlerTimer }) => {
+const OpprettTimeSkjema = ({ hentBehandlerTimer, mineKlinikker }) => {
     
   const dateInputRef = useRef();
   const timeInputStartRef = useRef();
   const timeInputStopRef = useRef();  
   const token = useAppStore((state) => state.token);
  
+  console.log(mineKlinikker)
   
   const [time, setTime] = useState({
     dato: "",
     startTid: "",
     sluttTid: "",
     pris: "",
+    klinikk:"",
   })
   
   const handleTime = (e) => {
@@ -78,6 +80,20 @@ const OpprettTimeSkjema = ({ hentBehandlerTimer }) => {
             <div className="input-wrapper">
               <Wallet className="input-icon" size={18} color="grey" strokeWidth={1.5} />
               <input type="number" id="pris" name="pris" value={time.pris} onChange={handleTime} min={0} placeholder="NOK / Timepris" required />
+            </div>
+          </div>
+          
+          <div className="input-container">
+            <label htmlFor="klinikk">Klinikk</label>
+            <div className="input-wrapper">
+              <Hospital className="input-icon" size={18} color="grey" strokeWidth={1.5} />
+              <select id="klinikk" name="klinikk" className={ time.klinikk ? "has-value" : "" } value={time.klinikk} onChange={handleTime} placeholder="Velg klinikk" required>
+                <option key="velg-klinikk" value="" disabled>Velg klinikk</option>
+                {mineKlinikker && mineKlinikker.map((klinikk) => {
+                  return <option key={klinikk._id} value={klinikk._id}>{ klinikk.navn }</option>
+                })}
+              
+              </select>
             </div>
           </div>
           

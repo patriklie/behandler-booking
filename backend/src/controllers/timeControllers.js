@@ -19,14 +19,14 @@ export const opprettTime = async (req, res) => {
     try {
 
         const { id } = req.user;
-        const { dato, startTid, sluttTid, pris } = req.body;
+        const { dato, startTid, sluttTid, pris, klinikk } = req.body;
 
         const behandler = await User.findById(id);
         if (!behandler) {
             return res.status(404).json({ message: "Behandler ID finnes ikke i databasen." })
         }
 
-        if (!dato || !startTid || !sluttTid) {
+        if (!dato || !startTid || !sluttTid || !klinikk) {
             return res.status(400).json({ message: "Manglende input data for å opprette time i request" });
         }
 
@@ -59,7 +59,7 @@ export const opprettTime = async (req, res) => {
             return res.status(400).json({ message: "Kan ikke opprette timer tilbake i tid." });
         }
 
-        const nyTime = await Time.create({ behandler: id, dato, startTid, sluttTid, pris, startDatoTidspunkt, sluttDatoTidspunkt })
+        const nyTime = await Time.create({ behandler: id, dato, startTid, sluttTid, pris, startDatoTidspunkt, sluttDatoTidspunkt, klinikk })
         res.status(201).json({message: `Ny time opprettet ${dato}`, time: nyTime })
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -71,7 +71,6 @@ export const hentMineTimer = async (req, res) => {
     try {
         const { id } = req.user;
         const mineTimer = await Time.find({ pasient: id }).populate("behandler", "username typeBehandler profilbilde").sort({ startDatoTidspunkt: 1 });
-        if (mineTimer.length === 0) return res.status(404).json({ message: "Ingen timeavtaler funnet." })
         res.status(200).json({ mineTimer, message: "Mine timeavtaler på innlogget pasient." })
         
     } catch (error) {
@@ -88,13 +87,10 @@ export const hentBehandlerTimer = async (req, res) => {
         const { status } = req.query;
         if (status) {
             const foundBehandlerTimer = await Time.find({ behandler: id, status }).populate("pasient", "username email");
-            if (foundBehandlerTimer.length === 0) return res.status(404).json({ message: `Ingen timer med funnet med status: ${status}.` });
             return res.status(200).json({ foundBehandlerTimer, message: `Fant alle timer med status ${status}.` })
         }
         const foundAlleBehandlerTimer = await Time.find({ behandler: id }).populate("pasient", "username email");
-        if (foundAlleBehandlerTimer.length === 0) return res.status(404).json({ message: "Ingen timer funnet." });
-        res.status(200).json({ foundAlleBehandlerTimer, message: "Fant alle behandlertimer." });
-
+        res.status(200).json({ foundAlleBehandlerTimer, message: "Alle behandlertimer." });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -186,7 +182,7 @@ export const hentValgtBehandlerTimer = async (req, res) => {
         const { behandlerId: id } = req.params;
         if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ message: "Ikke godkjent behandler ID." });
 
-        const valgtBehandlerTimer = await Time.find({ behandler: id, status: "ledig" }).sort({ startDatoTidspunkt: 1 })
+        const valgtBehandlerTimer = await Time.find({ behandler: id, status: "ledig" }).populate("klinikk", "navn adresse").sort({ startDatoTidspunkt: 1 })
         res.status(200).json({ message: "Hentet alle ledige timer på valgt behandler.", valgtBehandlerTimer })
 
     } catch (error) {

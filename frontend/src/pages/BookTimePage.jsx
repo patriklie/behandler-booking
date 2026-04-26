@@ -126,7 +126,9 @@ const BookTimePage = () => {
   
   useEffect(() => {
     hentAlleBehandlere();
-  },[])
+  }, [])
+  
+  console.log(valgtTime);
   
   return (
       

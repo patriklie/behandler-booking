@@ -3,7 +3,6 @@ import { User } from "../models/User.js";
 import { Klinikk } from "../models/Klinikk.js";
 import mongoose from "mongoose";
 
-
 export const opprettKlinikk = async (req, res) => {
     try {
         const { id } = req.user;
@@ -35,13 +34,24 @@ export const opprettKlinikk = async (req, res) => {
     }
 }
 
-
 export const hentAlleKlinikker = async (req, res) => {
     try {
         const alleKlinikker = await Klinikk.find()
-            .populate("opprettetAv", "username email")
-            .populate("behandlere", "username email")
+            .populate("opprettetAv", "username email profilbilde")
+            .populate("behandlere", "username email profilbilde")
         res.status(200).json(alleKlinikker)
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+export const hentMineKlinikker = async (req, res) => {
+    try {
+        const { id } = req.user;
+        const mineKlinikker = await Klinikk.find({ behandlere: id });
+        if (mineKlinikker.length === 0) return res.status(404).json({ message: "Fant ingen klinikker på brukeren." });
+        
+        return res.status(200).json(mineKlinikker)
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

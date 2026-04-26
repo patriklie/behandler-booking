@@ -1756,8 +1756,18 @@ dialog.slett-profil-modal[open] {
 .klinikk-kort-behandlere-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
   margin-top: 1rem;
+  position: relative;
+}
+
+.klinikk-kort-antall-behandlere-wrapper {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  right: 10px;
 }
 
 .klinikk-kort-antall-behandlere {
@@ -1765,42 +1775,69 @@ dialog.slett-profil-modal[open] {
   font-weight: 600;
 }
 
-.klinikk-kort-behandler-grid {
-  display: grid;
-  grid-template-columns: 1fr 50px;
+.klinikk-kort-behandler-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.klinikk-kort-behandler-liste {
+  margin-top: 1rem;
+}
+
+.klinikk-kort-behandler-add-container {
+  display: flex;
+  padding: 10px;
+  gap: .5rem;
   align-items: center;
 }
 
-.klinikk-kort-behandler-navn {
-  font-size: 12px;
+.klinikk-kort-behandler-profilbilde {
+  border-radius: 25px;
+  width: 48px;
+  height: 48px;
 }
 
-.klinikk-kort-behandler-icon {
+.klinikk-kort-behandler-navn {
+  font-size: 14px;
+}
+
+.klinikk-kort-behandler-icon-remove {
   color: grey;
-  width: 1rem;
-  justify-self: center;
+  width: 2rem;
   cursor: pointer;
+  margin-left: auto;
 }
 
 .klinikk-kort-behandler-icon-add {
   color: grey;
-    width: 2rem;
-    justify-self: center;
-    cursor: pointer;
+  width: 2rem;
+  justify-self: center;
+  cursor: pointer;
+  margin-top: 1rem;
 }
 
-.klinikk-kort-behandler-icon:hover,
+.klinikk-kort-behandler-icon-remove:hover,
 .klinikk-kort-behandler-icon-add:hover {
   color: black;
 }
 
 .klinikk-kort-behandler-select {
-  font-size: 12px;
+  font-size: 14px;
+  width: 100%;
   background-color: var(--primary-color);
-  color: white;
-  padding: 10px 5px;
+  color: rgb(255, 255, 255);
+  padding: 20px;
   text-align: center;
   cursor: pointer;
+  margin-top: 1rem;
+}
+
+.klinikk-kort-map-container {
+  height: 250px;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 1rem;
+  z-index: 0;
 }
 
 /* Opprett Klinikk Drawer Form x*/
@@ -2163,5 +2200,8 @@ dialog.slett-profil-modal[open] {
     grid-template-columns: 1fr;
   }
 
+  .klinikk-kort-container {
+    grid-template-columns: 1fr;
+  }
 
 }
