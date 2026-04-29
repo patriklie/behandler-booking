@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import PasientTimeCelle from "../components/PasientTimeCelle.jsx";
 import { time, motion, AnimatePresence } from "motion/react";
 
-const PasientTimeListe = ({ timer, avlysTime }) => {
+const PasientTimeListe = ({ timer, avlysTime, openDrawer }) => {
     
     const dagerTilTime = (timeString) => {
         const idag = new Date();
@@ -29,7 +29,7 @@ const PasientTimeListe = ({ timer, avlysTime }) => {
     return (
         <>
             <AnimatePresence mode="popLayout">
-                <motion.div className="pasientTimer-container" layout>
+                <motion.div className="pasienttimer-container" layout>
                     {timer.map((time) => (
                         <motion.div
                             key={time._id}
@@ -45,6 +45,7 @@ const PasientTimeListe = ({ timer, avlysTime }) => {
                                 formatertDato={formatDato(time.dato)}
                                 time={time}
                                 dagerTilTime={dagerTilTime(time.dato)}
+                                openDrawer={openDrawer}
                             />
                         </motion.div>
                     ))}

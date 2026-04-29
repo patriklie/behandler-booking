@@ -9,6 +9,7 @@ import TimeListe from "../components/TimeListe.jsx";
 import Skillelinje from "../components/Skillelinje.jsx";
 import PasientTimeListe from "../components/PasientTimeListe.jsx";
 import DrawerEndretime from "../components/DrawerEndretime.jsx";
+import DrawerPasientTime from "../components/DrawerPasientTime.jsx";
 
 const MineTimerPage = () => {
 
@@ -25,6 +26,18 @@ const MineTimerPage = () => {
   const [showTimeDrawer, setShowTimeDrawer] = useState(false);
   const [valgtEndreTime, setValgtEndreTime] = useState("");
   const [klinikker, setKlinikker] = useState([]);
+  const [valgtTime, setValgtTime] = useState(null);
+  const [showDrawerPasientTime, setShowDrawerPasientTime] = useState(false);
+  
+  const openDrawerPasientTime = (time) => {
+    setValgtTime(time);
+    setShowDrawerPasientTime(true);
+  }
+  
+  const closeDrawerPasientTime = () => {
+    setValgtTime(null);
+    setShowDrawerPasientTime(false);
+  }
   
   const hentMineKlinikker = async () => {
     try {
@@ -78,7 +91,6 @@ const MineTimerPage = () => {
     } catch (error) {
       toast.error(error.response?.data?.message || "Noe gikk galt ved avlysing av timen")
     }
-  
   }
   
   const hentPasientTimer = async () => {
@@ -86,8 +98,7 @@ const MineTimerPage = () => {
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/time/pasienttimer`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      setPasientTimer(response.data.mineTimer);
-      
+      setPasientTimer(response.data.mineTimer); 
     } catch (error) {
       toast.error(error.response?.data?.message || "Noe gikk galt ved henting av pasienttimer")
     }
@@ -196,56 +207,41 @@ const MineTimerPage = () => {
         <>
 
         <Skillelinje tekst="Mine Timer" />
+        
         <div className="filter-container">
-          
+
           <motion.div
-            whileHover={{
-              scale: 1.1,
-              boxShadow: "0px 5px 10px rgba(0,0,0,0.1)"
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 300,
-              damping: 10
-            }}
+            whileHover={{ scale: 1.1, boxShadow: "0px 5px 10px rgba(0,0,0,0.1)" }}
+            transition={{ type: "spring", stiffness: 300, damping: 10 }}
             className={`filter-btn alle ${filter === "" ? "active" : ""}`}
             onClick={() => setFilter("")}
-          >Alle</motion.div>
-          
-            <motion.div
-              whileHover={{
-                scale: 1.1,
-                boxShadow: "0px 5px 10px rgba(0,0,0,0.1)"
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 10
-              }}
+          >Alle
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.1, boxShadow: "0px 5px 10px rgba(0,0,0,0.1)" }}
+            transition={{ type: "spring", stiffness: 300, damping: 10 }}
             className={`filter-btn tidligere ${filter === "tidligere" ? "active" : ""}`}
-              onClick={() => setFilter("tidligere")}
-            >
-            Tidligere</motion.div>
-          
-            <motion.div
-              whileHover={{
-                scale: 1.1,
-                boxShadow: "0px 5px 10px rgba(0,0,0,0.1)"
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 10
-              }}
+            onClick={() => setFilter("tidligere")}
+          >Tidligere
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.1, boxShadow: "0px 5px 10px rgba(0,0,0,0.1)" }}
+            transition={{ type: "spring", stiffness: 300, damping: 10 }}
             className={`filter-btn kommende ${filter === "kommende" ? "active" : ""}`}
-              onClick={() => setFilter("kommende")}
-            >
-            Kommende</motion.div>
-          
-          </div>
+            onClick={() => setFilter("kommende")}
+          >Kommende
+          </motion.div>
+
+        </div>
         
-        <PasientTimeListe timer={filtrerteTimer} avlysTime={avlysTime} />
+        <PasientTimeListe timer={filtrerteTimer} avlysTime={avlysTime} openDrawer={openDrawerPasientTime} />
         </>
+      }
+      
+      {showDrawerPasientTime && role === "pasient" &&
+        <DrawerPasientTime closeDrawer={closeDrawerPasientTime} time={valgtTime} />
       }
 
       

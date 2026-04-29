@@ -1,8 +1,8 @@
 import { motion, useMotionValue, useTransform, animate, useMotionValueEvent, useAnimationControls, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
-import { BadgeCheck, Calendar, CalendarClock, CalendarX, Clock, Trash2 } from "lucide-react";
+import { Calendar, CalendarClock, CalendarX, Clock } from "lucide-react";
 
-const PasientTimeCelle = ({ time, formatertDato, dagerTilTime, avlysTime }) => {
+const PasientTimeCelle = ({ time, formatertDato, dagerTilTime, avlysTime, openDrawer }) => {
     const x = useMotionValue(0);
     const swipeDistance = 120;
     const bakgrunnsfarge = useTransform(x, [0, -swipeDistance], ["#ffffff", "#ff4444"]);
@@ -11,22 +11,9 @@ const PasientTimeCelle = ({ time, formatertDato, dagerTilTime, avlysTime }) => {
     const tekstPosition = useTransform(x, [0, -swipeDistance * 2], ["150px", "75px"]);
     const [visIkon, setVisIkon] = useState(true);
     const ikonControls = useAnimationControls();
-    const [harNudget, setHarNudget] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
     const [erOverSwipe, setErOverSwipe] = useState(false);
-    
-    
-    const handleTap = () => {
-        if (harNudget) return;
-        if (isDragging) return;
-        setHarNudget(true);
 
-        animate(x, [0, -280, 0], {
-            duration: 1.8,
-            ease: "easeInOut"
-        });
-    };
-    
     useEffect(() => {
         if (erOverSwipe) {
             ikonControls.start({
@@ -54,7 +41,7 @@ const PasientTimeCelle = ({ time, formatertDato, dagerTilTime, avlysTime }) => {
     });
     
     return (
-        <div className="pasientTime-wrapper">
+        <div className="pasienttime-wrapper">
             {visIkon &&
             <>
                 <motion.div
@@ -64,40 +51,36 @@ const PasientTimeCelle = ({ time, formatertDato, dagerTilTime, avlysTime }) => {
                 >
                     <CalendarX strokeWidth={1} />
                 </motion.div>
+                
                 <motion.div
                     className="bak-timecelle-tekst"
                     style={{ right: tekstPosition }}
-                
-                >
+                    >
                     AVLYS TIMEN
                 </motion.div>
             </>
             }
             
             <motion.div
-                className="pasientTime-celle"
+                className="pasienttime-celle"
                 drag="x"
                 dragConstraints={{ right: 0 }}
-                onTap={handleTap} 
+                onClick={() => !isDragging && openDrawer(time)}
                 dragElastic={0.1}
                 transition={{ type: "spring" }}
                 style={{ x, backgroundColor: bakgrunnsfarge }}
                 onDragStart={() => setIsDragging(true)}
                 onDragEnd={(event, info) => {
                     setIsDragging(false);
-
-                    const SWIPE_THRESHOLD = 120;
-
-                    const harSwipet =
-                        info.offset.x <= -SWIPE_THRESHOLD || info.velocity.x <= -500;
-
+                    const swipeAvstand = 120;
+                    const harSwipet = info.offset.x <= -swipeAvstand || info.velocity.x <= -500;
+                    
                     if (harSwipet) {
                         animate(x, -window.innerWidth, {
                             duration: 0.5,
                             onComplete: async () => {
                                 setVisIkon(false);
                                 await avlysTime(time._id);
-                                console.log("Avlys timen funksjon.");
                             }
                         });
                     } else {
@@ -132,16 +115,16 @@ const PasientTimeCelle = ({ time, formatertDato, dagerTilTime, avlysTime }) => {
                 }
 
                 
-                <div className="pasientTime-grid-celle">
-                    <div className="pasientTime-profilbilde" style={{ backgroundImage: `url(${time.behandler.profilbilde})` }}>
+                <div className="pasienttime-grid-celle">
+                    <div className="pasienttime-profilbilde" style={{ backgroundImage: `url(${time.behandler.profilbilde})` }}>
                     </div>  
                 </div>
                 
-                <div className="pasientTime-grid-celle innhold">
+                <div className="pasienttime-grid-celle innhold">
                     <div className="stor-forbokstav pasienttime-type-behandler">{time.behandler.typeBehandler}</div>
                     <div className="pasienttime-behandler-navn">{time.behandler.username}</div>
                     
-                    <div className="pasientTime-ikon-flex">
+                    <div className="pasienttime-ikon-flex">
                         <div className="icon-pair">
                             <Clock strokeWidth={2} size={18} />
                             <div>{time.startTid} - {time.sluttTid}</div>
@@ -152,15 +135,9 @@ const PasientTimeCelle = ({ time, formatertDato, dagerTilTime, avlysTime }) => {
                         </div>
                     </div>
                     
-                    
-                    
-                    
-                    <div>Ikke betalt {time.pris},-</div>
                 </div>
                 
- 
             </motion.div>
-
         </div>
     )
 }
