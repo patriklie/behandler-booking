@@ -260,10 +260,12 @@ body {
   padding: 16px;
   width: 100%;
   border-radius: 10px;
-  font-size: 12px;
+  font-size: 16px;
   color: #444444;
   background-color: white;
   resize: none;
+/*   line-height: 1.4;
+  letter-spacing: -0.2px; */
 }
 
 .input-container textarea:focus {
