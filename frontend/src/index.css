@@ -640,6 +640,36 @@ transition: box-shadow 0.3s ease;
   cursor: pointer;
 }
 
+.profil-push-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  background-color: #b1b1b1;
+  border-radius: 28px;
+  cursor: pointer;
+  padding: 4px;
+  transition: background-color 0.3s;
+}
+
+.toggle-switch.aktiv {
+  background-color: var(--primary-color);
+}
+
+.toggle-knapp {
+  width: 20px;
+  height: 20px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+}
+
 .profil-slett-btn {
   display: block;
   margin: 0 auto;

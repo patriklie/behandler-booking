@@ -139,8 +139,10 @@ const Profil = () => {
     }
   
   const aktiverPushVarsler = async () => {
+    setProfil({ pushSubscription: { optimistisk: true } })
     try {
       console.log("aktiver push varsler");
+      
       // Her sjekker vi om service worker er klar. Skal være registrert av vite PWA plugin npm pakken.
       const registration = await navigator.serviceWorker.ready;
       
@@ -156,13 +158,12 @@ const Profil = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success("Push varslinger på.");
-      
       // legger info om subscription i store
       setProfil({ pushSubscription: subscription })
     } catch (error) {
-      toast.error(error.response?.data?.message)
-  }
-
+      setProfil({ pushSubscription: null });
+      toast.error(error.response?.data?.message);
+   } 
   }
   
   const deaktiverPushVarsler = async () => {
@@ -202,10 +203,20 @@ const Profil = () => {
     
     { role === "behandler" &&
     <>
-      <div className="profil-push-aktiver" onClick={aktiverPushVarsler}>AKTIVER VARSLER</div>
+{/*       <div className="profil-push-aktiver" onClick={aktiverPushVarsler}>AKTIVER VARSLER</div>
       <div className="profil-push-deaktiver" onClick={deaktiverPushVarsler}>DEAKTIVER VARSLER</div>
-      
-      <Skillelinje tekst="Min Profil" />
+       */}
+        
+
+        
+        <Skillelinje tekst="Min Profil" />
+        
+        <div className="profil-push-container">
+          <div onClick={pushSubscription ? deaktiverPushVarsler : aktiverPushVarsler}>Push varslinger</div>
+          <div className={`toggle-switch ${pushSubscription ? "aktiv" : ""}`} onClick={pushSubscription ? deaktiverPushVarsler : aktiverPushVarsler}>
+            <motion.div className="toggle-knapp" animate={{ x: pushSubscription ? 24 : 0 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}/>
+          </div>
+        </div>
                
       <div className="profile-container-wrapper">
         <ProfileCard profilbildeKlikk={profilbildeKlikk} username={username} email={email} role={role} typeBehandler={typeBehandler} profilbilde={profilbilde} omBehandler={omBehandler} />
