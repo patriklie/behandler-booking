@@ -110,9 +110,19 @@ export const bookTime = async (req, res) => {
         const subscription = bookaTime.behandler.pushSubscription
 
         if (subscription) {
+
+            const pasient = await User.findById(pasientID).select("username")
+            const formatertDato = new Date(bookaTime.startDatoTidspunkt).toLocaleString("nb-NO", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                hour: "2-digit",
+                minute: "2-digit"
+            })
+
             webpush.sendNotification(subscription, JSON.stringify({
                 title: "Ny time booket!",
-                body: `${bookaTime.startDatoTidspunkt} er booket`
+                body: `${pasient.username} booket time ${formatertDato}.`
             })) 
         }
 
