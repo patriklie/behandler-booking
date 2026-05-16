@@ -51,9 +51,9 @@ const features = [
     {
         id: 8,
         title: "Push varslinger",
-        status: "ongoing",
+        status: "done",
         detaljer:
-            "Utvikler instant push varslinger for PWA versjon av appen på IOS og Android. Starter med varsling for behandlere når en time bookes."
+            "Nå kan behandlere aktivere push varslinger inne på brukerprofilen. Fungerer både på PWA versjon av appen for IOS og Android. Behandler varsles når en pasient booker eller avlyser en time. Varselet kommer med informasjon om pasient navn og timens dato/klokkeslett."
     },
     {
         id: 9,
