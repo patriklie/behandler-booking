@@ -18,6 +18,9 @@ export default defineConfig({
       strategies: 'injectManifest',
       srcDir: 'src',
       filename: 'service-worker.js',
+      workbox: {
+        skipWaiting: true
+      },
       manifest: {
         name: 'HelseBooking',
         short_name: 'HelseBooking',
