@@ -261,9 +261,9 @@ const Profil = () => {
         </div>
              
         <div className="input-container">
-          <div className="textarea-limit">{nyProfil?.omBehandler?.length} / 170</div>
+          <div className="textarea-limit">{nyProfil?.omBehandler?.length} / 150</div>
     {/*  <Info className="textarea-icon" size={18} fill="#FFFFFF" color="grey" strokeWidth={1.5} /> */}
-          <textarea type="text" maxLength={170} rows={6} onChange={handleOppdaterBruker} value={nyProfil.omBehandler} id="omBehandler" name="omBehandler" placeholder="Om Behandler" />  
+          <textarea type="text" maxLength={150} rows={5} onChange={handleOppdaterBruker} value={nyProfil.omBehandler} id="omBehandler" name="omBehandler" placeholder="Om Behandler" />  
         </div>
           
       </>

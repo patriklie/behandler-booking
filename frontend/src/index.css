@@ -531,7 +531,7 @@ input[type="radio"] {
 background-color: rgb(255, 255, 255);
 width: clamp(200px, 100%, 500px);
 margin: 1rem auto;
-height: 250px;
+height: 255px;
 border-radius: 10px 10px 10px 10px;
 box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px;
 display: grid;
