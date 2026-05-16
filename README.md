@@ -17,7 +17,7 @@ Prosjektet demonstrerer ferdigheter innen fullstack webutvikling med MERN-stacke
 - [Logo design](#logo-design)
 - [Funksjonalitet](#funksjonalitet)
 - [Tech Stack](#tech-stack)
-- [Arkitektur](#️arkitektur--systemdesign)
+- [Arkitektur](#arkitektur--systemdesign)
 - [Installer lokalt](#installer-appen-lokalt)
 - [Kontakt](#kontakt)
 
