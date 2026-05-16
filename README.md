@@ -14,7 +14,7 @@ Prosjektet demonstrerer ferdigheter innen fullstack webutvikling med MERN-stacke
 
 - [Live Demo](https://helsebooking.onrender.com)
 - [Skjermbilder](#skjermbilder-fra-appen)
-- [Logo design](#️logo-design)
+- [Logo design](#logo-design)
 - [Funksjonalitet](#funksjonalitet)
 - [Tech Stack](#tech-stack)
 - [Arkitektur](#️arkitektur--systemdesign)
