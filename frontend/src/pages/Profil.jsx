@@ -203,12 +203,6 @@ const Profil = () => {
     
     { role === "behandler" &&
     <>
-{/*       <div className="profil-push-aktiver" onClick={aktiverPushVarsler}>AKTIVER VARSLER</div>
-      <div className="profil-push-deaktiver" onClick={deaktiverPushVarsler}>DEAKTIVER VARSLER</div>
-       */}
-        
-
-        
         <Skillelinje tekst="Min Profil" />
         
         <div className="profil-push-container">

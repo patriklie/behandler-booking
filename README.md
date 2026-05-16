@@ -1,20 +1,16 @@
-# Hei 👋
+# Velkommen til **HelseBooking**
 
-### Velkommen til **HelseBooking**, min fullstack bookingapplikasjon for helsetjenester hvor pasienter kan finne og booke time hos behandlere.
+###  Min fullstack bookingapplikasjon for helsetjenester hvor pasienter kan finne og booke time hos behandlere.
 
 <div align="center">
 <img src="docs\bilder\Logo_prosess\mockups\iPhone_17_Mockup_1_left_rounded.png" />
 </div>
 
-<!-- <div align="center">
-<img src="docs/bilder/HelseBooking_Logo_blue.png" width="300" />
-</div> -->
-
 De fleste som har forsøkt å booke time i helsebransjen kjenner til eldre systemer, unødvendige steg og brukergrensesnitt som føles utdatert. **HelseBooking** er et fullstack-prosjekt bygget som et svar på nettopp dette, en moderne plattform der pasienter og behandlere samhandler sømløst, med fokus på få klikk fra innlogging til booket time.
 
 Prosjektet demonstrerer ferdigheter innen fullstack webutvikling med MERN-stacken, inkludert JWT-autentisering, rollebasert tilgangskontroll og en moderne brukeropplevelse bygget med React.
 
-## 📋 Innhold
+## Innhold
 
 - [Live Demo](https://helsebooking.onrender.com)
 - [Skjermbilder](#-skjermbilder-fra-appen)
@@ -27,7 +23,7 @@ Prosjektet demonstrerer ferdigheter innen fullstack webutvikling med MERN-stacke
 
 <div align="center">
 
-<h1><a href="https://helsebooking.onrender.com" target="_blank">⚡️ Live Demo ⚡️</a></h1>
+<h1><a href="https://helsebooking.onrender.com" target="_blank">Live Demo</a></h1>
 
 <img src="docs/bilder/HelseBooking_booktime.gif" width="350" />
 
@@ -44,7 +40,7 @@ Jeg har laget testbrukere under man kan logge på med. Med disse er det bare å 
 
 
 
-### 🔑 Test-brukere
+### Test-brukere
 
 | Rolle      | Epost                        | Passord   |
 |------------|------------------------------|-----------|
@@ -65,12 +61,12 @@ Jeg har laget testbrukere under man kan logge på med. Med disse er det bare å 
 
 <br>
 
-# 📸 Skjermbilder fra appen
+# Skjermbilder fra appen
 
 Her er noen skjermbilder av appen, men jeg anbefaler at du logger deg på en av testbrukerne å klikker deg rundt selv, eller at vi sammen tar en gjennomgang! 😊
 
 
-## 🏠 Forside / Om
+## Forside / Om
 
 <div>
   <img src="docs/bilder/about_hero_1.png" width="300" style="display:inline-block; vertical-align: top;" />
@@ -82,25 +78,25 @@ Her er noen skjermbilder av appen, men jeg anbefaler at du logger deg på en av 
   <img src="docs/bilder/about_hero_4.png" width="300" style="display:inline-block; vertical-align: top;" />
 </div>
 
-## 🔐 Auth (login/registrering)
+## Auth (login/registrering)
 <div>
   <img src="docs/bilder/auth_login_1.png" width="300" style="display:inline-block; vertical-align: top;" />
   <img src="docs/bilder/auth_registrer_1.png" width="300" style="display:inline-block; vertical-align: top;" />
 </div>
 
-## 📅 Book time (pasient)
+## Book time (pasient)
 <div>
   <img src="docs/bilder/book_time_1.png" width="300" style="display:inline-block; vertical-align: top;" />
   <img src="docs/bilder/book_time_2.png" width="300" style="display:inline-block; vertical-align: top;" />
 </div>
 
-## 👨🏻 Mine timer (pasient)
+## Mine timer (pasient)
 <div>
   <img src="docs/bilder/mine_timer_1.png" width="300" style="display:inline-block; vertical-align: top;" />
   <img src="docs/bilder/mine_timer_2.png" width="300" style="display:inline-block; vertical-align: top;" />
 </div>
 
-## 🏥 Klinikker (behandler)
+## Klinikker (behandler)
 <div>
   <img src="docs/bilder/klinikker_1.png" width="300" style="display:inline-block; vertical-align: top;" />
   <img src="docs/bilder/klinikker_3.png" width="300" style="display:inline-block; vertical-align: top;" />
@@ -114,7 +110,7 @@ Her er noen skjermbilder av appen, men jeg anbefaler at du logger deg på en av 
 
 <br>
 
-# ✏️ Logo design
+# Logo design
 
 Jeg har lyst til å vise arbeidsprosessen, noen av utkastene og tankegangen som ligger bak logo utviklingen. Som du vil se har noen av utkastene navnet **BehandlerBooking**. Dette var appens "arbeidsnavn" under utviklingen. Ettersom appen utviklet seg og arbeidet med logoen gikk videre ble et navnebytte naturlig. I tillegg ble navnet kortere, beholdt forklarende wordmark, men også mer minneverdig og lettere å bygge en visuell identitet rundt.
 
@@ -262,7 +258,7 @@ Fart og effektivitet ble fokuset i denne retningen, booking skal gå raskt. Få 
 
 <br>
 
-## ✨ Ferdig logo ✨
+## Ferdig logo
 
 Logoen jeg til slutt landet på er en **kombinasjon av de fire retningene** logo utviklingen har vært innom. Jeg tok med meg det jeg likte best fra hver retning og kombinerte det. Fonten er en redigert versjon av Open Sans Bold/Normal.
 
@@ -342,7 +338,7 @@ Blåfargen (#006EFF) brukes gjennom hele applikasjonens UI og bidrar til et mode
   </tr>
 </table>
 
-# ✨ Funksjonalitet
+# Funksjonalitet
 
 ### **Pasient**
 - Registrering og innlogging med JWT-autentisering
@@ -388,7 +384,7 @@ Blåfargen (#006EFF) brukes gjennom hele applikasjonens UI og bidrar til et mode
 
 # Tech Stack
 
-### 💻 Frontend
+### Frontend
 | Teknologi          | Bruk                           | Begrunnelse                                      |
 |---                 |---                             |---                                               |
 | React + Vite       | UI-rammeverk og byggverktøy    | Rask utviklingsopplevelse                        |
@@ -400,7 +396,7 @@ Blåfargen (#006EFF) brukes gjennom hele applikasjonens UI og bidrar til et mode
 | Lucide React       | Ikonbibliotek                  | Fine, lette og konsistente ikoner + treeshakable |
 | Leaflet + Geoapify | Kart og adressesøk             | Open source, ingen kostnad og enkel integrasjon  |
 
-### 🗄️ Backend
+### Backend
 | Teknologi           | Bruk                            | Begrunnelse                                         |
 |---                  |---                              |---                                                  |
 | Node.js + Express   | API-server                      | Samme språk som frontend, stort økosystem           |
@@ -409,7 +405,7 @@ Blåfargen (#006EFF) brukes gjennom hele applikasjonens UI og bidrar til et mode
 | Cloudinary + Multer | Bildeopplasting og lagring      | CDN-optimalisert bildelagring med transformasjoner  |
 | CORS                | Kryssdomene-tilgang             | Nødvendig for separat frontend/backend deploy       |
 
-### ☁️ Deploy
+### Deploy
 | Tjeneste         | Bruk                                                       | Begrunnelse                           |
 |---               |---                                                         |---                                    |
 | Render           | Hosting av frontend og backend                             | Gratis tier, enkel GitHub-integrasjon |
@@ -419,18 +415,18 @@ Blåfargen (#006EFF) brukes gjennom hele applikasjonens UI og bidrar til et mode
 
 <br>
 
-# 🏗️ Arkitektur / systemdesign
+# Arkitektur / systemdesign
 
 Dette prosjektet er bygget som et rollebasert bookingsystem der kjernen i systemet er samspillet mellom brukere, klinikker og timeavtaler.
 
 Systemet er designet rundt tre hovedentiteter:
 
-- 🧑‍⚕️ Brukere (User)
-- 🏥 Klinikker (Klinikk)
-- 📅 Timer (Time)
+- Brukere (User)
+- Klinikker (Klinikk)
+- Timer (Time)
 
 
-## 🧑‍⚕️ Brukere og roller
+## Brukere og roller
 
 Systemet har tre roller:
 
@@ -450,7 +446,7 @@ Behandlere har i tillegg utvidet profil med:
 
 ![Bruker-relasjoner](docs/bilder/bruker_relasjoner.png)
 
-## 🏥 Klinikker som “hub”
+## Klinikker som “hub”
 
 Klinikker fungerer som et organisatorisk lag mellom behandlere og timer.
 
@@ -467,7 +463,7 @@ Dette gjør at en behandler kan tilhøre flere klinikker, og klinikker kan skale
 
 ![Klinikk-relasjoner](docs/bilder/klinikk_relasjoner.png)
 
-## 📅 Time-modellen (kjerne i systemet)
+## Time-modellen (kjerne i systemet)
 
 Time er den mest sentrale modellen i systemet og binder det hele sammen.
 
@@ -491,7 +487,7 @@ Dette gir en tydelig og kontrollert livssyklus for hver time.
 
 ![Time-relasjoner](docs/bilder/time_relasjoner.png)
 
-## 🛡️ Backend regler
+## Backend regler
 
 Backend håndhever all forretningslogikk:
 
@@ -501,7 +497,7 @@ Backend håndhever all forretningslogikk:
 - Avlysning frigjør timer automatisk
 - Sletting av klinikk eller bruker rydder relaterte data (cascade-logikk)
 
-## 🔐 Autentisering og tilgang
+## Autentisering og tilgang
 - JWT brukes for autentisering
 - Middleware beskytter private routes
 - Rollebasert tilgang styrer:
@@ -509,14 +505,14 @@ Backend håndhever all forretningslogikk:
   - Hvem som kan booke
   - Hvem som kan administrere klinikker
 
-## 🚀 Designvalg
+## Designvalg
 - MongoDB ble valgt for fleksibel modellering av relasjoner
 - Mongoose brukes til validering og relasjonslogikk
 - Backend håndterer validering (ikke frontend)
 - Frontend er kun presentasjonslag + state management
 - API er REST-basert og delt mellom frontend/backend (separate deploys)
 
-## 📁 Mappestruktur:
+## Mappestruktur:
 
 ```
 HelseBooking/
@@ -591,7 +587,7 @@ npm run dev
 ```
 <br>
 
-## 👨🏻‍💻 Utvikler
+## Kontakt
 
 **Patrik Bystrøm Lie**
 - GitHub: [@patriklie](https://github.com/patriklie)
@@ -599,7 +595,7 @@ npm run dev
 
 <br>
 
-## 👏 Kreditering
+## Kreditering
 
 Dette prosjektet bruker tredjepartsillustrasjoner og verktøy:
 
