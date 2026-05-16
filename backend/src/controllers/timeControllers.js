@@ -122,7 +122,7 @@ export const bookTime = async (req, res) => {
 
             webpush.sendNotification(subscription, JSON.stringify({
                 title: "Ny time booket!",
-                body: `${pasient.username} booket time ${formatertDato}.`
+                body: `${pasient.username} booket timen ${formatertDato}.`
             })) 
         }
 
@@ -145,8 +145,28 @@ export const avlysTime = async (req, res) => {
         let endretTime;
 
         if (role === "pasient") {
-            endretTime = await Time.findOneAndUpdate({ _id: timeID, pasient: brukerID }, { status: "ledig", pasient: null,  }, { returnDocument: "after" })
+            endretTime = await Time.findOneAndUpdate({ _id: timeID, pasient: brukerID }, { status: "ledig", pasient: null, }, { returnDocument: "after" }).populate("behandler", "pushSubscription")
             if (!endretTime) return res.status(404).json({ message: "Fant ingen time med oppgitt ID" });
+
+            const subscription = endretTime.behandler.pushSubscription;
+
+            if (subscription) {
+
+                const pasient = await User.findById(brukerID).select("username")
+                const formatertDato = new Date(endretTime.startDatoTidspunkt).toLocaleString("nb-NO", {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                })
+
+                webpush.sendNotification(subscription, JSON.stringify({
+                    title: "Time avlyst!",
+                    body: `${pasient.username} avlyste timen ${formatertDato}.`
+                }))
+            }
+
             res.status(200).json({
                 endretTime, message: `Avlyst timen ${endretTime.dato.toLocaleDateString("no-NO", {
                     weekday: "long",
