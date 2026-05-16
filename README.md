@@ -368,6 +368,7 @@ Blåfargen (#006EFF) brukes gjennom hele applikasjonens UI og bidrar til et mode
 <img src="docs/bilder/HelseBooking_kart_animasjon.gif" width="300" />
 
 - Rediger timer, legg til eller fjern pasienter på timen.
+- Aktivere push varsling for booking og avlysing av timer. 
 - Behandlere på **Om**-siden roterer og viser et tilfeldig utvalg ved hver lasting
 
 <br>
