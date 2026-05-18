@@ -1552,6 +1552,7 @@ dialog.slett-profil-modal[open] {
   gap: 1rem;
   margin: 1rem auto;
   width: clamp(300px, 100%, 600px);
+  transform: translateZ(0);
 }
 
 .pasienttime-celle {

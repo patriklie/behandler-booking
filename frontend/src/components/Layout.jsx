@@ -10,10 +10,10 @@ const Layout = () => {
       <Outlet />   
 
       <Toaster
-        position="top-center"
-        containerStyle={{
+        position="bottom-center"
+/*         containerStyle={{
           top: 70
-        }}
+        }} */
         toastOptions={{
           style: {
             padding: "10px 32px",
