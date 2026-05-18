@@ -16,6 +16,7 @@ import Skillelinje from "../components/Skillelinje.jsx";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { Calendar1, Clock, Wallet } from "lucide-react";
+import { optimerCloudinaryBilder } from "../lib/optimerCloudinaryBilder.js";
 
 const BookTimePage = () => {
   const token = useAppStore((state) => state.token);
@@ -210,7 +211,7 @@ const BookTimePage = () => {
             >
           </motion.img>
           <motion.img
-            src={valgtBehandler?.profilbilde}
+            src={optimerCloudinaryBilder(valgtBehandler?.profilbilde, 75)}
             className="time-booking-modal-behandler-bilde"
             whileHover={{
               scale: 1.1,

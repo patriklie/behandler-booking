@@ -1,9 +1,12 @@
 import defaultAvatar from "../assets/Profile_avatar_placeholder_large.png";
 import { useRef } from "react";
 import { ShieldCheck } from "lucide-react";
+import { optimerCloudinaryBilder } from "../lib/optimerCloudinaryBilder.js";
 
 const ProfileCard = ({ profilbildeKlikk, username, email, role, typeBehandler, profilbilde, velgbehandler, valgt, cursorEnabled, nesteTime, formaterDato, visTilgjengelighet, omBehandler }) => {
     
+    
+    const optimertProfilbilde = optimerCloudinaryBilder(profilbilde, 175);
     const inputField = useRef();
     
     const handleOnChangeProfile = async (e) => {
@@ -17,7 +20,7 @@ const ProfileCard = ({ profilbildeKlikk, username, email, role, typeBehandler, p
         <div className="profilbilde-wrapper">
             <div className="profilbilde-bakgrunn"
                 onClick={ profilbildeKlikk ? () => inputField.current.click() : undefined }
-                style={{ backgroundImage: `url(${profilbilde || defaultAvatar})` }}
+                style={{ backgroundImage: `url(${optimertProfilbilde || defaultAvatar})` }}
             />
             </div>
                 

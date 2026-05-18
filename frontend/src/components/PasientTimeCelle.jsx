@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useTransform, animate, useMotionValueEvent, useAnimationControls, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
-import { Calendar, CalendarClock, CalendarX, Clock } from "lucide-react";
+import { CalendarClock, CalendarX } from "lucide-react";
+import { optimerCloudinaryBilder } from "../lib/optimerCloudinaryBilder.js";
 
 const PasientTimeCelle = ({ time, formatertDato, dagerTilTime, avlysTime, openDrawer }) => {
     const x = useMotionValue(0);
@@ -15,6 +16,8 @@ const PasientTimeCelle = ({ time, formatertDato, dagerTilTime, avlysTime, openDr
     const [isDragging, setIsDragging] = useState(false);
     const [erOverSwipe, setErOverSwipe] = useState(false);
 
+    console.log(time);
+    
     useEffect(() => {
         if (erOverSwipe) {
             ikonControls.start({
@@ -117,7 +120,7 @@ const PasientTimeCelle = ({ time, formatertDato, dagerTilTime, avlysTime, openDr
 
                 
                 <div className="pasienttime-grid-celle">
-                    <div className="pasienttime-profilbilde" style={{ backgroundImage: `url(${time.behandler.profilbilde})` }}>
+                    <div className="pasienttime-profilbilde" style={{ backgroundImage: `url(${optimerCloudinaryBilder(time.behandler.profilbilde, 75)})` }}>
                     </div>  
                 </div>
                 
