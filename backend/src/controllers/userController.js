@@ -233,7 +233,6 @@ export const aktiverPushVarsler = async (req, res) => {
     try {
         const { id } = req.user;
         // nå har vi subscription info i req.body
-        console.log("Inni aktiver push varsler");
         const foundUser = await User.findByIdAndUpdate(id, { pushSubscription: req.body });
         res.status(200).json({ message: "Aktivert push varsler" })
 
@@ -245,7 +244,6 @@ export const aktiverPushVarsler = async (req, res) => {
 export const deaktiverPushVarsler = async (req, res) => {
     try {
         const { id } = req.user;
-        console.log("Inni aktiver push varsler");
         const foundUser = await User.findByIdAndUpdate(id, { pushSubscription: null });
         res.status(200).json({ message: "Deaktivert push varsler" })
 

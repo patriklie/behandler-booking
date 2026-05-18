@@ -141,7 +141,6 @@ const Profil = () => {
   const aktiverPushVarsler = async () => {
     setProfil({ pushSubscription: { optimistisk: true } })
     try {
-      console.log("aktiver push varsler");
       
       // Her sjekker vi om service worker er klar. Skal være registrert av vite PWA plugin npm pakken.
       const registration = await navigator.serviceWorker.ready;
@@ -169,9 +168,7 @@ const Profil = () => {
   const deaktiverPushVarsler = async () => {
   
     try {
- 
-    console.log("deaktiver push varsler");
-    
+     
     // først henter vi serviceWorker
     const serviceWorkeren = await navigator.serviceWorker.ready;
     const subscription = await serviceWorkeren.pushManager.getSubscription();
@@ -183,11 +180,9 @@ const Profil = () => {
     }
       
     await subscription.unsubscribe();
-      console.log("kommer vi hit?")
     const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/users/pushvarsler`, {
       headers: { Authorization: `Bearer ${token}` }
     });
-    console.log("kommer vi hit?")
     setProfil({ pushSubscription: null });
     toast.success("Push varslinger av.");
       

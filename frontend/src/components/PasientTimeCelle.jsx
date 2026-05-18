@@ -15,8 +15,6 @@ const PasientTimeCelle = ({ time, formatertDato, dagerTilTime, avlysTime, openDr
     const ikonControls = useAnimationControls();
     const [isDragging, setIsDragging] = useState(false);
     const [erOverSwipe, setErOverSwipe] = useState(false);
-
-    console.log(time);
     
     useEffect(() => {
         if (erOverSwipe) {
