@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import HelseBookingTekst from "../assets/HelseBooking_tekst.webp";
 import { ChevronDown } from "lucide-react";
+import { optimerCloudinaryBilder } from "../lib/optimerCloudinaryBilder.js";
 
 const AboutBehandlere = () => {
     
@@ -51,7 +52,7 @@ const AboutBehandlere = () => {
                     return (
                         <div className="about-behandlere-grid-celle" key={behandler._id}>
                             <div className="about-behandlere-profilbilde-wrapper">
-                                <img className="about-behandlere-profilbilde" src={behandler.profilbilde} ></img>
+                                <img className="about-behandlere-profilbilde" src={optimerCloudinaryBilder(behandler.profilbilde, 500)} ></img>
                             </div>
                             <div className="about-behandlere-navn">{behandler.username}</div>
                             <div className="about-behandlere-type">{behandler.typeBehandler}</div>
