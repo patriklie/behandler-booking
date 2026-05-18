@@ -6,8 +6,8 @@ import { UserPen, Mail, Stethoscope, LockKeyhole, Eye, EyeClosed, X } from "luci
 import ProfileCard from "../components/ProfileCard.jsx";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
-import SlettCharacter from "../assets/3d-female-character-with-question-marks.png";
-import ProfileCharacter from "../assets/3d-female-character-waving.png";
+import SlettCharacter from "../assets/3d-female-character-with-question-marks.webp";
+import ProfileCharacter from "../assets/3d-female-character-waving.webp";
 import Skillelinje from "../components/Skillelinje.jsx";
 import { urlBase64ToUint8Array } from "../lib/pushVarsler.js"
 

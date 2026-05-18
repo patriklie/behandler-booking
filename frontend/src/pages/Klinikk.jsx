@@ -6,8 +6,8 @@ import { useAppStore } from "../store/authStore.js";
 import KlinikkKort from "../components/KlinikkKort.jsx";
 import toast from "react-hot-toast";
 import DrawerRedigerKlinikk from "../components/DrawerRedigerKlinikk.jsx";
-import Isometric from "../assets/IsoMetric_klinikk.png";
-import LeaningChar from "../assets/Leaning_char.png";
+import Isometric from "../assets/IsoMetric_klinikk.webp";
+import LeaningChar from "../assets/Leaning_char.webp";
 
 const Klinikk = () => {
   

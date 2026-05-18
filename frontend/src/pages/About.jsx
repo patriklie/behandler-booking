@@ -1,12 +1,12 @@
 import { ChevronDown } from "lucide-react";
 import { motion } from "motion/react"
 import { useNavigate } from "react-router";
-import Isometric from "../assets/IsoMetric_klinikk.png";
+import Isometric from "../assets/IsoMetric_klinikk.webp";
 import FeatureListe_data_driven from "../components/FeatureListe_data_driven.jsx";
-import HelseBookingLogo500 from "../assets/HelseBooking_500.png";
+import HelseBookingLogo500 from "../assets/HelseBooking_500.webp";
 import AboutBehandlere from "../components/AboutBehandlere.jsx";
-import HelseBookingBadge200 from "../assets/Badge_200.png";
-import FlyingMaskott3 from "../assets/FlyingMaskott_cropped.png";
+import HelseBookingBadge200 from "../assets/Badge_200.webp";
+import FlyingMaskott3 from "../assets/FlyingMaskott_cropped.webp";
 
 const About = () => {
   

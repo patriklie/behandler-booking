@@ -5,7 +5,7 @@ import { useState, useRef } from "react";
 import { useAppStore } from "../store/authStore.js";
 import { Info, ClipboardClock, CircleUserRound, LogOut, LogIn, UserPlus, Hospital, CalendarPlus } from "lucide-react";
 import toast from "react-hot-toast";
-import HelseBookingBlue from "../assets/HelseBooking_Logo_blue.png";
+import HelseBookingBlue from "../assets/HelseBooking_Logo_blue.webp";
 
 const Navbar = () => {
 

@@ -5,7 +5,7 @@ import { useAppStore } from "../store/authStore.js";
 import { useNavigate } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 import toast from "react-hot-toast";
-import RegisterPerson from "../assets/3d-female-character-working-laptop-while-sitting-chair.png";
+import RegisterPerson from "../assets/3d-female-character-working-laptop-while-sitting-chair.webp";
 
 const RegisterPage = () => {
   const [visPassord, setVisPassord] = useState(false);

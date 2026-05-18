@@ -5,7 +5,7 @@ import { useAppStore } from "../store/authStore.js";
 import { useNavigate, Link } from "react-router";
 import { motion } from "motion/react";
 import toast from "react-hot-toast";
-import LoginPerson from "../assets/freepik__background__69816.png";
+import LoginPerson from "../assets/freepik__background__69816.webp";
 
 const LoginPage = () => {
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import HelseBookingTekst from "../assets/HelseBooking_tekst.png";
+import HelseBookingTekst from "../assets/HelseBooking_tekst.webp";
 import { ChevronDown } from "lucide-react";
 
 const AboutBehandlere = () => {

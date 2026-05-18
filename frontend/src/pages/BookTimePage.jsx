@@ -1,5 +1,5 @@
 import ProfileCard from "../components/ProfileCard.jsx";
-import Badge200 from "../assets/Badge_200.png";
+import Badge200 from "../assets/Badge_200.webp";
 import { useAppStore } from "../store/authStore.js";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';

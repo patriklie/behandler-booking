@@ -2,7 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import PasientTimeCelle from "../components/PasientTimeCelle.jsx";
 import { time, motion, AnimatePresence } from "motion/react";
-import CharSmartPhone from "../assets/char_smartphone.png";
+import CharSmartPhone from "../assets/char_smartphone.webp";
 import { Link } from "react-router";
 import { ArrowUpNarrowWide, ArrowDownNarrowWide } from "lucide-react";
     
