@@ -38,37 +38,42 @@ const startTider = [
 
 const genererTimer = () => {
     const timer = [];
-    const idag = new Date();
+
+    const nå = new Date();
+    const idag = new Date(Date.UTC(
+        nå.getFullYear(),
+        nå.getMonth(),
+        nå.getDate()
+    ));
 
     for (let dag = 1; dag <= 14; dag++) {
         const dato = new Date(idag);
-        dato.setDate(idag.getDate() + dag);
+        dato.setUTCDate(idag.getUTCDate() + dag);
 
-        const ukedag = dato.getDay();
+        const ukedag = dato.getUTCDay();
         if (ukedag === 0 || ukedag === 6) continue;
 
-        const datoString = dato.toISOString().split("T")[0];
+        const år = dato.getUTCFullYear();
+        const måned = String(dato.getUTCMonth() + 1).padStart(2, "0");
+        const dagStr = String(dato.getUTCDate()).padStart(2, "0");
+        const datoString = `${år}-${måned}-${dagStr}`;
 
         behandlerIder.forEach((behandlerId) => {
-
-            
             const tilfeldigKlinikk =
                 klinikker[Math.floor(Math.random() * klinikker.length)];
 
             startTider.forEach((startTid) => {
-
                 const startDatoTidspunkt = new Date(
-                    `${datoString}T${startTid}`
+                    `${datoString}T${startTid}:00Z`
                 );
 
-                
                 const sluttDatoTidspunkt = new Date(
                     startDatoTidspunkt.getTime() + 45 * 60000
                 );
 
                 const sluttTid = sluttDatoTidspunkt
-                    .toTimeString()
-                    .slice(0, 5);
+                    .toISOString()
+                    .slice(11, 16);
 
                 timer.push({
                     behandler: behandlerId,
