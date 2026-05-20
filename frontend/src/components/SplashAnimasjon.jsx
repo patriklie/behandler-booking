@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 
 
 const SplashAnimasjon = ({ children }) => {
+    const [fase, setFase] = useState("inn");
+    const [done, setDone] = useState(false)
     
     useEffect(() => {
         const images = [
@@ -16,16 +18,17 @@ const SplashAnimasjon = ({ children }) => {
         })
     }, [])
     
-    const [fase, setFase] = useState("inn");
-    const [done, setDone] = useState(false)
-    
     useEffect(() => {
         const timer = setTimeout(() => setFase("ekspander"), 2500)
         return () => clearTimeout(timer)
     }, [])
     
     useEffect(() => {
-        const timer = setTimeout(() => setDone(true), 4000)
+        document.body.style.overflowY = "hidden"
+        const timer = setTimeout(() => {
+            setDone(true)
+            document.body.style.overflowY = ""
+        }, 4000)
         return () => clearTimeout(timer)
     }, [])
     
