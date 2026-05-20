@@ -5,6 +5,17 @@ import { useState, useEffect } from "react";
 
 const SplashAnimasjon = ({ children }) => {
     
+    useEffect(() => {
+        const images = [
+            "/src/assets/freepik__background__69816.webp",
+            "/src/assets/3d-female-character-working-laptop-while-sitting-chair.webp",
+        ]
+        images.forEach(src => {
+            const img = new Image()
+            img.src = src
+        })
+    }, [])
+    
     const [fase, setFase] = useState("inn");
     const [done, setDone] = useState(false)
     
