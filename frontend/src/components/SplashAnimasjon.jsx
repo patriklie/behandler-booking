@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
-
+import LoginPerson from "../assets/freepik__background__69816.webp"
+import RegisterPerson from "../assets/3d-female-character-working-laptop-while-sitting-chair.webp"
 
 
 const SplashAnimasjon = ({ children }) => {
@@ -8,10 +9,7 @@ const SplashAnimasjon = ({ children }) => {
     const [done, setDone] = useState(false)
     
     useEffect(() => {
-        const images = [
-            "/src/assets/freepik__background__69816.webp",
-            "/src/assets/3d-female-character-working-laptop-while-sitting-chair.webp",
-        ]
+        const images = [LoginPerson, RegisterPerson]
         images.forEach(src => {
             const img = new Image()
             img.src = src
@@ -24,10 +22,8 @@ const SplashAnimasjon = ({ children }) => {
     }, [])
     
     useEffect(() => {
-        document.body.style.overflowY = "hidden"
         const timer = setTimeout(() => {
             setDone(true)
-            document.body.style.overflowY = ""
         }, 4000)
         return () => clearTimeout(timer)
     }, [])
@@ -45,11 +41,12 @@ const SplashAnimasjon = ({ children }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                            position: "fixed",
+                position: "fixed",
+                overflow: "hidden",
                 inset: 0,
                 width: "100vw",
-                height: "100vh",
-                            backgroundColor: "white",
+                height: "100dvh",
+                backgroundColor: "white",
                 zIndex: 9999,
             }}
             exit={{ opacity: 0 }}
