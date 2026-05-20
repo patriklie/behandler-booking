@@ -2450,7 +2450,6 @@ dialog.slett-profil-modal[open] {
   z-index: 0;
 }
 
-
 @media (max-width: 850px) {
   .about-behandlere-grid {
     grid-template-columns: 1fr 1fr;
