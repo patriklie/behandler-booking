@@ -17,14 +17,14 @@ const SplashAnimasjon = ({ children }) => {
     }, [])
     
     useEffect(() => {
-        const timer = setTimeout(() => setFase("ekspander"), 2500)
+        const timer = setTimeout(() => setFase("ekspander"), 2000)
         return () => clearTimeout(timer)
     }, [])
     
     useEffect(() => {
         const timer = setTimeout(() => {
             setDone(true)
-        }, 4000)
+        }, 2800)
         return () => clearTimeout(timer)
     }, [])
     
@@ -63,15 +63,15 @@ const SplashAnimasjon = ({ children }) => {
                 }}
                 initial={{
                     scale: 0,
+                    rotate: 0
                 }}
                 animate={{
                     scale: 1,
+                    rotate: 360
                 }}
                 transition={{
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 15,
-                    delay: 2
+                    scale: { type: "spring", stiffness: 200, damping: 15, delay: 1.1 },
+                    rotate: { duration: 2, ease: "linear", delay: 1.1 }
                 }}
 
             ></motion.div>
@@ -95,7 +95,7 @@ const SplashAnimasjon = ({ children }) => {
                     type: "spring",
                     stiffness: 200,
                     damping: 15,
-                    delay: 1
+                    delay: fase === "ekspander" ? .5 : 1
                 }}
             ></motion.div>
 
@@ -135,28 +135,33 @@ const SplashAnimasjon = ({ children }) => {
                 <motion.div
                     style={{
                         width: 15,
-                        height: 90,
+                        height: 110,
                         left: 60,
                         top: "50%",
                         y: "-50%",
                         backgroundColor: "var(--primary-color)",
                         position: "absolute"
-                    }}
+                                }}             
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}                                   
                 />
 
                 {/* H - Strek høyre */}
                 <motion.div
                     style={{
                         width: 15,
-                        height: 90,
+                        height: 110,
                         right: 60,
                         top: "50%",
                         y: "-50%",
                         backgroundColor: "var(--primary-color)",
                         position: "absolute"
-                    }}
+                                }}
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}   
                 />
-
+                            
+                {/* H Skråstrek */}
                 <motion.div
                     style={{
                         width: 15,
@@ -169,14 +174,11 @@ const SplashAnimasjon = ({ children }) => {
                         y: "-50%",
                         rotate: 45,
                     }}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}       
                 />
 
             </motion.div>
-
-
-
-
-
 
 
         </motion.div>
