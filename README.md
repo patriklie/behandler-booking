@@ -31,7 +31,7 @@ Prosjektet demonstrerer ferdigheter innen fullstack webutvikling med MERN-stacke
 
 <br>
 
-Jeg har laget testbrukere under man kan logge på med. Med disse er det bare å opprette timer, slette timer, pasienter, behandlere, endre profilbilder og klinikker. **Logg inn og utforsk fritt** — timer og klinikker er forhåndsutfylt.
+**NB!** Live demoen er på Render sin gratis tier. Etter en periode med inaktivitet kan det ta opptil 60 sekunder før serveren er oppe igjen på første besøk. Jeg har laget testbrukere under man kan logge på med. Med disse er det bare å opprette timer, slette timer, pasienter, behandlere, endre profilbilder og klinikker. **Logg inn og utforsk fritt** — timer og klinikker er forhåndsutfylt.
 
 > [!TIP]
 > Appen er responsiv og fungerer på alle enheter, men er optimalisert for mobil (375px – 1000px). For best opplevelse: legg til HelseBooking som PWA på mobilen.
