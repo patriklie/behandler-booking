@@ -383,6 +383,9 @@ Blåfargen (#006EFF) brukes gjennom hele applikasjonens UI og bidrar til et mode
 - Timer blir slettet dersom man fjerner en behandler fra en klinikk
 - Timer blir slettet dersom man sletter profilen (pasient/behandler)
 - Responsivt design med animert navigasjon
+- Intro splash animasjon mens appen laster
+
+<img src="docs/bilder/HelseBooking_intro_animasjon.gif" width="300" />
 
 <br>
 
